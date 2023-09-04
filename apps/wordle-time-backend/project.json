@@ -1,0 +1,30 @@
+{
+  "name": "wordle-time-backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/wordle-time-backend/src",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle build"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle run"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle clean"
+      }
+    }
+  },
+  "tags": []
+}
