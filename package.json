@@ -19,6 +19,7 @@
     "@vitest/ui": "~0.32.0",
     "eslint": "~8.46.0",
     "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-cypress": "^2.13.4",
     "eslint-plugin-qwik": "~1.2.6",
     "node-fetch": "~3.3.0",
     "nx": "16.7.4",
