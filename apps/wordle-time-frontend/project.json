@@ -41,7 +41,7 @@
       "executor": "@nx/vite:preview-server",
       "options": {
         "buildTarget": "wordle-time-frontend:build",
-        "port": 4300
+        "port": 4173
       }
     },
     "test": {
@@ -57,7 +57,7 @@
       "options": {
         "buildTarget": "wordle-time-frontend:build.client",
         "mode": "ssr",
-        "port": 4200
+        "port": 5173
       }
     },
     "serve.debug": {
