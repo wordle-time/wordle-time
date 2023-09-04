@@ -50,7 +50,8 @@
                 "github.vscode-pull-request-github",
                 "tomoki1207.pdf",
                 "ms-python.python",
-                "njpwerner.autodocstring"
+                "njpwerner.autodocstring",
+                "nrwl.angular-console"
             ],
             "settings": {
                 "prettier.configPath": ".prettierrc",
