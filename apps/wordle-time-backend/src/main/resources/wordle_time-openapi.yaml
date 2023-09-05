@@ -1,0 +1,79 @@
+openapi: "3.0.3"
+info:
+  title: "wordle_time API"
+  description: "wordle_time API"
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /api/currentPhrase:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Phrase"
+  /api/guess:
+    get:
+      description: ""
+      parameters:
+        - name: "word"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "phrase"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            '*/*':
+              schema: { }
+              examples:
+                Example#1:
+                  description: ""
+                  value:
+                    guessedWord: ""
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/GuessResult"
+components:
+  schemas:
+    Phrase:
+      type: "object"
+      properties:
+        phrase:
+          type: "string"
+    WrongPhraseError:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+    GuessLengthError:
+      type: "object"
+      properties:
+        guessedWord:
+          type: "string"
+        message:
+          type: "string"
+    GuessResult:
+      type: "object"
+      properties:
+        letterStates:
+          type: "array"
+          items:
+            type: "string"
+            enum:
+              - "CorrectSpot"
+              - "WrongSpot"
+              - "WrongLetter"

@@ -37,3 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/docs/.swagger-codegen/
+/docs/.swagger-codegen-ignore
+/docs/index.html
