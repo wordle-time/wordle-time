@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Backend",
+            "request": "launch",
+            "mainClass": "com.partytime.PartyTimeBackendApplication",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch Swagger",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8090/swagger-ui.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Export work",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/export.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Check glossary",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/export.py",
+            "args": [
+                "-c"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+    ]
+}
