@@ -36,5 +36,8 @@
     "vite-tsconfig-paths": "~4.2.0",
     "vitest": "~0.32.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@qwikest/icons": "^0.0.8",
+    "motion": "^10.16.2"
+  }
 }

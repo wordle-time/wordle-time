@@ -71,7 +71,8 @@
                     "MD049": {
                         "style": "underscore"
                     }
-                }
+                },
+                "scss.lint.unknownAtRules": "ignore"
             }
         }
     },
