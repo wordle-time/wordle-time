@@ -13,7 +13,12 @@ class GuessLengthError(@Transient val guessedWord: String = ""): Error {
     "Geratenes Wort muss 5 Buchstaben lang sein. Geraten '$guessedWord' mit ${guessedWord.length} Buchstaben."
 }
 
-class WrongPhraseError: Error {
-  override val message = "Rate-Versuch für veraltetes Wort."
+@Serializable
+class WrongGameIDError: Error {
+  override val message = "Rate-Versuch für altes Wort."
+}
 
+@Serializable
+class OldGameIDError(val oldWord: String): Error {
+  override val message = "Rate Versuch für altes Wort."
 }

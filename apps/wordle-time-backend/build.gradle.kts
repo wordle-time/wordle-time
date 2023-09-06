@@ -12,11 +12,18 @@ repositories {
 }
 
 dependencies {
-  implementation(libs.bundles.ktor)
-  implementation(libs.swagger)
+  implementation(libs.bundles.ktor) {
+    exclude("ch.qos.logback", "logback-classic")
+    exclude("ch.qos.logback", "logback-core")
+  }
+  implementation(libs.swagger) {
+    exclude("ch.qos.logback", "logback-classic")
+    exclude("ch.qos.logback", "logback-core")
+  }
   implementation(libs.bundles.kodein)
   implementation(libs.bundles.hoplite)
   implementation(libs.slf4jSimple)
+  implementation(libs.kotlinLogging)
   implementation(libs.coroutines)
 
   testImplementation(testLibs.kotlin.test.junit5)

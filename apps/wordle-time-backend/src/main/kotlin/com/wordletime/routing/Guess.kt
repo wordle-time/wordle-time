@@ -3,9 +3,8 @@ package com.wordletime.routing
 import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
-import com.wordletime.dto.Phrase
-import com.wordletime.dto.WordPhraseStructure
-import com.wordletime.dto.WrongPhraseError
+import com.wordletime.dto.OldGameIDError
+import com.wordletime.dto.WrongGameIDError
 import com.wordletime.wordProvider.WordProvider
 import io.ktor.http.HttpStatusCode
 import io.ktor.resources.Resource
@@ -22,10 +21,7 @@ import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 
 @Resource("guess")
-class Guess(override val word: String, override val phrase: String) : WordPhraseStructure
-
-@Resource("currentPhrase")
-class CurrentPhrase()
+class Guess(val word: String)
 
 
 fun Application.setupAPIRouting() {
@@ -40,33 +36,36 @@ fun Application.setupAPIRouting() {
     route("/api") {
       get<Guess> {
         val wordProvider: WordProvider by closestDI().instance()
-        val currentWordPhrase = wordProvider.currentWordPhrase
+        val currentWordGameID = wordProvider.currentWordGameID
+
+        val gameID = call.request.cookies["gameID"]
         when {
-          it.phrase != currentWordPhrase.phrase ->
-            call.respond(HttpStatusCode.BadRequest, WrongPhraseError())
+          gameID != null && gameID != currentWordGameID.gameID -> {
+            val previousWordGameID = wordProvider.previousWordGameID
+            if (gameID == previousWordGameID.gameID) {
+              call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordGameID.word))
+            } else {
+              call.respond(HttpStatusCode.NotFound, WrongGameIDError())
+            }
+          }
 
           it.word.length != 5 ->
             call.respond(HttpStatusCode.BadRequest, GuessLengthError(it.word))
 
           else -> {
-            val letterSet = currentWordPhrase.word.toSet()
+            val letterSet = currentWordGameID.word.toSet()
             val letterStateList = it.word.mapIndexed { index, c ->
               when (c) {
-                currentWordPhrase.word[index] -> LetterState.CorrectSpot
+                currentWordGameID.word[index] -> LetterState.CorrectSpot
                 in letterSet -> LetterState.WrongSpot
                 else -> LetterState.WrongLetter
               }
-
             }
+
+            call.response.cookies.append("gameID", currentWordGameID.gameID)
             call.respond(HttpStatusCode.OK, GuessResult(letterStateList))
           }
         }
-      }
-
-      get<CurrentPhrase> {
-        val wordProvider: WordProvider by closestDI().instance()
-        val currentWordPhrase = wordProvider.currentWordPhrase
-        call.respond(HttpStatusCode.OK, Phrase(currentWordPhrase.phrase))
       }
     }
   }

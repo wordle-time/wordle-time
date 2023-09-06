@@ -79,7 +79,7 @@ private fun Application.installPlugins() {
 fun Application.setupDI() {
   di {
     extend(confDI)
-    bind<WordProvider>{ singleton { StaticWordProvider() }}
+    bind<WordProvider> { singleton { StaticWordProvider() } }
   }
 }
 

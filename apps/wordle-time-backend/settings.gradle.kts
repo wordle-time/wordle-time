@@ -64,6 +64,10 @@ dependencyResolutionManagement {
       val slf4jSimple = version("slf4jSimple", "2.0.7")
       library(slf4jSimple, "org.slf4j", "slf4j-simple").versionRef(slf4jSimple)
 
+      //Logging - kotlin-logging
+      val kotlinLogging = version("kotlinLogging", "5.1.0")
+      library(kotlinLogging, "io.github.oshai", "kotlin-logging").versionRef(kotlinLogging)
+
       //Parallel Processing - coroutines
       val coroutines = version("coroutines", coroutineVersion)
       library(coroutines, "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef(coroutines)

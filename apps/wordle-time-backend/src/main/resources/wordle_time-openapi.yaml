@@ -6,26 +6,16 @@ info:
 servers:
   - url: "http://localhost:8080"
 paths:
-  /api/currentPhrase:
-    get:
-      description: ""
-      responses:
-        "200":
-          description: "OK"
-          content:
-            '*/*':
-              schema:
-                $ref: "#/components/schemas/Phrase"
   /api/guess:
     get:
-      description: ""
+      description: "Guess the current wordl of the day."
       parameters:
-        - name: "word"
-          in: "query"
-          required: true
+        - name: "gameID"
+          in: "cookie"
+          required: false
           schema:
             type: "string"
-        - name: "phrase"
+        - name: "word"
           in: "query"
           required: true
           schema:
@@ -34,27 +24,44 @@ paths:
         "400":
           description: "Bad Request"
           content:
-            '*/*':
-              schema: { }
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/GuessLengthError"
               examples:
                 Example#1:
-                  description: ""
+                  description: "Example for GuessLengthError"
                   value:
-                    guessedWord: ""
+                    word: "app"
+        "403":
+          description: "Not Found"
+          content:
+            'application/json':
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/OldGameIDError"
+                  - $ref: "#/components/schemas/WrongGameIDError"
+              examples:
+                Example#1:
+                  description: "Example for WrongGameIDError"
+                  value:
+                    gameID: "aaaaaaaaaaaaaaa"
+                    word: "applu"
         "200":
           description: "OK"
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: "#/components/schemas/GuessResult"
 components:
   schemas:
-    Phrase:
+    OldGameIDError:
       type: "object"
       properties:
-        phrase:
+        oldWord:
           type: "string"
-    WrongPhraseError:
+        message:
+          type: "string"
+    WrongGameIDError:
       type: "object"
       properties:
         message:
