@@ -32,7 +32,13 @@
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [],
+    "forwardPorts": [
+        3000,
+        4173,
+        5173,
+        5174,
+        5175,
+    ],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "sh /workspaces/wordle-time/.devcontainer/postCreateCommand.sh",
     // Configure tool-specific properties.

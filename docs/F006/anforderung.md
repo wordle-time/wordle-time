@@ -1,4 +1,4 @@
-# F006 - Ende des Spiels
+# F006 - Benutzeroberfläche
 
 Als Spieler möchte ich eine klare und intuitive Benutzeroberfläche haben, damit ich das Spiel ohne Verwirrung oder Ablenkung spielen kann.
 
