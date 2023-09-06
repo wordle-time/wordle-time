@@ -8,7 +8,7 @@ export default component$(() => {
     const isHamburgerOpen = useSignal(false);
 
     return (
-        <nav class="">
+        <nav class="from-ctp-surface0 to-ctp-base bg-gradient-to-b">
             <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div class="relative flex h-16 items-center justify-between">
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -34,7 +34,7 @@ export default component$(() => {
                             <Icon />
                         </div>
                         <div class="hidden sm:ml-6 sm:block">
-                            <NavigationItems childclass="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" parentClass="h-full flex space-x-4 " />
+                            <NavigationItems childclass="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium" parentClass="h-full flex space-x-4 " />
                         </div>
                     </div>
 
@@ -42,10 +42,8 @@ export default component$(() => {
             </div>
 
             {isHamburgerOpen.value && (
-
-
                 <div class="sm:hidden" id="mobile-menu">
-                    <NavigationItems childclass="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" parentClass="space-y-1 px-2 pb-3 pt-2" />
+                    <NavigationItems childclass="text-ctp-blue hover:underline block rounded-md px-3 py-2 text-base font-medium" parentClass="space-y-1 px-2 pb-3 pt-2" />
                 </div>
             )
             }
@@ -62,7 +60,6 @@ interface ItemProps {
 const NavigationItems = component$((props: ItemProps) => {
     return (
         <div class={`${props.parentClass} h-screen items-center`}>
-
             <Link href="/" class={`${props.childclass}`}>Home</Link>
             <Link href="/rules" class={`${props.childclass}`}>Regeln</Link>
             <Link href="/game" class={`${props.childclass}`}>Spiel</Link>

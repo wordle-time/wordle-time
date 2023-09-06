@@ -1,17 +1,18 @@
 import { component$, Slot } from '@builder.io/qwik';
-import Header from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
+import Navbar from '../components/navbar/navbar';
 
 export default component$(() => {
   return (
     <>
-      <main class="min-h-screen">
-        <Header />
-        <section>
+      <main class="ctp-latte dark:ctp-mocha text-ctp-text">
+        <Navbar />
+        <section class="bg-ctp-base h-screen text-ctp-text">
           <Slot />
         </section>
+        <Footer />
       </main>
-      <Footer />
+
     </>
   );
 });
