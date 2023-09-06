@@ -40,5 +40,5 @@ kotlin {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("com.wordletime.WordleTimeBackendApplicationKt")
 }
