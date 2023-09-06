@@ -1,5 +1,5 @@
 import { Resource, component$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { Requirement } from "..";
 
 export const useRequirement = routeLoader$<Requirement>(async ({ params, redirect }) => {
@@ -33,6 +33,8 @@ export default component$(() => {
               ))}
             </ul>
           </div>)} />
+      <Link href='/requirements' class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Anforderungen</Link>
+
     </div >
   )
 })
