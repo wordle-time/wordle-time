@@ -11,7 +11,14 @@
             "name": "Launch Swagger",
             "type": "chrome",
             "request": "launch",
-            "url": "http://localhost:8090/swagger-ui.html",
+            "url": "http://localhost:8090/swagger",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch OpenApi",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:8090/openapi",
             "webRoot": "${workspaceFolder}"
         },
         {

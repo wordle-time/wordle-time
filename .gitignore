@@ -40,3 +40,6 @@ Thumbs.db
 /docs/.swagger-codegen/
 /docs/.swagger-codegen-ignore
 /docs/index.html
+apps/wordle-time-backend/docs/index.html
+apps/wordle-time-backend/docs/.swagger-codegen-ignore
+apps/wordle-time-backend/docs/.swagger-codegen/VERSION

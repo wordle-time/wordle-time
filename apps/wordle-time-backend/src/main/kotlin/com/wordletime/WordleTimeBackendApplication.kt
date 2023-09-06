@@ -45,6 +45,7 @@ fun main() {
     Netty,
     port = serverConfig.port,
     module = Application::partyTimeServer,
+    host = "localhost"
   ).also {
     Runtime.getRuntime().addShutdownHook(thread(start = false) {
       it.stop(1, 5, TimeUnit.SECONDS)
