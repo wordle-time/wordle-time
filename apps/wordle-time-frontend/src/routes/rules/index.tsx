@@ -2,34 +2,22 @@ import { component$, useVisibleTask$ } from '@builder.io/qwik';
 import { animate } from 'motion';
 
 export default component$(() => {
-  useVisibleTask$(() => {
-    animate(
-      '#animation-target',
-      {
-        scale: [1, 2, 2, 1, 1],
-        rotate: [0, 0, 270, 270, 0],
-        borderRadius: ['20%', '20%', '50%', '50%', '20%'],
-        backgroundColor: [
-          '#ff008c',
-          '#d309e1',
-          '#9c1aff',
-          '#7700ff',
-          '#ff008c',
-        ],
-      },
-      {
-        duration: 2,
-        easing: 'ease-in-out',
-        repeat: 2,
-        direction: 'alternate',
-      }
-    );
-  });
+
   return (
     <div
-      id="animation-target"
-      // Some tailwind styling for sizing and initial color
-      class="m-auto mt-24 w-52 h-52 bg-slate-500"
-    ><h1>hallo</h1></div>
+    >
+      Spielmechanik
+      Buchstaben-Eingabe: Der Spieler gibt einen Buchstaben ein, und der Server antwortet daraufhin mit einem von drei möglichen Hinweisen:
+
+      Der Buchstabe ist im gesuchten Wort vorhanden.
+      Der Buchstabe steht an der richtigen Stelle im Wort.
+      Der Buchstabe ist nicht im gesuchten Wort enthalten.
+      Spielende:
+
+      Gewonnen: Wenn der Spieler das Wort innerhalb der sechs Versuche errät, hat er das Spiel gewonnen.
+      Verloren: Wenn der Spieler das Wort nach sechs Versuchen nicht erraten hat, ist das Spiel verloren.
+      Mehrfache Versuche: Spieler können so oft sie möchten versuchen, das Wort zu erraten, solange sie es innerhalb der sechs Versuche schaffen.
+      Tägliches Wort: Das zu erratende Wort wechselt täglich, sodass Spieler jeden Tag eine neue Herausforderung haben.
+    </div>
   );
 });

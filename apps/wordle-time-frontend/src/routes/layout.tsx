@@ -7,7 +7,7 @@ export default component$(() => {
     <>
       <main class="ctp-latte dark:ctp-mocha text-ctp-text">
         <Navbar />
-        <section class="bg-ctp-base h-screen text-ctp-text">
+        <section class="bg-ctp-base min-h-screen text-ctp-text">
           <Slot />
         </section>
         <Footer />

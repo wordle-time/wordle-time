@@ -24,16 +24,16 @@ export default component$(() => {
                         <ul>
 
                             <li class="mb-4">
-                                <a class="font-medium text-ctp-blue  hover:underline" href="/icons/">
-                                    Designentscheidungen</a>
+                                <Link class="font-medium text-ctp-blue  hover:underline" href="/design">
+                                    Designentscheidungen</Link>
                             </li>
                             <li class="mb-4">
-                                <a class="font-medium  text-ctp-blue hover:underline" href="/figma/">
-                                    Glossar</a>
+                                <Link class="font-medium  text-ctp-blue hover:underline" href="/glossary">
+                                    Glossar</Link>
                             </li>
                             <li class="mb-4">
-                                <a class="font-medium  text-ctp-blue hover:underline" href="/pro/">
-                                    Nicht-Ziele</a>
+                                <Link class="font-medium  text-ctp-blue hover:underline" href="/non-goals">
+                                    Nicht-Ziele</Link>
                             </li>
                         </ul>
                     </div>
@@ -42,8 +42,8 @@ export default component$(() => {
                             Support</h3>
                         <ul>
                             <li class="mb-4">
-                                <a class="font-medium  text-ctp-blue hover:underline" href="/contact/">
-                                    API Spezifikation</a>
+                                <Link class="font-medium  text-ctp-blue hover:underline" href="/api-spec">
+                                    API Spezifikation</Link>
                             </li>
                             <li class="mb-4">
                                 <Link class="font-medium  text-ctp-blue hover:underline" href="/requirements">Anforderungen</Link>
