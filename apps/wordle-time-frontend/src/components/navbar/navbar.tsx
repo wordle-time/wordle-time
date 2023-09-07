@@ -1,6 +1,7 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import Icon from "../icon/icon";
 import { Link } from "@builder.io/qwik-city";
+import { s } from "vitest/dist/types-198fd1d9";
 
 
 
@@ -31,10 +32,14 @@ export default component$(() => {
                     </div>
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div class="flex flex-shrink-0 items-center">
+
                             <Icon />
-                        </div>
-                        <div class="hidden sm:ml-6 sm:block">
-                            <NavigationItems childclass="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium" parentClass="h-full flex space-x-4 " />
+                            <div class="hidden sm:ml-6 sm:block">
+                                <NavigationItem href="/" text="Home" />
+                                <NavigationItem href="/rules" text="Regeln" />
+                                <NavigationItem href="/game" text="Spiel" />
+                            </div>
+                            {/* <NavigationItems childclass="bg-ctp-crust h-full text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium" parentClass="" /> */}
                         </div>
                     </div>
 
@@ -42,8 +47,11 @@ export default component$(() => {
             </div>
 
             {isHamburgerOpen.value && (
-                <div class="sm:hidden" id="mobile-menu">
-                    <NavigationItems childclass="text-ctp-blue hover:underline block rounded-md px-3 py-2 text-base font-medium" parentClass="space-y-1 px-2 pb-3 pt-2" />
+                <div class="sm:hidden flex flex-col h-screen" id="mobile-menu">
+                    <NavigationItem href="/" text="Home" />
+                    <NavigationItem href="/rules" text="Regeln" />
+                    <NavigationItem href="/game" text="Spiel" />
+                    {/* <NavigationItems childclass="text-ctp-blue hover:underline block rounded-md px-3 py-2 text-base font-medium" parentClass="space-y-1 px-2 pb-3 pt-2" /> */}
                 </div>
             )
             }
@@ -52,19 +60,14 @@ export default component$(() => {
     );
 });
 
-interface ItemProps {
-    parentClass?: string;
-    childclass?: string;
+export interface NavigationItem {
+    href: string;
+    text: string;
 }
 
-const NavigationItems = component$((props: ItemProps) => {
+const NavigationItem = component$<NavigationItem>((props) => {
     return (
-        <div class={`${props.parentClass} h-screen items-center`}>
-            <Link href="/" class={`${props.childclass}`}>Home</Link>
-            <Link href="/rules" class={`${props.childclass}`}>Regeln</Link>
-            <Link href="/game" class={`${props.childclass}`}>Spiel</Link>
-        </div>
-
+        <Link class="m-3 text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium" href={props.href}>{props.text}</Link>
     )
 })
 
