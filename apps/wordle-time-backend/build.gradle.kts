@@ -20,6 +20,12 @@ dependencies {
     exclude("ch.qos.logback", "logback-classic")
     exclude("ch.qos.logback", "logback-core")
   }
+  constraints {
+    implementation("commons-codec", "commons-codec", "1.16.0") {
+      because("version 1.11 - 1.15 have junit security vulnerability")
+    }
+  }
+
   implementation(libs.bundles.kodein)
   implementation(libs.bundles.hoplite)
   implementation(libs.slf4jSimple)

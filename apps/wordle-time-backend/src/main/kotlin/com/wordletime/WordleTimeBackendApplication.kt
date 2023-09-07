@@ -7,6 +7,7 @@ import com.wordletime.config.ServerConfig
 import com.wordletime.routing.setupAPIRouting
 import com.wordletime.wordProvider.StaticWordProvider
 import com.wordletime.wordProvider.WordProvider
+import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationStopping
@@ -16,6 +17,7 @@ import io.ktor.server.engine.stop
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.resources.Resources
 import org.kodein.di.DI
@@ -43,9 +45,9 @@ fun main() {
   val serverConfig by confDI.instance<ServerConfig>()
   embeddedServer(
     Netty,
+    host = serverConfig.host,
     port = serverConfig.port,
-    module = Application::partyTimeServer,
-    host = "localhost"
+    module = Application::partyTimeServer
   ).also {
     Runtime.getRuntime().addShutdownHook(thread(start = false) {
       it.stop(1, 5, TimeUnit.SECONDS)
@@ -74,6 +76,12 @@ private fun Application.installPlugins() {
   }
   install(CallLogging) {
     level = Level.TRACE
+  }
+  install(CORS) {
+    val serverConfig by confDI.instance<ServerConfig>()
+    allowHost("${serverConfig.host}:${serverConfig.port}")
+    allowHeader(HttpHeaders.ContentType)
+    allowHeader(HttpHeaders.Cookie)
   }
 }
 

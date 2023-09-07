@@ -30,7 +30,7 @@ dependencyResolutionManagement {
     create("libs") {
       //Server - ktor
       addCommon(
-        "ktor", "io.ktor", "2.3.3", listOf(
+        "ktor", "io.ktor", "2.3.4", listOf(
           "ktor-server-core",
           "ktor-server-netty",
           "ktor-server-call-logging",
@@ -40,7 +40,8 @@ dependencyResolutionManagement {
           "ktor-server-resources",
           "ktor-server-request-validation",
           "ktor-server-openapi",
-          "ktor-server-swagger"
+          "ktor-server-swagger",
+          "ktor-server-cors"
         )
       )
 
