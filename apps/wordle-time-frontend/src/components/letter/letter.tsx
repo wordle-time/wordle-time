@@ -13,7 +13,7 @@ export default component$<LetterProps>((props) => {
   return (
 
     <input type="text" class={
-      ['w-24', 'h-24', 'text-center', 'mr-10', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase text-6xl',
+      ['w-8', 'h-8', 'md:w-12', 'md:h-12', 'lg:w-24', 'lg:h-24', 'text-center', 'mx-2', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase', 'text-l', 'md:text-lg', 'lg:text-6xl',
         { "border-ctp-green": props.letterState == 0 },
         { "border-ctp-yellow": props.letterState == 1 },
         { "border-ctp-red": props.letterState == 2 },
