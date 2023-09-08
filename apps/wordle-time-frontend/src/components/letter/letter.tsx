@@ -20,7 +20,6 @@ export default component$<LetterProps>((props) => {
       {
         delay: stagger(0.1),
       }
-
     )
   })
 
