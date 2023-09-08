@@ -1,11 +1,12 @@
 package com.wordletime.routing
 
+import com.wordletime.config.ServerConfig
 import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.OldGameIDError
 import com.wordletime.dto.WrongGameIDError
-import com.wordletime.wordProvider.WordProvider
+import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpStatusCode
 import io.ktor.resources.Resource
 import io.ktor.server.application.Application
@@ -24,24 +25,24 @@ import org.kodein.di.ktor.closestDI
 class Guess(val word: String)
 
 //todo Kay
-fun Application.setupAPIRouting() {
+fun Application.setupAPIRouting(serverConfig: ServerConfig) {
   routing {
     openAPI("openapi", swaggerFile = "wordle_time-openapi.yaml") {
       this.opts.openAPI.apply {
-        this.servers = listOf(Server().apply { url = "https://localhost:8090" })
+        this.servers = listOf(Server().apply { url = "https://${serverConfig.host}:${serverConfig.port}" })
       }
     }
     swaggerUI(path = "swagger", swaggerFile = "wordle_time-openapi.yaml")
 
     route("/api") {
       get<Guess> {
-        val wordProvider: WordProvider by closestDI().instance()
-        val currentWordGameID = wordProvider.currentWordGameID
+        val wordState: WordState by closestDI().instance()
+        val currentWordGameID = wordState.currentWordGameID
 
         val gameID = call.request.cookies["gameID"]
         when {
           gameID != null && gameID != currentWordGameID.gameID -> {
-            val previousWordGameID = wordProvider.previousWordGameID
+            val previousWordGameID = wordState.previousWordGameID
             if (gameID == previousWordGameID.gameID) {
               call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordGameID.word))
             } else {

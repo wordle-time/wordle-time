@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
-    application
+  kotlin("jvm") version "1.9.0"
+  application
   kotlin("plugin.serialization") version "1.9.0"
 }
 
@@ -8,7 +8,7 @@ group = "com.wordletime"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
@@ -38,13 +38,18 @@ dependencies {
 }
 
 tasks.test {
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
 
 kotlin {
-    jvmToolchain(17)
+  jvmToolchain(17)
+}
+
+tasks.named<JavaExec>("run") {
+  systemProperties["config.override.wordProviderConfig.staticWord"] =
+    System.getProperty("config.override.wordProviderConfig.staticWord")
 }
 
 application {
-    mainClass.set("com.wordletime.WordleTimeBackendApplicationKt")
+  mainClass.set("com.wordletime.WordleTimeBackendApplicationKt")
 }
