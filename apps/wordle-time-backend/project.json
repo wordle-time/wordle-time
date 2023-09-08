@@ -15,7 +15,7 @@
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/wordle-time-backend",
-        "command": "gradle run"
+        "command": "gradle run -Dconfig.override.wordProviderConfig.staticWord=apple"
       }
     },
     "clean": {

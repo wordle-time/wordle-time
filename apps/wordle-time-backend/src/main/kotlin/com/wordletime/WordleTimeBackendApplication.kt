@@ -46,8 +46,6 @@ private val confDI = DI {
 }
 
 fun main() {
-  println("Demo: '" + System.getProperty("config.override.wordProviderConfig.staticWord") + "'")
-
   val serverConfig by confDI.instance<ServerConfig>()
   embeddedServer(
     Netty,
