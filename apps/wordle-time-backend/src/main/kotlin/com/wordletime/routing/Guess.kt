@@ -1,5 +1,6 @@
 package com.wordletime.routing
 
+import com.wordletime.config.ServerConfig
 import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
@@ -24,11 +25,11 @@ import org.kodein.di.ktor.closestDI
 class Guess(val word: String)
 
 //todo Kay
-fun Application.setupAPIRouting() {
+fun Application.setupAPIRouting(serverConfig: ServerConfig) {
   routing {
     openAPI("openapi", swaggerFile = "wordle_time-openapi.yaml") {
       this.opts.openAPI.apply {
-        this.servers = listOf(Server().apply { url = "https://localhost:8090" })
+        this.servers = listOf(Server().apply { url = "https://${serverConfig.host}:${serverConfig.port}" })
       }
     }
     swaggerUI(path = "swagger", swaggerFile = "wordle_time-openapi.yaml")

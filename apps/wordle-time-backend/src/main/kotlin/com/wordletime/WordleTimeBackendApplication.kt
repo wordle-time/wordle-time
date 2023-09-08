@@ -65,7 +65,9 @@ private fun Application.partyTimeServer() {
   installPlugins()
   setupDI()
   setupLifecycle()
-  setupAPIRouting()
+
+  val serverConfig by confDI.instance<ServerConfig>()
+  setupAPIRouting(serverConfig)
 }
 
 private fun Application.installPlugins() {
