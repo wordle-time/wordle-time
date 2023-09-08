@@ -1,5 +1,6 @@
-import { QRL, component$ } from "@builder.io/qwik"
+import { QRL, component$, useVisibleTask$ } from "@builder.io/qwik"
 import { LetterState } from "../../routes/game"
+import { animate, stagger } from "motion";
 
 export interface LetterProps {
   letter: string,
@@ -9,11 +10,26 @@ export interface LetterProps {
 }
 
 export default component$<LetterProps>((props) => {
+  useVisibleTask$(() => {
+    animate(
+      '.letter',
+      {
+        scale: [1, 2, 2, 1, 1],
+        rotate: [0, 0, 270, 270, 0],
+      },
+      {
+        delay: stagger(0.1),
+      }
+
+    )
+  })
+
+
 
   return (
     <>
       <input type="text" class={
-        ['w-8', 'h-8', 'md:w-12', 'md:h-12', 'lg:w-24', 'lg:h-24', 'text-center', 'mx-2', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase', 'text-l', 'md:text-lg', 'lg:text-6xl', 'hover:scale-125',
+        ['w-8', 'letter', 'h-8', 'md:w-12', 'md:h-12', 'lg:w-24', 'lg:h-24', 'text-center', 'mx-2', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase', 'text-l', 'md:text-lg', 'lg:text-6xl', 'hover:scale-125',
           { "border-ctp-green": props.letterState == "CorrectSpot" },
           { "border-ctp-yellow": props.letterState == "WrongSpot" },
           { "border-ctp-red": props.letterState == "WrongLetter" },
