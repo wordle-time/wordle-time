@@ -1,6 +1,6 @@
 import { $, component$, useStore } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
-import { server$ } from "@builder.io/qwik-city";
+import { routeAction$, server$ } from "@builder.io/qwik-city";
 
 export enum LetterState {
   "CorrectSpot",
@@ -19,14 +19,15 @@ export interface CurrentGuess {
 
 const endpoint = "http://localhost:8090/api/guess?word=";
 
-const serverResponse = server$(async (guess: CurrentGuess) => {
-  const response = await fetch(endpoint + guess.letter.join("").toLowerCase());
+const useserverResponse = routeAction$(async (guess) => {
+  const response = await fetch(endpoint + guess.letters);
   const json = await response.json();
   console.log(json);
   return json;
 });
 
 export default component$(() => {
+  const serverResponse = useserverResponse();
 
   const store = useStore(
     {
@@ -73,8 +74,8 @@ export default component$(() => {
             <div class="flex items-center justify-center my-16">
               <button class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={async () => {
-                  const response = await serverResponse(store.CurrentGuess);
-                  store.GuessResult.letterStates = response.letterStates;
+                  const response = await serverResponse.submit({ letters: store.CurrentGuess.letter.join("").toLowerCase() });
+                  store.GuessResult.letterStates = response.value.letterStates;
                 }}
 
 

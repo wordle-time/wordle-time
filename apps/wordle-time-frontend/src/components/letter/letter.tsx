@@ -4,7 +4,7 @@ import { LetterState } from "../../routes/game"
 export interface LetterProps {
   letter: string,
   index: number,
-  letterState: string
+  letterState: string | LetterState,
   onLetterChange: QRL<(index: number, letter: string) => void>;
 }
 
