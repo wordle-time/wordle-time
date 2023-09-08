@@ -23,12 +23,12 @@ import org.kodein.di.ktor.closestDI
 @Resource("guess")
 class Guess(val word: String)
 
-
+//todo Kay
 fun Application.setupAPIRouting() {
   routing {
     openAPI("openapi", swaggerFile = "wordle_time-openapi.yaml") {
       this.opts.openAPI.apply {
-        this.servers = listOf(Server().apply { url = "https://localhost:8080" })
+        this.servers = listOf(Server().apply { url = "https://localhost:8090" })
       }
     }
     swaggerUI(path = "swagger", swaggerFile = "wordle_time-openapi.yaml")
