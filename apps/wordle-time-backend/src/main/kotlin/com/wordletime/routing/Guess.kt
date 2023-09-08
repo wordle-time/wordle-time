@@ -5,7 +5,7 @@ import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.OldGameIDError
 import com.wordletime.dto.WrongGameIDError
-import com.wordletime.wordProvider.WordProvider
+import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpStatusCode
 import io.ktor.resources.Resource
 import io.ktor.server.application.Application
@@ -35,13 +35,13 @@ fun Application.setupAPIRouting() {
 
     route("/api") {
       get<Guess> {
-        val wordProvider: WordProvider by closestDI().instance()
-        val currentWordGameID = wordProvider.currentWordGameID
+        val wordState: WordState by closestDI().instance()
+        val currentWordGameID = wordState.currentWordGameID
 
         val gameID = call.request.cookies["gameID"]
         when {
           gameID != null && gameID != currentWordGameID.gameID -> {
-            val previousWordGameID = wordProvider.previousWordGameID
+            val previousWordGameID = wordState.previousWordGameID
             if (gameID == previousWordGameID.gameID) {
               call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordGameID.word))
             } else {

@@ -4,9 +4,12 @@ import com.sksamuel.hoplite.ConfigLoaderBuilder
 import com.sksamuel.hoplite.addResourceSource
 import com.wordletime.config.Config
 import com.wordletime.config.ServerConfig
+import com.wordletime.config.WordProviderConfig
 import com.wordletime.routing.setupAPIRouting
+import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.StaticWordProvider
 import com.wordletime.wordProvider.WordProvider
+import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -39,9 +42,12 @@ private val confDI = DI {
     }
   }
   bind<ServerConfig> { singleton { instance<Config>().server } }
+  bind<WordProviderConfig> { singleton { instance<Config>().wordProviderConfig } }
 }
 
 fun main() {
+  println("Demo: '" + System.getProperty("config.override.wordProviderConfig.staticWord") + "'")
+
   val serverConfig by confDI.instance<ServerConfig>()
   embeddedServer(
     Netty,
@@ -88,7 +94,18 @@ private fun Application.installPlugins() {
 fun Application.setupDI() {
   di {
     extend(confDI)
-    bind<WordProvider> { singleton { StaticWordProvider() } }
+    bind<WordProvider> {
+      singleton {
+        val wordProviderConfig: WordProviderConfig by di.instance()
+        wordProviderConfig.staticWord.let {provideWord ->
+          check(provideWord.isEmpty() || provideWord.length == 5) {
+            "The configured wordl Word must either be empty to randomly choose a word from words.json or 5 letters long"
+          }
+          if (provideWord.isEmpty()) ListWordProvider() else StaticWordProvider(provideWord)
+        }
+      }
+    }
+    bind<WordState> { singleton { WordState(instance<WordProvider>()) } }
   }
 }
 
