@@ -1,12 +1,12 @@
 import { $, component$, useStore } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
-import { routeAction$, server$ } from "@builder.io/qwik-city";
+import { routeAction$ } from "@builder.io/qwik-city";
 
 export enum LetterState {
-  "CorrectSpot",
-  "WrongSpot",
-  "WrongLetter",
-  "Empty"
+  "Undefiend" = 0,
+  "CorrectSpot" = 1,
+  "WrongSpot" = 2,
+  "WrongLetter" = 3,
 }
 
 export interface GuessResult {
@@ -19,26 +19,43 @@ export interface CurrentGuess {
 
 const endpoint = "http://localhost:8090/api/guess?word=";
 
-const useserverResponse = routeAction$(async (guess) => {
+export const useserverResponse = routeAction$(async (guess, requestEvent) => {
   const response = await fetch(endpoint + guess.letters);
   const json = await response.json();
   console.log(json);
+  console.log('Response cookies:', requestEvent.cookie);
+  console.log('Response header:', requestEvent.headers);
   return json;
 });
+
+export interface GameState {
+  tryCount: number;
+  isComplete: boolean;
+  isLoading: boolean;
+  CurrentGuess: CurrentGuess;
+  GuessResult: GuessResult;
+}
 
 export default component$(() => {
   const serverResponse = useserverResponse();
 
-  const store = useStore(
+  const store = useStore<GameState>(
     {
-      tries: 5,
+      tryCount: 0,
       isComplete: false,
+      isLoading: false,
       CurrentGuess: {
-        letter: ["a", "b", "a", "a", "b"]
-      } as CurrentGuess,
+        letter: ["A", "E", "I", "O", "U"]
+      },
       GuessResult: {
-        letterStates: [LetterState.Empty, LetterState.CorrectSpot, LetterState.WrongSpot, LetterState.WrongLetter, LetterState.CorrectSpot]
-      } as GuessResult
+        letterStates: [
+          LetterState.Undefiend,
+          LetterState.Undefiend,
+          LetterState.Undefiend,
+          LetterState.Undefiend,
+          LetterState.Undefiend
+        ]
+      },
     }
   )
 
@@ -50,16 +67,8 @@ export default component$(() => {
 
   return (
     <>
-      <div>Game</div>
-      <section class="p-4">
-        <div> Tries: {store.tries} / 6</div>
-        <div> Current Guess: {store.CurrentGuess.letter.join("")}</div>
-        <div> Guess Result: {store.GuessResult.letterStates.join("")}</div>
-      </section>
-
-      <div> Guess Result: {store.GuessResult.letterStates.join("")}</div>
       {
-        !store.isComplete && store.tries < 6 && (
+        !store.isComplete && store.tryCount < 6 && (
           <>
             <div class="flex items-center justify-center">
               {store.CurrentGuess.letter.map((letter, index) => (
@@ -72,14 +81,18 @@ export default component$(() => {
               ))}
             </div>
             <div class="flex items-center justify-center my-16">
-              <button class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
+              <button disabled={
+                store.CurrentGuess.letter.join("").length < 5
+              } class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={async () => {
                   const response = await serverResponse.submit({ letters: store.CurrentGuess.letter.join("").toLowerCase() });
                   store.GuessResult.letterStates = response.value.letterStates;
+                  store.tryCount = store.tryCount + 1;
                 }}
-
-
               >Raten</button>
+            </div>
+            <div class="flex items-center justify-center my-16">
+              <h3 class="text-3xl"> Versuche: {store.tryCount} / 6</h3>
             </div>
           </>
         )
@@ -87,14 +100,14 @@ export default component$(() => {
       {
         store.isComplete && (
           <div class="flex items-center justify-center my-16">
-            <h1>You made it</h1>
+            <h1 class="text-3xl text-ctp-green">You made it</h1>
           </div>
         )
       }
       {
-        store.tries >= 6 && !store.isComplete && (
+        store.tryCount >= 6 && !store.isComplete && (
           <div class="flex items-center justify-center my-16">
-            <h1>You lost</h1>
+            <h1 class="text-3xl text-ctp-red">You lost</h1>
           </div>
         )
       }
