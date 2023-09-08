@@ -5,6 +5,7 @@ import com.sksamuel.hoplite.addResourceSource
 import com.wordletime.config.Config
 import com.wordletime.config.ServerConfig
 import com.wordletime.config.WordProviderConfig
+import com.wordletime.requirements.RequirementsProvider
 import com.wordletime.routing.setupAPIRouting
 import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.StaticWordProvider
@@ -106,6 +107,7 @@ fun Application.setupDI() {
       }
     }
     bind<WordState> { singleton { WordState(instance<WordProvider>()) } }
+    bind<RequirementsProvider> { singleton { RequirementsProvider() }}
   }
 }
 

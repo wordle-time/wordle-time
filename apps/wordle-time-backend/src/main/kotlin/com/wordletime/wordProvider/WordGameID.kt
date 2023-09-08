@@ -1,4 +1,4 @@
-package com.wordletime.words
+package com.wordletime.wordProvider
 
 import kotlinx.serialization.Serializable
 

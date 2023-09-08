@@ -6,6 +6,7 @@ import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.OldGameIDError
 import com.wordletime.dto.WrongGameIDError
+import com.wordletime.requirements.RequirementsProvider
 import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpStatusCode
 import io.ktor.resources.Resource
@@ -23,6 +24,9 @@ import org.kodein.di.ktor.closestDI
 
 @Resource("guess")
 class Guess(val word: String)
+
+@Resource("requirements")
+class Requirements()
 
 //todo Kay
 fun Application.setupAPIRouting(serverConfig: ServerConfig) {
@@ -67,6 +71,11 @@ fun Application.setupAPIRouting(serverConfig: ServerConfig) {
             call.respond(HttpStatusCode.OK, GuessResult(letterStateList))
           }
         }
+      }
+
+      get<Requirements> {
+        val requirementsProvider: RequirementsProvider by closestDI().instance()
+        call.respond(HttpStatusCode.OK, requirementsProvider.requirements)
       }
     }
   }
