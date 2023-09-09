@@ -80,6 +80,7 @@ paths:
           schema:
             type: "string"
             example: "F001"
+          description: "id of the requirement (case-sensitive)"
       responses:
         "200":
           description: "OK"
