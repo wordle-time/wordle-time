@@ -3,7 +3,7 @@ package com.wordletime.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Requirements(val requirements: List<Requirement>)
+data class RequirementsContainer(val requirements: List<Requirement>)
 
 @Serializable
 data class Requirement(

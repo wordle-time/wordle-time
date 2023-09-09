@@ -2,12 +2,14 @@ package com.wordletime.requirements
 
 import com.sksamuel.hoplite.ConfigLoaderBuilder
 import com.sksamuel.hoplite.addResourceSource
-import com.wordletime.dto.Requirements
+import com.wordletime.dto.RequirementsContainer
 
 class RequirementsProvider {
-  val requirements = ConfigLoaderBuilder.default()
+  val requirementsContainer = ConfigLoaderBuilder.default()
     .addResourceSource("/requirements.json")
     .build()
-    .loadConfigOrThrow<Requirements>()
+    .loadConfigOrThrow<RequirementsContainer>()
+
+  val requirementsByID = requirementsContainer.requirements.associateBy { it.id }
 }
 

@@ -8,7 +8,9 @@ servers:
 paths:
   /api/guess:
     get:
-      description: "Guess the current wordl of the day."
+      summary: "Guess the current wordl of the day."
+      tags:
+        - guess
       parameters:
         - name: "gameID"
           in: "cookie"
@@ -54,7 +56,10 @@ paths:
                 $ref: "#/components/schemas/GuessResult"
   /api/requirements:
     get:
-      description: "Get requirements of the project"
+      summary: "Get requirements of the project"
+      description: "Get all requirements of the project."
+      tags:
+        - requirements
       responses:
         "200":
           description: "OK <br> A file response"
@@ -62,6 +67,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Requirements"
+  /api/requirements/{id}:
+    get:
+      summary: "Get a specific requirement of the project"
+      description: "Get a specific requirement of the project by id."
+      tags:
+        - requirements
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            example: "F001"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Requirement"
+        "404":
+          description: "Not Found"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "Requirement with id 'F009' not found."
 components:
   schemas:
     OldGameIDError:

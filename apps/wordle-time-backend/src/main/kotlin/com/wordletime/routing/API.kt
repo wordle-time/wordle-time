@@ -26,7 +26,10 @@ import org.kodein.di.ktor.closestDI
 class Guess(val word: String)
 
 @Resource("requirements")
-class Requirements()
+class Requirements() {
+  @Resource("{id}")
+  class Requirement(val parent: Requirements = Requirements(), val id: String)
+}
 
 //todo Kay
 fun Application.setupAPIRouting(serverConfig: ServerConfig) {
@@ -75,7 +78,17 @@ fun Application.setupAPIRouting(serverConfig: ServerConfig) {
 
       get<Requirements> {
         val requirementsProvider: RequirementsProvider by closestDI().instance()
-        call.respond(HttpStatusCode.OK, requirementsProvider.requirements)
+        call.respond(HttpStatusCode.OK, requirementsProvider.requirementsContainer)
+      }
+
+      get<Requirements.Requirement> {
+        val requirementsProvider: RequirementsProvider by closestDI().instance()
+        val requirementByID = requirementsProvider.requirementsByID[it.id]
+        if(requirementByID != null) {
+          call.respond(HttpStatusCode.OK, requirementByID)
+        } else {
+          call.respond(HttpStatusCode.NotFound, "Requirement with id '${it.id}' not found.")
+        }
       }
     }
   }
