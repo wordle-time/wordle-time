@@ -6,7 +6,7 @@ import com.wordletime.config.Config
 import com.wordletime.config.ServerConfig
 import com.wordletime.config.WordProviderConfig
 import com.wordletime.requirements.RequirementsProvider
-import com.wordletime.routing.setupAPIRouting
+import com.wordletime.routing.apiRouting
 import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.StaticWordProvider
 import com.wordletime.wordProvider.WordProvider
@@ -22,7 +22,6 @@ import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
-import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.resources.Resources
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -52,7 +51,7 @@ fun main() {
     Netty,
     host = serverConfig.host,
     port = serverConfig.port,
-    module = Application::partyTimeServer
+    module = Application::wordleTimeServer
   ).also {
     Runtime.getRuntime().addShutdownHook(thread(start = false) {
       it.stop(1, 5, TimeUnit.SECONDS)
@@ -60,13 +59,13 @@ fun main() {
   }.start(wait = true)
 }
 
-private fun Application.partyTimeServer() {
+private fun Application.wordleTimeServer() {
   installPlugins()
   setupDI()
   setupLifecycle()
 
   val serverConfig by confDI.instance<ServerConfig>()
-  setupAPIRouting(serverConfig)
+  apiRouting(serverConfig)
 }
 
 private fun Application.installPlugins() {
@@ -74,13 +73,10 @@ private fun Application.installPlugins() {
   install(ContentNegotiation) {
     json()
   }
+  /*
   install(RequestValidation) {
-    /*
-    validate<AccountDeleteDTO> {
-      ValidationResult.Valid
-    }
-     */
   }
+   */
   install(CallLogging) {
     level = Level.TRACE
   }
