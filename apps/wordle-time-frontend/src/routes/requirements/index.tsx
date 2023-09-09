@@ -11,10 +11,14 @@ export interface Requirement {
   criteria: string[]
 }
 
-export const useRequirements = routeLoader$<Requirement[]>(async () => {
-  const res = await fetch("http://localhost:3000/requirements")
 
-  return (await res.json() as Requirement[]);
+export interface Requirements {
+  requirements: Requirement[]
+}
+
+export const useRequirements = routeLoader$<Requirement[]>(async () => {
+  const res = await fetch("http://localhost:8090/api/requirements");
+  return (await res.json() as Requirements).requirements;
 });
 
 export default component$(() => {

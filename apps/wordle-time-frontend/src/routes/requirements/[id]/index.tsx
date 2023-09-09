@@ -3,7 +3,7 @@ import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { Requirement } from "..";
 
 export const useRequirement = routeLoader$<Requirement>(async ({ params, redirect }) => {
-  const res = await fetch("http://localhost:3000/requirements/" + params.id);
+  const res = await fetch("http://localhost:8090/api/requirements/" + params.id);
 
   if (!res.ok) {
     throw redirect(301, "..")
