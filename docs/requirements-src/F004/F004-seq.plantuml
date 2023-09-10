@@ -1,0 +1,5 @@
+@startuml F004_seq
+title "Tägliches Wort"
+
+Bob -> Alice : hello
+@enduml

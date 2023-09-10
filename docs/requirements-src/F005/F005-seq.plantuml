@@ -1,0 +1,5 @@
+@startuml F005_seq
+title "Ende des Spiels"
+
+Bob -> Alice : hello
+@enduml

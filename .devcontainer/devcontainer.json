@@ -63,9 +63,9 @@
                 "prettier.configPath": ".prettierrc",
                 "prettier.resolveGlobalModules": true,
                 "remote.restoreForwardedPorts": true,
-                "plantuml.diagramsRoot": "docs",
+                "plantuml.diagramsRoot": "docs/requirements-src",
                 "plantuml.exportFormat": "png",
-                "plantuml.exportOutDir": "docs/PNG",
+                "plantuml.exportOutDir": "docs/requirements",
                 "plantuml.exportIncludeFolderHeirarchy": true,
                 "plantuml.exportSubFolder": false,
                 "plantuml.jarArgs": [
@@ -79,6 +79,7 @@
                     }
                 },
                 "scss.lint.unknownAtRules": "ignore"
+
             }
         }
     },

@@ -1,0 +1,5 @@
+@startuml F006_seq
+title "Benutzeroberfläche"
+
+Bob -> Alice : hello
+@enduml

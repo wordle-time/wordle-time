@@ -1,0 +1,6 @@
+@startuml F005_act
+<style file=plantStyle.css>
+title "Ende des Spiels"
+
+Bob -> Alice : hello
+@enduml

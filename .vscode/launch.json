@@ -29,21 +29,10 @@
             "webRoot": "${workspaceFolder}"
         },
         {
-            "name": "Python: Export work",
+            "name": "Python: Export Anforderungen",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/tools/export.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "Python: Check glossary",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tools/export.py",
-            "args": [
-                "-c"
-            ],
+            "program": "${workspaceFolder}/tools/export_requirements.py",
             "console": "integratedTerminal",
             "justMyCode": true
         },

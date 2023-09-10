@@ -1,0 +1,6 @@
+@startuml F003_act
+<style file=plantStyle.css>
+title "Zählmechanismus"
+
+Bob -> Alice : hello
+@enduml

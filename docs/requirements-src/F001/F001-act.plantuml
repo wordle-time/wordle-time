@@ -1,0 +1,6 @@
+@startuml F001_act
+<style file=plantStyle.css>
+title "Worteingabe"
+
+Bob -> Alice : hello
+@enduml

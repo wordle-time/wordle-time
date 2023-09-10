@@ -1,0 +1,6 @@
+@startuml F002_act
+<style file=plantStyle.css>
+title "Feedback-Mechanismus"
+
+Bob -> Alice : hello
+@enduml

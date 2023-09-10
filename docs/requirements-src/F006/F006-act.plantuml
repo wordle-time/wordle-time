@@ -1,0 +1,6 @@
+@startuml F006_act
+<style file=plantStyle.css>
+title "Benutzeroberfläche"
+
+Bob -> Alice : hello
+@enduml

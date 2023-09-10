@@ -1,0 +1,5 @@
+@startuml F001_seq
+title "Worteingabe"
+
+Bob -> Alice : hello
+@enduml

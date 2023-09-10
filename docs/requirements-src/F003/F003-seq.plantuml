@@ -1,0 +1,5 @@
+@startuml F003_seq
+title "Zählmechanismus"
+
+Bob -> Alice : hello
+@enduml

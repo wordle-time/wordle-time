@@ -1,0 +1,6 @@
+@startuml F004_act
+<style file=plantStyle.css>
+title "Tägliches Wort"
+
+Bob -> Alice : hello
+@enduml
