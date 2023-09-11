@@ -15,11 +15,10 @@ data class Requirement(
   val impact: String,
   val criteria: List<String>,
   val testCases: List<TestCase>,
-  @Transient val resourcePath: String = ""
-) {
-  val actPic = "${id}_act.png"
-  val seqPic = "${id}_seq.png"
-}
+  @Transient val resourcePath: String = "",
+  val actPic: String,
+  val seqPic: String
+)
 
 @Serializable
 data class TestCase(

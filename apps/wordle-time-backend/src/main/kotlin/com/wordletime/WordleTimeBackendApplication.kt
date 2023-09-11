@@ -105,7 +105,7 @@ fun Application.setupDI() {
       }
     }
     bind<WordState> { singleton { WordState(instance<WordProvider>()) } }
-    bind<RequirementsProvider> { singleton { RequirementsProvider() } }
+    bind<RequirementsProvider> { singleton { RequirementsProvider(instance<ServerConfig>()) } }
   }
 }
 
