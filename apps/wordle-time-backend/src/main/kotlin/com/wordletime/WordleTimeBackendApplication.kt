@@ -12,6 +12,7 @@ import com.wordletime.wordProvider.StaticWordProvider
 import com.wordletime.wordProvider.WordProvider
 import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationStopping
@@ -82,9 +83,10 @@ private fun Application.installPlugins() {
   }
   install(CORS) {
     val serverConfig by confDI.instance<ServerConfig>()
-    allowHost("${serverConfig.host}:${serverConfig.port}")
+    allowHost("${serverConfig.host}:${serverConfig.frontendPort}")
+    allowMethod(HttpMethod.Get)
+
     allowHeader(HttpHeaders.ContentType)
-    allowHeader(HttpHeaders.Cookie)
   }
 }
 
@@ -94,7 +96,7 @@ fun Application.setupDI() {
     bind<WordProvider> {
       singleton {
         val wordProviderConfig: WordProviderConfig by di.instance()
-        wordProviderConfig.staticWord.let {provideWord ->
+        wordProviderConfig.staticWord.let { provideWord ->
           check(provideWord.isEmpty() || provideWord.length == 5) {
             "The configured wordl Word must either be empty to randomly choose a word from words.json or 5 letters long"
           }
@@ -103,7 +105,7 @@ fun Application.setupDI() {
       }
     }
     bind<WordState> { singleton { WordState(instance<WordProvider>()) } }
-    bind<RequirementsProvider> { singleton { RequirementsProvider() }}
+    bind<RequirementsProvider> { singleton { RequirementsProvider() } }
   }
 }
 
