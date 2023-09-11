@@ -25,13 +25,14 @@ export default component$(() => {
           <div>
             <h1>{requirement.title}</h1>
             <p>{requirement.description}</p>
-            <a href={requirement.referece} class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Auf GitHub ansehen </a>
+            <a href={requirement.reference} class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Auf GitHub ansehen </a>
             <p>{requirement.impact}</p>
             <ul class="list-disc pl-5">
               {requirement.criteria.map((c) => (
                 <li class="" key={c}>{c}</li>
               ))}
             </ul>
+            <img src={requirement.seqPic} width="200" height='200' />
           </div>)} />
       <Link href='/requirements' class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Anforderungen</Link>
 
