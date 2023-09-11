@@ -8,13 +8,13 @@
       "Das Eingabefeld akzeptiert und validiert meine Eingabe",
       "Ich erhalte eine Rückmeldung, wenn meine Eingabe ungültig ist"
     ],
-    "test-cases": [
+    "testCases": [
         {
             "name": "Testfall 1",
             "requirement": "Das Spiel wurde gestartet.",
             "action": "Ich gebe ein Wort ein.",
             "expectation": " Die Anzahl der Versuche wird um 1 erhöht.",
-            "test-pic": "test-name.png"
+            "testPic": "test-name.png"
         }
     ]
   }

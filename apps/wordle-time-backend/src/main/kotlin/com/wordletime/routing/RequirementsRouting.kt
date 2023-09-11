@@ -1,13 +1,31 @@
 package com.wordletime.routing
 
+import com.wordletime.dto.Requirement
 import com.wordletime.requirements.RequirementsProvider
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.resources.get
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondFile
 import io.ktor.server.routing.Routing
+import io.ktor.util.pipeline.PipelineContext
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
+import java.io.File
+
+suspend fun PipelineContext<*, ApplicationCall>.handleRequirementByID(
+  id: String,
+  handler: suspend (Requirement) -> Unit
+) {
+  val requirementsProvider: RequirementsProvider by closestDI().instance()
+  val requirementByID = requirementsProvider.requirementsByID[id]
+  if (requirementByID != null) {
+    handler(requirementByID)
+  } else {
+    call.respond(HttpStatusCode.NotFound, "Requirement with id '$id' not found.")
+  }
+}
 
 fun Routing.requirementsRouting() {
   get<API.Requirements> {
@@ -16,12 +34,26 @@ fun Routing.requirementsRouting() {
   }
 
   get<API.Requirements.Requirement> {
-    val requirementsProvider: RequirementsProvider by closestDI().instance()
-    val requirementByID = requirementsProvider.requirementsByID[it.id]
-    if (requirementByID != null) {
-      call.respond(HttpStatusCode.OK, requirementByID)
-    } else {
-      call.respond(HttpStatusCode.NotFound, "Requirement with id '${it.id}' not found.")
+    handleRequirementByID(it.id) { requirement ->
+      call.respond(HttpStatusCode.OK, requirement)
+    }
+  }
+
+  get<API.Requirements.Requirement.Pic> {
+    handleRequirementByID(it.parent.id) { requirement ->
+      val requirementURL = this::class.java.getResource(requirement.resourcePath)!!.toURI()
+      val requirementPath = File(requirementURL).toPath()
+
+      val picFile = requirementPath.resolve(it.fileName).toFile()
+
+      when {
+        !picFile.exists() -> call.respond(HttpStatusCode.NotFound, "Picture '${it.fileName}' not found")
+        !picFile.toPath().startsWith(requirementPath) -> call.respond(
+          HttpStatusCode.BadRequest,
+          "Selected file not child of ${it.parent.id} dir"
+        )
+        else -> call.respondFile(picFile)
+      }
     }
   }
 }

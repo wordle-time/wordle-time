@@ -53,3 +53,11 @@ tasks.named<JavaExec>("run") {
 application {
   mainClass.set("com.wordletime.WordleTimeBackendApplicationKt")
 }
+
+tasks.processResources {
+  from("../../docs/requirements") {
+    into("requirements/")
+    exclude("**/*.md")
+    exclude("**/*.pdf")
+  }
+}
