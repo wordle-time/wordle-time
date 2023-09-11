@@ -1,0 +1,13 @@
+{
+  "glossaries": [
+    {
+      "title": "Anwendung",
+      "description": "Eine _Anwendung_ ist eine Software, die eine bestimmte Funktionalität bereitstellt. Eine _Anwendung_ kann aus mehreren _Komponenten_ bestehen, z. B. einem _Frontend_, einem _Backend_ und einer _Datenbank_."
+    },
+    {
+      "name": "NX",
+      "description": "_NX_ ist eine flexible _Anwendung_, das die Entwicklung von _Frontend_ und _Backend_ in einer bestimmen Struktur (z. B. _monolithische Architektur_) erleichtert.",
+      "url": "https://nx.dev"
+    }
+  ]
+}
