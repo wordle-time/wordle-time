@@ -1,7 +1,7 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import Icon from "../icon/icon";
 import { Link } from "@builder.io/qwik-city";
-import { s } from "vitest/dist/types-198fd1d9";
+import { NavigationItem } from "@wordle-time/models";
 
 
 
@@ -60,16 +60,10 @@ export default component$(() => {
     );
 });
 
-export interface NavigationItem {
-    href: string;
-    text: string;
-}
+
 
 const NavigationItem = component$<NavigationItem>((props) => {
     return (
         <Link class="m-3 text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium" href={props.href}>{props.text}</Link>
     )
 })
-
-    // < Link href = "/" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" > Dashboard</Link >
-    //     <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>

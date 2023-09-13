@@ -1,5 +1,5 @@
 import { QRL, component$, useVisibleTask$ } from "@builder.io/qwik"
-import { LetterState } from "../../routes/game"
+import { LetterState } from "@wordle-time/models";
 import { animate, stagger } from "motion";
 
 export interface LetterProps {

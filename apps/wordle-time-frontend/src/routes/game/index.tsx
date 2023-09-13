@@ -2,21 +2,7 @@ import { $, component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
 import { server$ } from "@builder.io/qwik-city";
 import { animate } from "motion";
-
-export enum LetterState {
-  "Undefiend" = 0,
-  "CorrectSpot" = 1,
-  "WrongSpot" = 2,
-  "WrongLetter" = 3,
-}
-
-export interface GuessResult {
-  letterStates: LetterState[];
-}
-
-export interface CurrentGuess {
-  letter: string[];
-}
+import { CurrentGuess, GuessResult, LetterState } from "@wordle-time/models";
 
 const endpoint = "http://localhost:8090/api/guess?word=";
 

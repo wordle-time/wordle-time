@@ -1,32 +1,7 @@
 import { Resource, component$ } from "@builder.io/qwik";
 import { routeLoader$, Link } from "@builder.io/qwik-city";
+import { Requirement, Requirements } from "@wordle-time/models";
 import fetch from "node-fetch";
-
-export interface Requirement {
-  id: string
-  title: string
-  reference: string
-  description: string
-  impact: string
-  criteria: string[]
-  testCases: TestCase[]
-  actPic: string
-  seqPic: string
-}
-
-export interface TestCase {
-  name: string
-  requirement: string
-  action: string
-  expectation: string
-  testPic: string
-}
-
-
-
-export interface Requirements {
-  requirements: Requirement[]
-}
 
 export const useRequirements = routeLoader$<Requirement[]>(async () => {
   const res = await fetch("http://localhost:8090/api/requirements");
