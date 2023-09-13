@@ -1,9 +1,9 @@
 import { LetterState } from './letter';
 
-export interface GuessResult {
+export interface IGuessResult {
   letterStates: LetterState[];
 }
 
-export interface CurrentGuess {
+export interface ICurrentGuess {
   letter: string[];
 }

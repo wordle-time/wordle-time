@@ -1,7 +1,6 @@
 import { component$, useSignal } from "@builder.io/qwik";
-import Icon from "../icon/icon";
-import { Link } from "@builder.io/qwik-city";
-import { NavigationItem } from "@wordle-time/models";
+import Icon from "../icon/Icon";
+import NavigationItem from "./Navigation-item";
 
 
 
@@ -39,7 +38,6 @@ export default component$(() => {
                                 <NavigationItem href="/rules" text="Regeln" />
                                 <NavigationItem href="/game" text="Spiel" />
                             </div>
-                            {/* <NavigationItems childclass="bg-ctp-crust h-full text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium" parentClass="" /> */}
                         </div>
                     </div>
 
@@ -51,7 +49,6 @@ export default component$(() => {
                     <NavigationItem href="/" text="Home" />
                     <NavigationItem href="/rules" text="Regeln" />
                     <NavigationItem href="/game" text="Spiel" />
-                    {/* <NavigationItems childclass="text-ctp-blue hover:underline block rounded-md px-3 py-2 text-base font-medium" parentClass="space-y-1 px-2 pb-3 pt-2" /> */}
                 </div>
             )
             }
@@ -62,8 +59,4 @@ export default component$(() => {
 
 
 
-const NavigationItem = component$<NavigationItem>((props) => {
-    return (
-        <Link class="m-3 text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium" href={props.href}>{props.text}</Link>
-    )
-})
+

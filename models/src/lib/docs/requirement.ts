@@ -1,16 +1,16 @@
-export interface Requirement {
+export interface IRequirement {
   id: string;
   title: string;
   reference: string;
   description: string;
   impact: string;
   criteria: string[];
-  testCases: TestCase[];
+  testCases: ITestCase[];
   actPic: string;
   seqPic: string;
 }
 
-export interface TestCase {
+export interface ITestCase {
   name: string;
   requirement: string;
   action: string;
@@ -19,5 +19,5 @@ export interface TestCase {
 }
 
 export interface Requirements {
-  requirements: Requirement[];
+  requirements: IRequirement[];
 }

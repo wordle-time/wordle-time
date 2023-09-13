@@ -1,6 +1,5 @@
 import { component$, Slot } from '@builder.io/qwik';
-import Footer from '../components/footer/footer';
-import Navbar from '../components/navbar/navbar';
+import { Footer, Navbar } from '@wordle-time/ui';
 
 export default component$(() => {
   return (

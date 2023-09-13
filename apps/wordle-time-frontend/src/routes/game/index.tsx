@@ -2,7 +2,7 @@ import { $, component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
 import { server$ } from "@builder.io/qwik-city";
 import { animate } from "motion";
-import { CurrentGuess, GuessResult, LetterState } from "@wordle-time/models";
+import { ICurrentGuess, IGuessResult, LetterState } from "@wordle-time/models";
 
 const endpoint = "http://localhost:8090/api/guess?word=";
 
@@ -17,14 +17,12 @@ export interface GameState {
   tryCount: number;
   isComplete: boolean;
   isLoading: boolean;
-  CurrentGuess: CurrentGuess;
-  GuessResult: GuessResult;
+  CurrentGuess: ICurrentGuess;
+  GuessResult: IGuessResult;
 }
 
 
 export default component$(() => {
-
-
   const store = useStore<GameState>(
     {
       tryCount: 0,

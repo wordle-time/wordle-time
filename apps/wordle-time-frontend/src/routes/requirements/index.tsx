@@ -1,11 +1,11 @@
 import { Resource, component$ } from "@builder.io/qwik";
 import { routeLoader$, Link } from "@builder.io/qwik-city";
-import { Requirement, Requirements } from "@wordle-time/models";
+import { IRequirement, Requirements as IRequirements } from "@wordle-time/models";
 import fetch from "node-fetch";
 
-export const useRequirements = routeLoader$<Requirement[]>(async () => {
+export const useRequirements = routeLoader$<IRequirement[]>(async () => {
   const res = await fetch("http://localhost:8090/api/requirements");
-  return (await res.json() as Requirements).requirements;
+  return (await res.json() as IRequirements).requirements;
 });
 
 export default component$(() => {
