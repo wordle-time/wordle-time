@@ -13,6 +13,7 @@
     "@nx/jest": "16.7.4",
     "@nx/js": "16.7.4",
     "@nx/linter": "16.7.4",
+    "@nx/react": "^16.8.1",
     "@nx/vite": "16.7.4",
     "@nx/workspace": "16.7.4",
     "@types/jest": "^29.4.0",
