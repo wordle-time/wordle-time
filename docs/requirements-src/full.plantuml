@@ -32,7 +32,7 @@ repeat
         if(NotFound enthält oldWord) then (Ja)
             :Zeige "Altes Wort $oldWord";
         endif
-        :Zeige "Zu ratendes Wort hat sich geändert. Starte neu"
+        :Zeige "Zu ratendes Wort hat sich geändert. Starte neu";
         :Re-Initialisiere neues Spiel;
         stop
     case (OK)
