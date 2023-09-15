@@ -43,3 +43,6 @@ Thumbs.db
 apps/wordle-time-backend/docs/index.html
 apps/wordle-time-backend/docs/.swagger-codegen-ignore
 apps/wordle-time-backend/docs/.swagger-codegen/VERSION
+
+# PlantUML
+/plantuml-release.jar

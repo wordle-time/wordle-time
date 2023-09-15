@@ -1,6 +1,7 @@
 @startuml full_act
 <style file=plantStyle.css>
 title "Wordle-Time vollständiger Workflow"
+skinparam conditionStyle InsideDiamond
 
 |wordle-time Frontend|
 start
@@ -49,8 +50,7 @@ repeat
         :RateVersuche++;
     endswitch
     backward:Biete neuen Rate-Versuch;
-repeat while (Rateversuche < 6) is (Ja)
--> Nein;
+repeat while (Rateversuche < 6) is (Ja) not (Nein);
 :Zeige "Verloren. Zu viele Rateversuche";
 stop
 @enduml
