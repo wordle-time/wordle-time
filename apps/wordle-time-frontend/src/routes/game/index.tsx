@@ -19,8 +19,8 @@ export interface GameState {
   isLoading: boolean;
   CurrentGuess: ICurrentGuess;
   GuessResult: IGuessResult;
+  LocaleDateString: string;
 }
-
 
 export default component$(() => {
   const store = useStore<GameState>(
@@ -40,38 +40,86 @@ export default component$(() => {
           LetterState.Undefiend
         ]
       },
-    }
+      LocaleDateString: new Date().toLocaleDateString()
+    },
   )
+
+  const isToDay = $((localeDateString: string) => {
+    console.log("getting the current date");
+    const today = new Date();
+    console.log("today is", today.toLocaleDateString(), "localStorage is from", localeDateString);
+    if (today.toLocaleDateString() === localeDateString) {
+      console.log("Localstorage is from today");
+      return true;
+    }
+  }
+  );
+
+  const updateStateFromStorage = $((state: GameState) => {
+    isToDay(state.LocaleDateString).then(
+      (isToDay) => {
+        if (isToDay) {
+          console.log("Apply state from local storage");
+          store.tryCount = state.tryCount;
+          store.isComplete = state.isComplete;
+          store.isLoading = state.isLoading;
+          store.CurrentGuess = state.CurrentGuess;
+          store.GuessResult = state.GuessResult;
+          store.LocaleDateString = state.LocaleDateString;
+        } else {
+          console.log("Localstorage is not from today");
+          window.localStorage.removeItem("gameState");
+          console.log("state removed from local storage");
+        }
+      }
+    )
+  }
+  );
+
 
   // load the state of the game from local storage
   useVisibleTask$(() => {
+    console.log("checking local storage for game state");
     const localStorage = Object.keys(window.localStorage).find(key => key === "gameState");
     if (localStorage) {
-      const gameState = JSON.parse(window.localStorage.getItem("gameState") || "");
-      store.tryCount = gameState.tryCount;
-      store.isComplete = gameState.isComplete;
-      store.isLoading = gameState.isLoading;
-      store.CurrentGuess = gameState.CurrentGuess;
-      store.GuessResult = gameState.GuessResult;
-      console.log(gameState);
-    } else {
-      console.log("no local storage");
+      console.log("local storage found");
+      const gameState = JSON.parse(window.localStorage.getItem("gameState") || "") as GameState;
+      // chck if the date day, month and year are the same
+      if (gameState) {
+        updateStateFromStorage(gameState);
+        console.log("store loaded from local storage");
+      }
     }
+
+    animate(
+      ".loading",
+      {
+        scale: [1, 1.5, 1],
+      },
+      {
+        duration: 1.5,
+        repeat: Infinity,
+      }
+    )
+    store.isLoading = false;
   });
-
-
 
   const onLetterChange = $((index: number, letter: string) => {
     store.CurrentGuess.letter[index] = letter;
   });
 
-
-
   return (
     <div class='grid h-screen place-items-center'>
       <div>
         {
-          !store.isComplete && store.tryCount < 6 && (
+          store.isLoading && (
+            <div class="flex items-center justify-center">
+              <h1 class="text-3xl loading">Loading ...</h1>
+            </div>
+          )
+        }
+        {
+          !store.isComplete && store.tryCount < 6 && !store.isLoading && (
             <>
               <div class="flex items-center justify-center">
                 {store.CurrentGuess.letter.map((letter, index) => (
@@ -93,7 +141,6 @@ export default component$(() => {
                     store.tryCount = store.tryCount + 1;
                     animate(".tryCount", {
                       scale: [1, 1.5, 1],
-
                     })
                     window.localStorage.setItem("gameState", JSON.stringify(store));
                   }}
@@ -106,14 +153,14 @@ export default component$(() => {
           )
         }
         {
-          store.isComplete && (
+          store.isComplete && !store.isLoading && (
             <div class="flex items-center justify-center my-16">
               <h1 class="text-3xl text-ctp-green">You made it</h1>
             </div>
           )
         }
         {
-          store.tryCount >= 6 && !store.isComplete && (
+          store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
             <div class="flex items-center justify-center my-16">
               <h1 class="text-3xl text-ctp-red">You lost</h1>
             </div>
