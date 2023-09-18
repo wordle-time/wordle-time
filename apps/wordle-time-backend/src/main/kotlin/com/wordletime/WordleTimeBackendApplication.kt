@@ -49,10 +49,6 @@ private val confDI = DI {
 fun main() {
   val serverConfig by confDI.instance<ServerConfig>()
 
-  println("Demo mode: ${serverConfig.demo}")
-
-  val wordProviderConfig by confDI.instance<WordProviderConfig>()
-  println("Word: ${wordProviderConfig.staticWord}")
   embeddedServer(
     Netty,
     host = serverConfig.host,
