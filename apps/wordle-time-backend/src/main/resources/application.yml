@@ -2,5 +2,6 @@ server:
   host: "localhost"
   port: 8090
   frontendPort: 5173
+  demo: false
 wordProviderConfig:
   staticWord: ""

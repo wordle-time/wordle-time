@@ -22,3 +22,13 @@ class WrongGameIDError: Error {
 class OldGameIDError(val oldWord: String): Error {
   override val message = "Rate Versuch für altes Wort."
 }
+
+@Serializable
+class GameIDNotFoundError(val gameID: Int): Error {
+  override val message = "Word for gameID '$gameID' not found"
+}
+
+@Serializable
+class CurrentDayWordRequestError(val gameID: Int): Error {
+  override val message = "Word for latest gameID '$gameID' won't be shared"
+}

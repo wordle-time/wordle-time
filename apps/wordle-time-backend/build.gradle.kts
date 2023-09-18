@@ -46,8 +46,12 @@ kotlin {
 }
 
 tasks.named<JavaExec>("run") {
-  systemProperties["config.override.wordProviderConfig.staticWord"] =
-    System.getProperty("config.override.wordProviderConfig.staticWord")
+  System.getProperties().filter {
+    val keyAsString = it.key as String
+    keyAsString.startsWith("config.override")
+  }.forEach {
+    systemProperties[it.key as String] = it.value as String
+  }
 }
 
 application {

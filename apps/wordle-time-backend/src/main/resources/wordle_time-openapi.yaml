@@ -23,18 +23,19 @@ paths:
           schema:
             type: "string"
       responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/GuessResult"
         "400":
           description: "Bad Request"
           content:
             'application/json':
               schema:
                 $ref: "#/components/schemas/GuessLengthError"
-              examples:
-                Example#1:
-                  description: "Example for GuessLengthError"
-                  value:
-                    word: "app"
-        "403":
+        "404":
           description: "Not Found"
           content:
             'application/json':
@@ -42,18 +43,38 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/OldGameIDError"
                   - $ref: "#/components/schemas/WrongGameIDError"
-              examples:
-                Example#1:
-                  description: "Example for WrongGameIDError"
-                  value:
-                    gameID: "aaaaaaaaaaaaaaa"
-                    word: "applu"
+  /api/wordForGameID:
+    get:
+      summary: "Get word for gameID."
+      description: "Get a past word by gameID"
+      tags:
+        - guess
+      parameters:
+        - name: "gameID"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            example: 1
+      responses:
+        "404":
+          description: "Not Found"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/GameIDNotFoundError"
+        "403":
+          description: "Forbidden"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/CurrentDayWordRequestError"
         "200":
           description: "OK"
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GuessResult"
+                $ref: "#/components/schemas/WordContainer"
   /api/requirements:
     get:
       summary: "Get requirements of the project"
@@ -222,3 +243,30 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Requirement"
+    GameIDNotFoundError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+    CurrentDayWordRequestError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+    WordContainer:
+      type: "object"
+      properties:
+        word:
+          type: "string"
+        gameID:
+          type: "integer"
+          format: "int32"
+        date:
+          type: "string"
+          format: "date"

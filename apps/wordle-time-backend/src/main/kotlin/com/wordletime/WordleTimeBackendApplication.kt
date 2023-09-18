@@ -48,6 +48,11 @@ private val confDI = DI {
 
 fun main() {
   val serverConfig by confDI.instance<ServerConfig>()
+
+  println("Demo mode: ${serverConfig.demo}")
+
+  val wordProviderConfig by confDI.instance<WordProviderConfig>()
+  println("Word: ${wordProviderConfig.staticWord}")
   embeddedServer(
     Netty,
     host = serverConfig.host,
@@ -104,7 +109,7 @@ fun Application.setupDI() {
         }
       }
     }
-    bind<WordState> { singleton { WordState(instance<WordProvider>()) } }
+    bind<WordState> { singleton { WordState(instance<WordProvider>(), instance<ServerConfig>().demo) } }
     bind<RequirementsProvider> { singleton { RequirementsProvider(instance<ServerConfig>()) } }
   }
 }

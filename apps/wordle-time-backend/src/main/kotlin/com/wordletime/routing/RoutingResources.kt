@@ -7,6 +7,9 @@ class API {
   @Resource("guess")
   class Guess(val parent: API = API(), val word: String)
 
+  @Resource("wordForGameID")
+  class WordForGameID(val parent: API = API(), val gameID: Int)
+
   @Resource("requirements")
   class Requirements(val parent: API = API()) {
     @Resource("{id}")

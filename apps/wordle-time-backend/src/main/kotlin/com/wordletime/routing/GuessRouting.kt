@@ -1,5 +1,7 @@
 package com.wordletime.routing
 
+import com.wordletime.dto.CurrentDayWordRequestError
+import com.wordletime.dto.GameIDNotFoundError
 import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
@@ -13,18 +15,19 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
+import java.time.LocalDate
 
 fun Routing.guessRouting() {
   get<API.Guess> {
     val wordState: WordState by closestDI().instance()
-    val currentWordGameID = wordState.currentWordGameID
+    val currentWordContainer = wordState.currentWordContainer()
 
-    val gameID = call.request.cookies["gameID"]
+    val gameID = call.request.cookies["gameID"]?.toInt()
     when {
-      gameID != null && gameID != currentWordGameID.gameID -> {
-        val previousWordGameID = wordState.previousWordGameID
-        if (gameID == previousWordGameID.gameID) {
-          call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordGameID.word))
+      gameID != null && gameID != currentWordContainer.gameID -> {
+        val previousWordContainer = wordState.existingWordContainerByID(gameID)
+        if (previousWordContainer != null) {
+          call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordContainer.word))
         } else {
           call.respond(HttpStatusCode.NotFound, WrongGameIDError())
         }
@@ -34,18 +37,33 @@ fun Routing.guessRouting() {
         call.respond(HttpStatusCode.BadRequest, GuessLengthError(it.word))
 
       else -> {
-        val letterSet = currentWordGameID.word.toSet()
+        val letterSet = currentWordContainer.word.toSet()
         val letterStateList = it.word.mapIndexed { index, c ->
           when (c) {
-            currentWordGameID.word[index] -> LetterState.CorrectSpot
+            currentWordContainer.word[index] -> LetterState.CorrectSpot
             in letterSet -> LetterState.WrongSpot
             else -> LetterState.WrongLetter
           }
         }
 
-        call.response.cookies.append("gameID", currentWordGameID.gameID)
+        call.response.cookies.append("gameID", currentWordContainer.gameID.toString())
         call.respond(HttpStatusCode.OK, GuessResult(letterStateList))
       }
+    }
+  }
+
+  get<API.WordForGameID> {
+    val wordState: WordState by closestDI().instance()
+    val wordContainerForGameID = wordState.existingWordContainerByID(it.gameID)
+    when {
+      wordContainerForGameID == null -> call.respond(HttpStatusCode.NotFound, GameIDNotFoundError(it.gameID))
+
+      wordContainerForGameID.date == LocalDate.now() -> call.respond(
+        HttpStatusCode.Forbidden,
+        CurrentDayWordRequestError(it.gameID)
+      )
+
+      else -> call.respond(HttpStatusCode.OK, wordContainerForGameID)
     }
   }
 }
