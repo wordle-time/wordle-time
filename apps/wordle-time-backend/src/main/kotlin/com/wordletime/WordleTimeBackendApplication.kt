@@ -4,13 +4,8 @@ import com.sksamuel.hoplite.ConfigLoaderBuilder
 import com.sksamuel.hoplite.addResourceSource
 import com.wordletime.config.Config
 import com.wordletime.config.ServerConfig
-import com.wordletime.config.WordProviderConfig
-import com.wordletime.requirements.RequirementsProvider
+import com.wordletime.di.serverModule
 import com.wordletime.routing.apiRouting
-import com.wordletime.wordProvider.ListWordProvider
-import com.wordletime.wordProvider.StaticWordProvider
-import com.wordletime.wordProvider.WordProvider
-import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
@@ -21,39 +16,31 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.engine.stop
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.callloging.processingTimeMillis
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.request.httpMethod
+import io.ktor.server.request.path
 import io.ktor.server.resources.Resources
-import org.kodein.di.DI
-import org.kodein.di.bind
 import org.kodein.di.instance
+import org.kodein.di.ktor.closestDI
 import org.kodein.di.ktor.di
-import org.kodein.di.singleton
-import org.slf4j.event.Level
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
-private val confDI = DI {
-  bind<Config> {
-    singleton {
-      ConfigLoaderBuilder.default()
-        .addResourceSource("/application.yml")
-        .build()
-        .loadConfigOrThrow<Config>()
-    }
-  }
-  bind<ServerConfig> { singleton { instance<Config>().server } }
-  bind<WordProviderConfig> { singleton { instance<Config>().wordProviderConfig } }
-}
-
 fun main() {
-  val serverConfig by confDI.instance<ServerConfig>()
+  val config = ConfigLoaderBuilder.default()
+    .addResourceSource("/application.yml")
+    .build()
+    .loadConfigOrThrow<Config>()
+
+  val serverConfig by config::server
 
   embeddedServer(
     Netty,
     host = serverConfig.host,
     port = serverConfig.port,
-    module = Application::wordleTimeServer
+    module = { wordleTimeServer(config) }
   ).also {
     Runtime.getRuntime().addShutdownHook(thread(start = false) {
       it.stop(1, 5, TimeUnit.SECONDS)
@@ -61,13 +48,17 @@ fun main() {
   }.start(wait = true)
 }
 
-private fun Application.wordleTimeServer() {
+private fun Application.wordleTimeServer(config: Config) {
+  setupDI(config)
   installPlugins()
-  setupDI()
   setupLifecycle()
+  apiRouting()
+}
 
-  val serverConfig by confDI.instance<ServerConfig>()
-  apiRouting(serverConfig)
+private fun Application.setupDI(config: Config) {
+  di {
+    import(serverModule(config))
+  }
 }
 
 private fun Application.installPlugins() {
@@ -80,33 +71,34 @@ private fun Application.installPlugins() {
   }
    */
   install(CallLogging) {
-    level = Level.TRACE
+    format {
+      val status = it.response.status()
+      val method = it.request.httpMethod.value
+      val route = it.request.path()
+      val time = it.processingTimeMillis()
+
+      buildString {
+        append("$status: $method - $route in ${time}ms")
+        it.request.queryParameters.forEach { prameter, values ->
+          append(
+            "\n\tQueryParameter: $prameter -> " +
+              values.joinToString(", ", "[", "]") { value -> "\"$value\"" }
+          )
+        }
+        it.request.cookies["gameID"]?.let { gameID ->
+          append("\n\tCookie: gameID -> $gameID")
+        }
+      }
+
+
+    }
   }
   install(CORS) {
-    val serverConfig by confDI.instance<ServerConfig>()
+    val serverConfig by this@installPlugins.closestDI().instance<ServerConfig>()
     allowHost("${serverConfig.host}:${serverConfig.frontendPort}")
     allowMethod(HttpMethod.Get)
 
     allowHeader(HttpHeaders.ContentType)
-  }
-}
-
-fun Application.setupDI() {
-  di {
-    extend(confDI)
-    bind<WordProvider> {
-      singleton {
-        val wordProviderConfig: WordProviderConfig by di.instance()
-        wordProviderConfig.staticWord.let { provideWord ->
-          check(provideWord.isEmpty() || provideWord.length == 5) {
-            "The configured wordl Word must either be empty to randomly choose a word from words.json or 5 letters long"
-          }
-          if (provideWord.isEmpty()) ListWordProvider() else StaticWordProvider(provideWord)
-        }
-      }
-    }
-    bind<WordState> { singleton { WordState(instance<WordProvider>(), instance<ServerConfig>().demo) } }
-    bind<RequirementsProvider> { singleton { RequirementsProvider(instance<ServerConfig>()) } }
   }
 }
 
@@ -115,3 +107,4 @@ private fun Application.setupLifecycle() {
     println("Gracefully shutting down")
   }
 }
+

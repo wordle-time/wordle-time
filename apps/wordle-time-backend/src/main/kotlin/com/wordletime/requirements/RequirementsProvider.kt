@@ -16,7 +16,7 @@ class RequirementsProvider(serverConfig: ServerConfig) {
     requirementsDirFile
       .listFiles { dir, _ -> dir.isDirectory }!!
       .map { requirementDir ->
-
+        //TODO: Revert actPic/seqPic from URL to filename
         val resourcePath = requirementDir.resolve("${requirementDir.name}-req.json").relativeTo(resourceRoot)
         val resourceJsonString = "/$resourcePath"
         ConfigLoaderBuilder.default()

@@ -32,7 +32,7 @@ dependencies {
   implementation(libs.kotlinLogging)
   implementation(libs.coroutines)
 
-  testImplementation(testLibs.kotlin.test.junit5)
+  testImplementation(testLibs.bundles.junit)
   testImplementation(testLibs.mockk)
   testImplementation(testLibs.coroutines)
 }

@@ -76,8 +76,9 @@ dependencyResolutionManagement {
 
     create("testLibs") {
       // Testing - kotlin-test-junit5
-      val kotlinTestJunit5 = version("kotlin-test-junit5", "1.9.0")
-      library("kotlin-test-junit5", "org.jetbrains.kotlin", "kotlin-test-junit5").versionRef(kotlinTestJunit5)
+      addCommon("junit", "org.junit.jupiter", "5.10.0", listOf(
+        "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
+      ))
 
       //Mocking - mockk
       val mockk = version("mockk", "1.13.5")

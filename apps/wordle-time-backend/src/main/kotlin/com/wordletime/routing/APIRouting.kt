@@ -7,16 +7,19 @@ import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.routing
 import io.swagger.v3.oas.models.servers.Server
+import org.kodein.di.instance
+import org.kodein.di.ktor.closestDI
 
-fun Application.apiRouting(serverConfig: ServerConfig) {
+fun Application.apiRouting() {
   routing {
-    swaggerOpenAPI(serverConfig)
+    swaggerOpenAPI()
     guessRouting()
     requirementsRouting()
   }
 }
 
-private fun Routing.swaggerOpenAPI(serverConfig: ServerConfig) {
+private fun Routing.swaggerOpenAPI() {
+  val serverConfig: ServerConfig by closestDI().instance()
   openAPI("openapi", swaggerFile = "wordle_time-openapi.yaml") {
     this.opts.openAPI.apply {
       this.servers = listOf(Server().apply { url = "https://${serverConfig.host}:${serverConfig.port}" })

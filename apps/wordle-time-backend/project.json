@@ -24,6 +24,13 @@
         "cwd": "apps/wordle-time-backend",
         "command": "gradle clean"
       }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle test"
+      }
     }
   },
   "tags": []
