@@ -33,6 +33,7 @@ dependencies {
   implementation(libs.coroutines)
 
   testImplementation(testLibs.bundles.junit)
+  testImplementation(testLibs.bundles.ktor)
   testImplementation(testLibs.mockk)
   testImplementation(testLibs.coroutines)
 }

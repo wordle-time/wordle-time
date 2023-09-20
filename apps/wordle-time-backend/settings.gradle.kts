@@ -80,8 +80,9 @@ dependencyResolutionManagement {
       ))
 
       // Testing - ktor-host
-      val ktor = version("ktor", ktorVersion)
-      library(ktor, "io.ktor", "ktor-server-test-host").versionRef(ktor)
+      addCommon("ktor", "io.ktor", ktorVersion, listOf(
+        "ktor-server-test-host", "ktor-client-content-negotiation"
+      ))
 
       //Mocking - mockk
       val mockk = version("mockk", "1.13.5")
