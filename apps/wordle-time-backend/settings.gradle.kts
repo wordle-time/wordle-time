@@ -1,12 +1,12 @@
 pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
 rootProject.name = "wordle-time-backend"
@@ -56,9 +56,11 @@ dependencyResolutionManagement {
       )
 
       //Config - hoplite
-      addCommon("hoplite", "com.sksamuel.hoplite", "2.7.5", listOf(
-        "hoplite-core", "hoplite-yaml", "hoplite-json"
-      ))
+      addCommon(
+        "hoplite", "com.sksamuel.hoplite", "2.7.5", listOf(
+          "hoplite-core", "hoplite-yaml", "hoplite-json"
+        )
+      )
 
       //Logging - slf4j-simple
       val slf4jSimple = version("slf4jSimple", "2.0.7")
@@ -75,14 +77,22 @@ dependencyResolutionManagement {
 
     create("testLibs") {
       // Testing - kotlin-test-junit5
-      addCommon("junit", "org.junit.jupiter", "5.10.0", listOf(
-        "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
-      ))
+      addCommon(
+        "junit", "org.junit.jupiter", "5.10.0", listOf(
+          "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
+        )
+      )
+
+      // Testing - JUnit Platform launcher
+      val junitPlatformLauncher = version("junitPlatformLauncher", "1.10.0")
+      library(junitPlatformLauncher, "org.junit.platform", "junit-platform-launcher").versionRef(junitPlatformLauncher)
 
       // Testing - ktor-host
-      addCommon("ktor", "io.ktor", ktorVersion, listOf(
-        "ktor-server-test-host", "ktor-client-content-negotiation"
-      ))
+      addCommon(
+        "ktor", "io.ktor", ktorVersion, listOf(
+          "ktor-server-test-host", "ktor-client-content-negotiation"
+        )
+      )
 
       //Mocking - mockk
       val mockk = version("mockk", "1.13.5")

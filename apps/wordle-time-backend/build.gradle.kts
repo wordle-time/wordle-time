@@ -1,7 +1,10 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
-  kotlin("jvm") version "1.9.0"
+  kotlin("jvm") version "1.9.10"
   application
   kotlin("plugin.serialization") version "1.9.0"
+  idea
 }
 
 group = "com.wordletime"
@@ -33,6 +36,7 @@ dependencies {
   implementation(libs.coroutines)
 
   testImplementation(testLibs.bundles.junit)
+  testImplementation(testLibs.junitPlatformLauncher)
   testImplementation(testLibs.bundles.ktor)
   testImplementation(testLibs.mockk)
   testImplementation(testLibs.coroutines)
@@ -40,7 +44,17 @@ dependencies {
 
 tasks.test {
   useJUnitPlatform()
+  testLogging {
+    events = setOf(
+      TestLogEvent.PASSED,
+      TestLogEvent.SKIPPED,
+      TestLogEvent.FAILED,
+      TestLogEvent.STANDARD_OUT,
+      TestLogEvent.STANDARD_ERROR
+    )
+  }
 }
+
 
 kotlin {
   jvmToolchain(17)
@@ -64,5 +78,12 @@ tasks.processResources {
     into("requirements/")
     exclude("**/*.md")
     exclude("**/*.pdf")
+  }
+}
+
+idea {
+  module {
+    isDownloadJavadoc = true
+    isDownloadSources = true
   }
 }
