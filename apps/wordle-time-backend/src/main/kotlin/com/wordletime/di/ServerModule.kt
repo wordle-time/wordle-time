@@ -11,10 +11,18 @@ import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.StaticWordProvider
 import com.wordletime.wordProvider.WordProvider
 import com.wordletime.wordProvider.WordState
+import io.ktor.server.application.Application
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
+import org.kodein.di.ktor.di
 import org.kodein.di.singleton
+
+fun Application.setupDI(config: Config) {
+  di {
+    import(serverModule(config))
+  }
+}
 
 fun serverModule(config: Config) = DI.Module("serverConfig") {
   bind<Config> { instance(config) }
