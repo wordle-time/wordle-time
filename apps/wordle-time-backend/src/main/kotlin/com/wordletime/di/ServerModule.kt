@@ -42,5 +42,5 @@ fun serverModule(config: Config) = DI.Module("serverConfig") {
     }
   }
   bind<WordState> { singleton { WordState(instance<WordProvider>(), instance<ServerConfig>().demo) } }
-  bind<RequirementsProvider> { singleton { RequirementsProvider(instance<ServerConfig>()) } }
+  bind<RequirementsProvider> { singleton { RequirementsProvider() } }
 }

@@ -24,11 +24,12 @@ fun VersionCatalogBuilder.addCommon(alias: String, commonGroup: String, version:
 dependencyResolutionManagement {
   versionCatalogs {
     val coroutineVersion = "1.7.3"
+    val ktorVersion = "2.3.4"
 
     create("libs") {
       //Server - ktor
       addCommon(
-        "ktor", "io.ktor", "2.3.4", listOf(
+        "ktor", "io.ktor", ktorVersion, listOf(
           "ktor-server-core",
           "ktor-server-netty",
           "ktor-server-call-logging",
@@ -77,6 +78,10 @@ dependencyResolutionManagement {
       addCommon("junit", "org.junit.jupiter", "5.10.0", listOf(
         "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
       ))
+
+      // Testing - ktor-host
+      val ktor = version("ktor", ktorVersion)
+      library(ktor, "io.ktor", "ktor-server-test-host").versionRef(ktor)
 
       //Mocking - mockk
       val mockk = version("mockk", "1.13.5")
