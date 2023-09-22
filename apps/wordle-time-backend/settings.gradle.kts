@@ -62,9 +62,23 @@ dependencyResolutionManagement {
         )
       )
 
-      //Logging - slf4j-simple
-      val slf4jSimple = version("slf4jSimple", "2.0.7")
-      library(slf4jSimple, "org.slf4j", "slf4j-simple").versionRef(slf4jSimple)
+      //Logging - log4j2
+      addCommon(
+        "log4j2", "org.apache.logging.log4j", "2.20.0", listOf(
+          "log4j", "log4j-api", "log4j-core", "log4j-slf4j-impl"
+        )
+      )
+      val jackson = version("jackson", "2.15.2")
+      library(
+        "jacksonDataformatYaml",
+        "com.fasterxml.jackson.dataformat",
+        "jackson-dataformat-yaml"
+      ).versionRef(jackson)
+      library(
+        "jacksonCore",
+        "com.fasterxml.jackson.core",
+        "jackson-databind"
+      ).versionRef(jackson)
 
       //Logging - kotlin-logging
       val kotlinLogging = version("kotlinLogging", "5.1.0")

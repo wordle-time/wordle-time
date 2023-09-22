@@ -31,7 +31,11 @@ dependencies {
 
   implementation(libs.bundles.kodein)
   implementation(libs.bundles.hoplite)
-  implementation(libs.slf4jSimple)
+
+  implementation(libs.bundles.log4j2)
+  implementation(libs.jacksonDataformatYaml)
+  implementation(libs.jacksonCore)
+
   implementation(libs.kotlinLogging)
   implementation(libs.coroutines)
 
