@@ -21,8 +21,11 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.util.concurrent.CancellationException
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
@@ -41,7 +44,7 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
   private val serverConfig by config::server
 
   private val internalServerState = MutableSharedFlow<ServerState>(
-    replay = 1,
+    replay = 10,
     onBufferOverflow = BufferOverflow.DROP_OLDEST
   )
 
@@ -57,18 +60,25 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
     })
   }
 
-  val serverState = internalServerState.asSharedFlow().also {
-    it.onEach { newState ->
+  val serverState = internalServerState.asSharedFlow()
+
+  init {
+    serverState.onEach { newState ->
       logger.info { newState.name }
       if (newState == ServerState.ApplicationStopped) {
         serverScope.cancel("Server stopped")
       }
-    }.launchIn(serverScope)
+    }.onCompletion { logger.info { "StateReporter completed" } }
+      .launchIn(serverScope)
   }
 
   fun startServer() = serverScope.launch {
     serverEngine.start(false)
-    awaitCancellation()
+    try {
+      awaitCancellation()
+    } catch (ex: CancellationException) {
+      serverEngine.stop(1, 5, TimeUnit.SECONDS)
+    }
   }
 
   private fun Application.wordleTimeServer(config: Config) {
@@ -87,7 +97,9 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
       ApplicationStopped to ServerState.ApplicationStopped
     ).forEach { (ktorEvent, enumEvent) ->
       environment.monitor.subscribe(ktorEvent) { _ ->
-        internalServerState.tryEmit(enumEvent)
+        if(serverScope.isActive) {
+          internalServerState.tryEmit(enumEvent)
+        }
       }
     }
 
@@ -96,7 +108,9 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
       ApplicationStopPreparing to ServerState.ApplicationStopPreparing,
     ).forEach { (ktorEvent, enumEvent) ->
       environment.monitor.subscribe(ktorEvent) { _ ->
-        internalServerState.tryEmit(enumEvent)
+        if(serverScope.isActive) {
+          internalServerState.tryEmit(enumEvent)
+        }
       }
     }
   }
