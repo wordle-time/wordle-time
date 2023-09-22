@@ -65,7 +65,7 @@ dependencyResolutionManagement {
       //Logging - log4j2
       addCommon(
         "log4j2", "org.apache.logging.log4j", "2.20.0", listOf(
-          "log4j", "log4j-api", "log4j-core", "log4j-slf4j-impl"
+          "log4j", "log4j-api", "log4j-core", "log4j-slf4j2-impl"
         )
       )
       val jackson = version("jackson", "2.15.2")
