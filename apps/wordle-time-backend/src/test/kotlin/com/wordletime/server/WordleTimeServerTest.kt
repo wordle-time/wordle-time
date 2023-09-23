@@ -22,14 +22,22 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertIterableEquals
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.fail
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 import java.time.LocalDate
+import java.util.concurrent.CancellationException
 
 class WordleTimeServerTest {
 
@@ -37,7 +45,7 @@ class WordleTimeServerTest {
     /**
      * A [ServerConfig] with placeholder host, port, frontendPort and demo-mode set to true.
      */
-    private val SERVER_CONFIG = ServerConfig("example.com", 80, 7070, true)
+    private val SERVER_CONFIG = ServerConfig("localhost", 8090, 7070, true)
 
     /**
      * A [WordProviderConfig] that provides the valid word "aaabb".
@@ -180,5 +188,22 @@ class WordleTimeServerTest {
     assertEquals(HttpStatusCode.NotFound, afterResponse.status)
   }
 
+  @Test
+  @Tag("slow")
+  fun testServerStartup(): Unit = runBlocking {
+    val testScope = CoroutineScope(Dispatchers.Default)
 
+    val wordleTimeServer = WordleTimeServer(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG), testScope)
+    wordleTimeServer.startServer()
+
+
+    testScope.launch {
+      val serverReady = wordleTimeServer.serverState
+        .firstOrNull { it == WordleTimeServer.ServerState.ServerReady }
+
+      assertEquals(WordleTimeServer.ServerState.ServerReady, serverReady)
+    }.join()
+
+    testScope.cancel(CancellationException("Test cancellation"))
+  }
 }
