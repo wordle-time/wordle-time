@@ -1,4 +1,4 @@
-export enum LetterState {
+export enum ILetterState {
   'Undefiend' = 0,
   'CorrectSpot' = 1,
   'WrongSpot' = 2,

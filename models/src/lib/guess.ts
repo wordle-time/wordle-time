@@ -1,9 +1,15 @@
-import { LetterState } from './letter';
+import { ILetterState } from './letter';
 
 export interface IGuessResult {
-  letterStates: LetterState[];
+  letterStates: ILetterState[];
 }
 
 export interface ICurrentGuess {
   letter: string[];
+}
+
+export interface IWordFromId {
+  word?: string;
+  gameID?: number;
+  date?: string;
 }

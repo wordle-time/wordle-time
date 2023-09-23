@@ -2,16 +2,28 @@ import { $, component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
 import { server$ } from "@builder.io/qwik-city";
 import { animate } from "motion";
-import { ICurrentGuess, IGuessResult, LetterState } from "@wordle-time/models";
+import { ICurrentGuess, IGuessResult, ILetterState, IWordFromId } from "@wordle-time/models";
 
-const endpoint = "http://localhost:8090/api/guess?word=";
+const guessRoute = "http://localhost:8090/api/guess?word=";
+const wordForIdRoute = "http://localhost:8090/api/wordForGameID?gameID=";
 
-export const serverResponse = server$(async (guess) => {
-  const response = await fetch(endpoint + guess.letter.join("").toLowerCase());
+export const guessResponse = server$(async (guess) => {
+  const response = await fetch(guessRoute + guess.letter.join("").toLowerCase());
+  console.log("server response: ", response);
   const json = await response.json();
-  console.log(json);
+  console.log("json: ", json);
   return json;
 });
+
+export const wordForIdResponse = server$(async (id) => {
+  const response = await fetch(wordForIdRoute + id);
+  console.log("server response: ", response);
+  const json = await response.json();
+  console.log("json: ", json);
+  return json;
+});
+
+
 
 export interface GameState {
   tryCount: number;
@@ -20,6 +32,8 @@ export interface GameState {
   CurrentGuess: ICurrentGuess;
   GuessResult: IGuessResult;
   LocaleDateString: string;
+  wordFromId?: IWordFromId;
+
 }
 
 export default component$(() => {
@@ -33,11 +47,11 @@ export default component$(() => {
       },
       GuessResult: {
         letterStates: [
-          LetterState.Undefiend,
-          LetterState.Undefiend,
-          LetterState.Undefiend,
-          LetterState.Undefiend,
-          LetterState.Undefiend
+          ILetterState.Undefiend,
+          ILetterState.Undefiend,
+          ILetterState.Undefiend,
+          ILetterState.Undefiend,
+          ILetterState.Undefiend
         ]
       },
       LocaleDateString: new Date().toLocaleDateString()
@@ -52,8 +66,7 @@ export default component$(() => {
       console.log("Localstorage is from today");
       return true;
     }
-  }
-  );
+  });
 
   const updateStateFromStorage = $((state: GameState) => {
     isToDay(state.LocaleDateString).then(
@@ -73,12 +86,26 @@ export default component$(() => {
         }
       }
     )
-  }
-  );
+  });
 
 
   // load the state of the game from local storage
   useVisibleTask$(() => {
+    console.log("checking cookies for solutions");
+    const cookie = document.cookie.split(";").find(cookie => cookie.includes("gameId"));
+    if (cookie) {
+      const id = cookie.split("=")[1];
+      console.log("cookie found with id: ", id);
+      wordForIdResponse(id).then(
+        (wordFromId: IWordFromId) => {
+          console.log("word from id: ", wordFromId);
+          store.wordFromId = wordFromId;
+        }
+      )
+      document.cookie = '';
+      console.log("cookie removed");
+    }
+
     console.log("checking local storage for game state");
     const localStorage = Object.keys(window.localStorage).find(key => key === "gameState");
     if (localStorage) {
@@ -112,6 +139,16 @@ export default component$(() => {
     <div class='grid h-screen place-items-center'>
       <div>
         {
+          store.wordFromId && (
+            <div class="flex-row items-center justify-center my-16">
+              <h3 class="text-3xl text-ctp-blue">Last time you played on: {store.wordFromId.date}.</h3>
+              <h3 class="text-3xl text-ctp-blue">Solution: {store.wordFromId.word?.toLocaleUpperCase()}</h3>
+            </div>
+          )
+        }
+      </div>
+      <div>
+        {
           store.isLoading && (
             <div class="flex items-center justify-center">
               <h1 class="text-3xl loading">Loading ...</h1>
@@ -136,7 +173,7 @@ export default component$(() => {
                   store.CurrentGuess.letter.join("").length < 5
                 } class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                   onClick$={async () => {
-                    const response = await serverResponse(store.CurrentGuess);
+                    const response = await guessResponse(store.CurrentGuess);
                     store.GuessResult.letterStates = response.letterStates;
                     store.tryCount = store.tryCount + 1;
                     animate(".tryCount", {
