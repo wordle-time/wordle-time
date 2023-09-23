@@ -12,4 +12,6 @@ data class WordContainer(
   val date: LocalDate
 ) {
   override fun toString(): String = "word: '$word'; gameID: '$gameID'; date: '$date';"
+
+  fun stripWord() = WordContainer("", gameID, date)
 }

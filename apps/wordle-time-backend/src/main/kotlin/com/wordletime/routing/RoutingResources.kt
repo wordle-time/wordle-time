@@ -5,10 +5,16 @@ import io.ktor.resources.Resource
 @Resource("/api")
 class API {
   @Resource("guess")
-  class Guess(val parent: API = API(), val word: String)
+  class Guess(val parent: API = API()) {
+    @Resource("word")
+    class Word(val parent: Guess = Guess(), val word: String)
 
-  @Resource("wordForGameID")
-  class WordForGameID(val parent: API = API(), val gameID: Int)
+    @Resource("wordForGameID")
+    class WordForGameID(val parent: Guess = Guess(), val gameID: Int)
+
+    @Resource("currentGameID")
+    class CurrentGameID(val parent: Guess = Guess())
+  }
 
   @Resource("requirements")
   class Requirements(val parent: API = API()) {

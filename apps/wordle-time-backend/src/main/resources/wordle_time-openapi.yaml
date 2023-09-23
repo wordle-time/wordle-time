@@ -6,9 +6,9 @@ info:
 servers:
   - url: "http://localhost:8090"
 paths:
-  /api/guess:
+  /api/guess/word:
     get:
-      summary: "Guess the current wordl of the day."
+      summary: "Guess the current wordl of the day"
       tags:
         - guess
       parameters:
@@ -43,9 +43,9 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/OldGameIDError"
                   - $ref: "#/components/schemas/WrongGameIDError"
-  /api/wordForGameID:
+  /api/guess/wordForGameID:
     get:
-      summary: "Get word for gameID."
+      summary: "Get word for gameID"
       description: "Get a past word by gameID"
       tags:
         - guess
@@ -75,6 +75,27 @@ paths:
             'application/json':
               schema:
                 $ref: "#/components/schemas/WordContainer"
+              example:
+                word: "apple"
+                gameID: 5
+                date: "2023-09-22"
+  /api/guess/currentGameID:
+    get:
+      summary: "Get current gameID."
+      description: "Get the gameID of the current day. word will always be empty."
+      tags:
+        - guess
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/WordContainer"
+              example:
+                word: ""
+                gameID: 6
+                date: "2023-09-23"
   /api/requirements:
     get:
       summary: "Get requirements of the project"

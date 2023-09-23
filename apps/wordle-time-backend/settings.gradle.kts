@@ -104,7 +104,7 @@ dependencyResolutionManagement {
       // Testing - ktor-host
       addCommon(
         "ktor", "io.ktor", ktorVersion, listOf(
-          "ktor-server-test-host", "ktor-client-content-negotiation"
+          "ktor-server-test-host", "ktor-client-content-negotiation", "ktor-client-resources"
         )
       )
 

@@ -18,7 +18,7 @@ import org.kodein.di.ktor.closestDI
 import java.time.LocalDate
 
 fun Routing.guessRouting() {
-  get<API.Guess> {
+  get<API.Guess.Word> {
     val wordState: WordState by closestDI().instance()
     val currentWordContainer = wordState.currentWordContainer()
 
@@ -52,7 +52,7 @@ fun Routing.guessRouting() {
     }
   }
 
-  get<API.WordForGameID> {
+  get<API.Guess.WordForGameID> {
     val wordState: WordState by closestDI().instance()
     val wordContainerForGameID = wordState.existingWordContainerByID(it.gameID)
     when {
@@ -65,5 +65,10 @@ fun Routing.guessRouting() {
 
       else -> call.respond(HttpStatusCode.OK, wordContainerForGameID)
     }
+  }
+
+  get<API.Guess.CurrentGameID> {
+    val wordState: WordState by closestDI().instance()
+    call.respond(wordState.currentWordContainer().stripWord())
   }
 }

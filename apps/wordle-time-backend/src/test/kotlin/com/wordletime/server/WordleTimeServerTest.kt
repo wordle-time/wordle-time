@@ -10,14 +10,17 @@ import com.wordletime.di.setupDI
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.WordContainer
+import com.wordletime.routing.API
+import com.wordletime.routing.apiRouting
 import com.wordletime.routing.guessRouting
 import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.WordProvider
+import com.wordletime.wordProvider.WordState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import io.ktor.client.plugins.resources.Resources
+import io.ktor.client.plugins.resources.get
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.routing.routing
@@ -84,6 +87,7 @@ class WordleTimeServerTest {
         install(ContentNegotiation) {
           json()
         }
+        install(Resources)
       }
 
       handler(client)
@@ -91,19 +95,16 @@ class WordleTimeServerTest {
   }
 
   @Test
-  fun testGuessRouting() = testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
-    val responseAllCorrect: GuessResult = client.get("/api/guess") {
-      this.parameter("word", STATIC_WORD_PROVIDER_CONFIG.staticWord)
-    }.body()
+  fun testGuessWordRouting() = testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
+    val responseAllCorrect: GuessResult =
+      client.get(API.Guess.Word(word = STATIC_WORD_PROVIDER_CONFIG.staticWord)).body()
 
     assertIterableEquals(
       List(5) { LetterState.CorrectSpot },
       responseAllCorrect.letterStates
     )
 
-    val responseMixed: GuessResult = client.get("/api/guess") {
-      this.parameter("word", "ababc")
-    }.body()
+    val responseMixed: GuessResult = client.get(API.Guess.Word(word = "ababc")).body()
 
     assertIterableEquals(
       listOf(
@@ -157,35 +158,52 @@ class WordleTimeServerTest {
   }
 
   @Test
-  fun testWordForGameIDRouting() = testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
-    //test today
-    val todayResponse = client.get("/api/wordForGameID") {
-      this.parameter("gameID", "6")
-    }
-    assertEquals(HttpStatusCode.Forbidden, todayResponse.status)
+  fun testAPIWordForGameIDRouting() =
+    testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
+      //test today
+      val todayResponse = client.get(API.Guess.WordForGameID(gameID = 6))
+      assertEquals(HttpStatusCode.Forbidden, todayResponse.status)
 
-    //test days 5 prior to this day until yesterday
-    for (dayMinus in 5 downTo 1) {
-      val dayMinusResponse: WordContainer = client.get("/api/wordForGameID") {
-        this.parameter("gameID", "${6 - dayMinus}")
-      }.body()
+      //test days 5 prior to this day until yesterday
+      for (dayMinus in 5 downTo 1) {
+        val dayMinusResponse: WordContainer = client.get(API.Guess.WordForGameID(gameID = 6 - dayMinus)).body()
 
-      assertEquals(STATIC_WORD_PROVIDER_CONFIG.staticWord, dayMinusResponse.word)
-      assertEquals(LocalDate.now().minusDays(dayMinus.toLong()), dayMinusResponse.date)
-      assertEquals(6 - dayMinus, dayMinusResponse.gameID)
+        assertEquals(STATIC_WORD_PROVIDER_CONFIG.staticWord, dayMinusResponse.word)
+        assertEquals(LocalDate.now().minusDays(dayMinus.toLong()), dayMinusResponse.date)
+        assertEquals(6 - dayMinus, dayMinusResponse.gameID)
+      }
+
+      //test id before all other ids
+      val beforeResponse = client.get(API.Guess.WordForGameID(gameID = 0))
+      assertEquals(HttpStatusCode.NotFound, beforeResponse.status)
+
+      //test id after today's id
+      val afterResponse = client.get(API.Guess.WordForGameID(gameID = 7))
+      assertEquals(HttpStatusCode.NotFound, afterResponse.status)
     }
 
-    //test id before all other ids
-    val beforeResponse = client.get("/api/wordForGameID") {
-      this.parameter("gameID", "0")
-    }
-    assertEquals(HttpStatusCode.NotFound, beforeResponse.status)
+  @Test
+  fun testAPIGuessCurrentGameID() = testApplication {
+    val staticWordConfig = generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)
+    var currentWordContainer: WordContainer? = null
+    application {
+      setupDI(staticWordConfig)
+      installPlugins()
+      apiRouting()
 
-    //test id after today's id
-    val afterResponse = client.get("/api/wordForGameID") {
-      this.parameter("gameID", "7")
+      val wordState: WordState by closestDI().instance()
+      currentWordContainer = wordState.currentWordContainer()
     }
-    assertEquals(HttpStatusCode.NotFound, afterResponse.status)
+
+    val client = createClient {
+      install(ContentNegotiation) {
+        json()
+      }
+      install(Resources)
+    }
+
+    val apiGameIDWordContainer: WordContainer = client.get(API.Guess.CurrentGameID()).body()
+    assertEquals(currentWordContainer?.stripWord(), apiGameIDWordContainer)
   }
 
   @Test
