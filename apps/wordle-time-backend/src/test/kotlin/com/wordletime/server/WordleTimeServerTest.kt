@@ -184,7 +184,7 @@ class WordleTimeServerTest {
 
   @Test
   fun testAPIGuessCurrentGameID() = testApplication {
-    val staticWordConfig = generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)
+    val staticWordConfig = generateTestConfig(RANDOM_WORD_PROVIDER_CONFIG)
     var currentWordContainer: WordContainer? = null
     application {
       setupDI(staticWordConfig)

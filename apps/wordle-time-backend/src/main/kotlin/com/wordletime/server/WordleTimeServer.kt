@@ -49,14 +49,15 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
   )
 
 
-  private val serverEngine = embeddedServer(
+  private val serverEngine = serverScope.embeddedServer(
     Netty,
     host = serverConfig.host,
     port = serverConfig.port,
     module = { wordleTimeServer(config) }
   ).also {
     Runtime.getRuntime().addShutdownHook(thread(start = false) {
-      it.stop(1, 5, TimeUnit.SECONDS)
+      //it.stop(1, 5, TimeUnit.SECONDS)
+      serverScope.cancel("Program stopped")
     })
   }
 
