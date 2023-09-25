@@ -33,14 +33,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertIterableEquals
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.fail
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 import java.time.LocalDate
 import java.util.concurrent.CancellationException
+import java.util.stream.Stream
 
 class WordleTimeServerTest {
 
@@ -70,10 +75,24 @@ class WordleTimeServerTest {
      */
     private fun generateTestConfig(wordProviderConfig: WordProviderConfig) =
       Config(SERVER_CONFIG, wordProviderConfig)
+
+    @JvmStatic
+    fun testGuessWordRouting(): Stream<Arguments> = Stream.of(
+      Arguments.of(STATIC_WORD_PROVIDER_CONFIG.staticWord, List(5) { LetterState.CorrectSpot }),
+      Arguments.of(
+        "ababc", listOf(
+          LetterState.CorrectSpot,
+          LetterState.WrongSpot,
+          LetterState.CorrectSpot,
+          LetterState.CorrectSpot,
+          LetterState.WrongLetter
+        )
+      )
+    )
   }
 
 
-  private fun testApplicationWithSetup(config: Config, handler: suspend (HttpClient) -> Unit) {
+  private fun testApplicationWithSetup(config: Config, handler: suspend (HttpClient) -> Unit) =
     testApplication {
       application {
         setupDI(config)
@@ -92,31 +111,15 @@ class WordleTimeServerTest {
 
       handler(client)
     }
-  }
 
-  @Test
-  fun testGuessWordRouting() = testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
-    val responseAllCorrect: GuessResult =
-      client.get(API.Guess.Word(word = STATIC_WORD_PROVIDER_CONFIG.staticWord)).body()
+  @ParameterizedTest
+  @MethodSource("testGuessWordRouting")
+  fun testGuessWordRouting(word: String, expected: List<LetterState>) =
+    testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
+      val responseAllCorrect: GuessResult = client.get(API.Guess.Word(word = word)).body()
 
-    assertIterableEquals(
-      List(5) { LetterState.CorrectSpot },
-      responseAllCorrect.letterStates
-    )
-
-    val responseMixed: GuessResult = client.get(API.Guess.Word(word = "ababc")).body()
-
-    assertIterableEquals(
-      listOf(
-        LetterState.CorrectSpot,
-        LetterState.WrongSpot,
-        LetterState.CorrectSpot,
-        LetterState.CorrectSpot,
-        LetterState.WrongLetter
-      ),
-      responseMixed.letterStates
-    )
-  }
+      assertIterableEquals(expected, responseAllCorrect.letterStates)
+    }
 
   @Test
   fun testRandomWordProvider() = testApplication {
@@ -142,6 +145,7 @@ class WordleTimeServerTest {
   }
 
   @Test
+  @DisplayName("Test initializing DI with invalid word")
   fun testDIInvalidWord() = testApplication {
     val invalidWordDIConfig = generateTestConfig(INVALID_WORD_PROVIDER_CONFIG)
     application {
