@@ -1,21 +1,17 @@
 package com.wordletime.routing
 
 import com.wordletime.config.ServerConfig
-import io.ktor.server.application.Application
 import io.ktor.server.plugins.openapi.openAPI
 import io.ktor.server.plugins.swagger.swaggerUI
 import io.ktor.server.routing.Routing
-import io.ktor.server.routing.routing
 import io.swagger.v3.oas.models.servers.Server
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 
-fun Application.apiRouting() {
-  routing {
-    swaggerOpenAPI()
-    guessRouting()
-    requirementsRouting()
-  }
+fun Routing.apiRouting() {
+  swaggerOpenAPI()
+  guessRouting()
+  requirementsRouting()
 }
 
 private fun Routing.swaggerOpenAPI() {
@@ -27,3 +23,4 @@ private fun Routing.swaggerOpenAPI() {
   }
   swaggerUI(path = "swagger", swaggerFile = "wordle_time-openapi.yaml")
 }
+

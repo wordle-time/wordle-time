@@ -18,7 +18,9 @@ data class Requirement(
   @Transient val resourcePath: String = "",
   val actPic: String,
   val seqPic: String
-)
+) {
+  override fun toString(): String = id
+}
 
 @Serializable
 data class TestCase(

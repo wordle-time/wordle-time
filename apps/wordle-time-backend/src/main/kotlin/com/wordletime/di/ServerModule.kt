@@ -18,13 +18,14 @@ import org.kodein.di.instance
 import org.kodein.di.ktor.di
 import org.kodein.di.singleton
 
-fun Application.setupDI(config: Config) {
+internal fun Application.setupDI(config: Config, overrideModule: DI.Module? = null) {
   di {
     import(serverModule(config))
+    if(overrideModule != null) import(overrideModule, allowOverride = true)
   }
 }
 
-fun serverModule(config: Config) = DI.Module("serverConfig") {
+internal fun serverModule(config: Config) = DI.Module("serverConfig") {
   bind<Config> { instance(config) }
   bind<ServerConfig> { singleton { instance<Config>().server } }
   bind<WordProviderConfig> { singleton { instance<Config>().wordProviderConfig } }

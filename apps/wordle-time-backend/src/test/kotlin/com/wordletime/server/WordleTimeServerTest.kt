@@ -7,22 +7,14 @@ import com.wordletime.config.ServerConfig
 import com.wordletime.config.WordList
 import com.wordletime.config.WordProviderConfig
 import com.wordletime.di.setupDI
-import com.wordletime.dto.GuessResult
-import com.wordletime.dto.LetterState
-import com.wordletime.dto.WordContainer
-import com.wordletime.routing.API
-import com.wordletime.routing.apiRouting
 import com.wordletime.routing.guessRouting
 import com.wordletime.wordProvider.ListWordProvider
 import com.wordletime.wordProvider.WordProvider
-import com.wordletime.wordProvider.WordState
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.resources.Resources
-import io.ktor.client.plugins.resources.get
-import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.routing.Routing
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import kotlinx.coroutines.CoroutineScope
@@ -32,24 +24,19 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.fail
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
+import org.kodein.di.DI
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
-import java.time.LocalDate
 import java.util.concurrent.CancellationException
-import java.util.stream.Stream
 
-class WordleTimeServerTest {
+internal class WordleTimeServerTest {
 
-  private companion object {
+  companion object {
     /**
      * A [ServerConfig] with placeholder host, port, frontendPort and demo-mode set to true.
      */
@@ -58,68 +45,47 @@ class WordleTimeServerTest {
     /**
      * A [WordProviderConfig] that provides the valid word "aaabb".
      */
-    private val STATIC_WORD_PROVIDER_CONFIG = WordProviderConfig("aaabb")
+    val STATIC_WORD_PROVIDER_CONFIG = WordProviderConfig("aaabb")
 
     /**
      * A [WordProviderConfig] that provides the invalid word "app".
      */
-    private val INVALID_WORD_PROVIDER_CONFIG = WordProviderConfig("app")
+    val INVALID_WORD_PROVIDER_CONFIG = WordProviderConfig("app")
 
     /**
      * A [WordProviderConfig] that provides no word, prompting the usage of a [ListWordProvider]
      */
-    private val RANDOM_WORD_PROVIDER_CONFIG = WordProviderConfig("")
+    val RANDOM_WORD_PROVIDER_CONFIG = WordProviderConfig("")
 
     /**
      * Generates a [Config] based on the [SERVER_CONFIG] and the passed [wordProviderConfig]
      */
-    private fun generateTestConfig(wordProviderConfig: WordProviderConfig) =
+    fun generateTestConfig(wordProviderConfig: WordProviderConfig) =
       Config(SERVER_CONFIG, wordProviderConfig)
 
-    @JvmStatic
-    fun testGuessWordRouting(): Stream<Arguments> = Stream.of(
-      Arguments.of(STATIC_WORD_PROVIDER_CONFIG.staticWord, List(5) { LetterState.CorrectSpot }),
-      Arguments.of(
-        "ababc", listOf(
-          LetterState.CorrectSpot,
-          LetterState.WrongSpot,
-          LetterState.CorrectSpot,
-          LetterState.CorrectSpot,
-          LetterState.WrongLetter
-        )
-      )
-    )
+    fun testApplicationWithSetup(config: Config, diOverrideModule: DI.Module? = null, routingExtension: Routing.() -> Unit = {}, handler: suspend (HttpClient) -> Unit) =
+      testApplication {
+        application {
+          setupDI(config, diOverrideModule)
+
+          installPlugins()
+          routing {
+            routingExtension()
+            guessRouting()
+          }
+        }
+
+        val client = createClient {
+          install(ContentNegotiation) {
+            json()
+          }
+          install(Resources)
+        }
+
+        handler(client)
+      }
   }
 
-
-  private fun testApplicationWithSetup(config: Config, handler: suspend (HttpClient) -> Unit) =
-    testApplication {
-      application {
-        setupDI(config)
-        installPlugins()
-        routing {
-          guessRouting()
-        }
-      }
-
-      val client = createClient {
-        install(ContentNegotiation) {
-          json()
-        }
-        install(Resources)
-      }
-
-      handler(client)
-    }
-
-  @ParameterizedTest
-  @MethodSource("testGuessWordRouting")
-  fun testGuessWordRouting(word: String, expected: List<LetterState>) =
-    testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
-      val responseAllCorrect: GuessResult = client.get(API.Guess.Word(word = word)).body()
-
-      assertIterableEquals(expected, responseAllCorrect.letterStates)
-    }
 
   @Test
   fun testRandomWordProvider() = testApplication {
@@ -162,56 +128,8 @@ class WordleTimeServerTest {
   }
 
   @Test
-  fun testAPIWordForGameIDRouting() =
-    testApplicationWithSetup(generateTestConfig(STATIC_WORD_PROVIDER_CONFIG)) { client ->
-      //test today
-      val todayResponse = client.get(API.Guess.WordForGameID(gameID = 6))
-      assertEquals(HttpStatusCode.Forbidden, todayResponse.status)
-
-      //test days 5 prior to this day until yesterday
-      for (dayMinus in 5 downTo 1) {
-        val dayMinusResponse: WordContainer = client.get(API.Guess.WordForGameID(gameID = 6 - dayMinus)).body()
-
-        assertEquals(STATIC_WORD_PROVIDER_CONFIG.staticWord, dayMinusResponse.word)
-        assertEquals(LocalDate.now().minusDays(dayMinus.toLong()), dayMinusResponse.date)
-        assertEquals(6 - dayMinus, dayMinusResponse.gameID)
-      }
-
-      //test id before all other ids
-      val beforeResponse = client.get(API.Guess.WordForGameID(gameID = 0))
-      assertEquals(HttpStatusCode.NotFound, beforeResponse.status)
-
-      //test id after today's id
-      val afterResponse = client.get(API.Guess.WordForGameID(gameID = 7))
-      assertEquals(HttpStatusCode.NotFound, afterResponse.status)
-    }
-
-  @Test
-  fun testAPIGuessCurrentGameID() = testApplication {
-    val staticWordConfig = generateTestConfig(RANDOM_WORD_PROVIDER_CONFIG)
-    var currentWordContainer: WordContainer? = null
-    application {
-      setupDI(staticWordConfig)
-      installPlugins()
-      apiRouting()
-
-      val wordState: WordState by closestDI().instance()
-      currentWordContainer = wordState.currentWordContainer()
-    }
-
-    val client = createClient {
-      install(ContentNegotiation) {
-        json()
-      }
-      install(Resources)
-    }
-
-    val apiGameIDWordContainer: WordContainer = client.get(API.Guess.CurrentGameID()).body()
-    assertEquals(currentWordContainer?.stripWord(), apiGameIDWordContainer)
-  }
-
-  @Test
   @Tag("slow")
+  @DisplayName("Test server startup")
   fun testServerStartup(): Unit = runBlocking {
     val testScope = CoroutineScope(Dispatchers.Default)
 

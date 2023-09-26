@@ -12,12 +12,18 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.resources.get
 import io.ktor.server.response.respond
-import io.ktor.server.routing.Routing
+import io.ktor.server.routing.Route
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 import java.time.LocalDate
 
-fun Routing.guessRouting() {
+fun Route.guessRouting() {
+  apiGuessWord()
+  apiGuessWordForGameID()
+  apiGuessCurrentGameID()
+}
+
+private fun Route.apiGuessWord() {
   get<API.Guess.Word> {
     val wordState: WordState by closestDI().instance()
     val currentWordContainer = wordState.currentWordContainer()
@@ -27,9 +33,9 @@ fun Routing.guessRouting() {
       gameID != null && gameID != currentWordContainer.gameID -> {
         val previousWordContainer = wordState.existingWordContainerByID(gameID)
         if (previousWordContainer != null) {
-          call.respond(HttpStatusCode.NotFound, OldGameIDError(previousWordContainer.word))
+          call.respond(HttpStatusCode.NotFound, OldGameIDError(gameID, previousWordContainer.word))
         } else {
-          call.respond(HttpStatusCode.NotFound, WrongGameIDError())
+          call.respond(HttpStatusCode.NotFound, WrongGameIDError(gameID))
         }
       }
 
@@ -51,7 +57,9 @@ fun Routing.guessRouting() {
       }
     }
   }
+}
 
+private fun Route.apiGuessWordForGameID() {
   get<API.Guess.WordForGameID> {
     val wordState: WordState by closestDI().instance()
     val wordContainerForGameID = wordState.existingWordContainerByID(it.gameID)
@@ -66,7 +74,9 @@ fun Routing.guessRouting() {
       else -> call.respond(HttpStatusCode.OK, wordContainerForGameID)
     }
   }
+}
 
+private fun Route.apiGuessCurrentGameID() {
   get<API.Guess.CurrentGameID> {
     val wordState: WordState by closestDI().instance()
     call.respond(wordState.currentWordContainer().stripWord())

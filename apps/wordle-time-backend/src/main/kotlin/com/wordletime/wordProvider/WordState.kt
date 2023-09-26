@@ -27,7 +27,7 @@ class WordState(private val wordProvider: WordProvider, private val demoMode: Bo
 
   fun existingWordContainerByID(gameID: Int) = wordContainers[gameID]
 
-  fun currentWordContainer() = wordContainers.lastEntry().value.let {
+  fun currentWordContainer(): WordContainer = wordContainers.lastEntry().value.let {
     when (it.date) {
       LocalDate.now() -> it
       else -> WordContainer(wordProvider.getWord(), nextGameID++, LocalDate.now()).also { newWordContainer ->

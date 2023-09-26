@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class RequirementsProviderTest {
+internal class RequirementsProviderTest {
   @Test
   fun testRequirementsProvider() {
     val requirementsProvider = RequirementsProvider()

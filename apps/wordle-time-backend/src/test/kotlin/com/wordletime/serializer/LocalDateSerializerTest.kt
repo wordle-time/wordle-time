@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.time.LocalDate
 import java.util.stream.Stream
 
-class LocalDateSerializerTest {
+internal class LocalDateSerializerTest {
 
   companion object {
     private val dateStrings = listOf("2022-08-15", "2011-01-05", "2023-02-02", "2020-01-01")

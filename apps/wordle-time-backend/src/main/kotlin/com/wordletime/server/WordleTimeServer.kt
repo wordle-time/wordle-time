@@ -14,6 +14,7 @@ import io.ktor.server.application.ServerReady
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.engine.stop
 import io.ktor.server.netty.Netty
+import io.ktor.server.routing.routing
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.cancel
@@ -86,7 +87,9 @@ class WordleTimeServer(private val config: Config, private val serverScope: Coro
     setupDI(config)
     installPlugins()
     setupLifecycle()
-    apiRouting()
+    routing {
+      apiRouting()
+    }
   }
 
 
