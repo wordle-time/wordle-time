@@ -10,20 +10,16 @@ const currentIdRoute = "http://localhost:8090/api/guess/currentGameID";
 
 
 export const useCurrentId = routeAction$(async (data, { cookie }): Promise<IWordFromId> => {
-  let wordFormId: IWordFromId = {}
-
   const gameID = cookie.get("gameID")?.value;
   if (gameID) {
+    const wordFormId = {} as IWordFromId;
     wordFormId.gameID = gameID as unknown as number;
-  } else {
-    const response = await fetch(currentIdRoute);
-    const result = await response.json();
-    wordFormId = result as IWordFromId;
-    cookie.set("gameID", wordFormId.gameID as unknown as string);
+    return wordFormId;
   }
-
-
-  console.log("wordfromID: ", wordFormId);
+  const response = await fetch(currentIdRoute);
+  const result = await response.json();
+  const wordFormId = result as IWordFromId;
+  cookie.set("gameID", wordFormId.gameID as unknown as string);
   return wordFormId;
 });
 
@@ -54,11 +50,12 @@ export const getGameID = async () => {
 export const useWordForId = routeAction$(async (data, { cookie }) => {
   const gameID = cookie.get("gameID")?.value;
   if (!gameID) {
-    const wordForGameID = await getGameID;
-    console.log("wordfromID: ", wordForGameID);
+    getGameID;
   }
   const response = await fetch(wordForIdRoute + cookie.get("gameID")?.value);
   const result = await response.json();
+  cookie.delete("gameID");
+  //console.log(result);
   return result;
 });
 
@@ -76,6 +73,7 @@ export default component$(() => {
 
   const guessResult = useGuessResult();
   const currentId = useCurrentId();
+  const wordForId = useWordForId();
 
 
   const store = useStore<GameState>(
@@ -103,11 +101,16 @@ export default component$(() => {
   )
 
   useVisibleTask$(async () => {
-    console.log("visible");
     const { value } = await currentId.submit();
-    console.log("wordFormId: ", value);
     store.wordFromId = value;
-    console.log("store.wordFromId: ", store.wordFromId);
+    const { value: res } = await wordForId.submit();
+    if (res.word) {
+      store.wordFromId.word = res.word;
+      store.wordFromId.gameID = 0;
+      console.log(store.wordFromId.word);
+
+
+    }
 
     // guessResult.submit({ word: store.CurrentGuess.letter.join("") });
   });
@@ -118,10 +121,7 @@ export default component$(() => {
 
 
   return (
-    <div class='grid h-screen place-items-center' onLoad$={async () => {
-
-    }
-    }>
+    <div class='grid h-screen place-items-center'>
       <h1>Hallo</h1>
       <Form action={guessResult}>
         <input type="text" name="word" />
