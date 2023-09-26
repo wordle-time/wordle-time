@@ -9,49 +9,56 @@ const wordForIdRoute = "http://localhost:8090/api/guess/wordForGameID?gameID=";
 const currentIdRoute = "http://localhost:8090/api/guess/currentGameID";
 
 
-export const onGet: RequestHandler = async ({ headers, headersSent }) => {
-  // //cookie.set("gameID", "5");
-  // // const response = await fetch(guessRoute + 'abcde');
+export const useCurrentId = routeAction$(async (data, { cookie }): Promise<IWordFromId> => {
+  let wordFormId: IWordFromId = {}
 
-  // // console.log("response: ", response);
-  // // send(response.status, await response.text());
-  // console.log("headers: ", headers);
-  // console.log("headersSent: ", headersSent);
-}
+  const gameID = cookie.get("gameID")?.value;
+  if (gameID) {
+    wordFormId.gameID = gameID as unknown as number;
+  } else {
+    const response = await fetch(currentIdRoute);
+    const result = await response.json();
+    wordFormId = result as IWordFromId;
+    cookie.set("gameID", wordFormId.gameID as unknown as string);
+  }
 
-export const useCurrentId = routeAction$(async (data, { cookie }) => {
-  const response = await fetch(currentIdRoute);
-  const result = await response.json();
-  //console.log("response: ", response);
 
-  // console.log("result: ", result);
-  return result as IWordFromId;
+  console.log("wordfromID: ", wordFormId);
+  return wordFormId;
 });
 
 export const useGuessResult = routeAction$(async (data, { cookie }) => {
-  //console.log("requestEvent: ", requestEvent);
-  // console.log("data: ", data);
-
-  // const gammeIdCookie = cookie.get("gameID");
-  // if (gammeIdCookie) {
-  //   console.log(gammeIdCookie);
-  // }
-
   const response = await fetch(guessRoute + data.word, {
     headers: {
       cookie: cookie.get("gameID") ? "gameID=" + cookie.get("gameID")?.value : ""
     }
   });
 
-  //console.log("response headers: ", response.headers);
   const gameId = response.headers.getSetCookie();
   if (gameId) {
-    // console.log("gameId: ", gameId);
     cookie.set(gameId[0].split("=")[0], gameId[0].split("=")[1]);
   }
-  //console.log("response: ", response);
+
   const result = await response.json();
-  // console.log("result: ", result);
+  return result;
+});
+
+// fetch gameID if not present
+export const getGameID = async () => {
+  const response = await fetch(currentIdRoute);
+  const result = await response.json();
+  return result;
+};
+
+
+export const useWordForId = routeAction$(async (data, { cookie }) => {
+  const gameID = cookie.get("gameID")?.value;
+  if (!gameID) {
+    const wordForGameID = await getGameID;
+    console.log("wordfromID: ", wordForGameID);
+  }
+  const response = await fetch(wordForIdRoute + cookie.get("gameID")?.value);
+  const result = await response.json();
   return result;
 });
 
@@ -89,31 +96,32 @@ export default component$(() => {
         ]
       },
       LocaleDateString: new Date().toLocaleDateString(),
-      wordFromId: {}
+      wordFromId: {
+
+      }
     },
   )
 
-  guessResult.submit({ word: store.CurrentGuess.letter.join("") });
+  useVisibleTask$(async () => {
+    console.log("visible");
+    const { value } = await currentId.submit();
+    console.log("wordFormId: ", value);
+    store.wordFromId = value;
+    console.log("store.wordFromId: ", store.wordFromId);
 
-  // load the state of the game from local storage
-  useVisibleTask$(() => {
-    animate(
-      ".loading",
-      {
-        scale: [1, 1.5, 1],
-      },
-      {
-        duration: 1.5,
-        repeat: Infinity,
-      }
-    )
-    // store.isLoading = false;
+    // guessResult.submit({ word: store.CurrentGuess.letter.join("") });
   });
 
 
 
+
+
+
   return (
-    <div class='grid h-screen place-items-center'>
+    <div class='grid h-screen place-items-center' onLoad$={async () => {
+
+    }
+    }>
       <h1>Hallo</h1>
       <Form action={guessResult}>
         <input type="text" name="word" />
@@ -122,59 +130,3 @@ export default component$(() => {
     </div>
   );
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function useClientEffect$(arg0: () => void) {
-  throw new Error("Function not implemented.");
-}
-
