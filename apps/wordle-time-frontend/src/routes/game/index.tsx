@@ -31,7 +31,8 @@ export const useGuessResult = routeAction$(async (data, { cookie }) => {
   });
 
   const gameId = response.headers.getSetCookie();
-  if (gameId) {
+  if (gameId.length > 0) {
+    console.log(gameId);
     cookie.set(gameId[0].split("=")[0], gameId[0].split("=")[1]);
   }
 
@@ -111,8 +112,6 @@ export default component$(() => {
       store.wordFromId.word = res.word;
       store.wordFromId.gameID = 0;
       console.log(store.wordFromId.word);
-
-
     }
   }
 
@@ -131,7 +130,10 @@ export default component$(() => {
       <h1>Hallo</h1>
       <Form action={guessResult}>
         <input type="text" name="word" />
-        <button type="submit">Guess</button>
+        <button type="submit" onClick$={() => {
+          store.tryCount += 1;
+          console.log(store.tryCount);
+        }}>Guess</button>
       </Form>
     </div>
   );
