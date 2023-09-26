@@ -54,7 +54,10 @@ export const useWordForId = routeAction$(async (data, { cookie }) => {
   }
   const response = await fetch(wordForIdRoute + cookie.get("gameID")?.value);
   const result = await response.json();
-  cookie.delete("gameID");
+  if (result.word) {
+    cookie.delete("gameID");
+  }
+  //cookie.delete("gameID");
   //console.log(result);
   return result;
 });
@@ -111,9 +114,12 @@ export default component$(() => {
 
 
     }
+  }
 
     // guessResult.submit({ word: store.CurrentGuess.letter.join("") });
-  });
+    //});
+
+  );
 
 
 
