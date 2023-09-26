@@ -1,29 +1,59 @@
 import { $, component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
 import Letter from "../../components/letter/letter";
-import { server$ } from "@builder.io/qwik-city";
+import { Form, RequestHandler, routeAction$, routeLoader$, server$ } from "@builder.io/qwik-city";
 import { animate } from "motion";
 import { ICurrentGuess, IGuessResult, ILetterState, IWordFromId } from "@wordle-time/models";
 
-const guessRoute = "http://localhost:8090/api/guess?word=";
-const wordForIdRoute = "http://localhost:8090/api/wordForGameID?gameID=";
+const guessRoute = "http://localhost:8090/api/guess/word?word=";
+const wordForIdRoute = "http://localhost:8090/api/guess/wordForGameID?gameID=";
+const currentIdRoute = "http://localhost:8090/api/guess/currentGameID";
 
-export const guessResponse = server$(async (guess) => {
-  const response = await fetch(guessRoute + guess.letter.join("").toLowerCase());
-  console.log("server response: ", response);
-  const json = await response.json();
-  console.log("json: ", json);
-  return json;
+
+export const onGet: RequestHandler = async ({ headers, headersSent }) => {
+  // //cookie.set("gameID", "5");
+  // // const response = await fetch(guessRoute + 'abcde');
+
+  // // console.log("response: ", response);
+  // // send(response.status, await response.text());
+  // console.log("headers: ", headers);
+  // console.log("headersSent: ", headersSent);
+}
+
+export const useCurrentId = routeAction$(async (data, { cookie }) => {
+  const response = await fetch(currentIdRoute);
+  const result = await response.json();
+  //console.log("response: ", response);
+
+  // console.log("result: ", result);
+  return result as IWordFromId;
 });
 
-export const wordForIdResponse = server$(async (id) => {
-  const response = await fetch(wordForIdRoute + id);
-  console.log("server response: ", response);
-  const json = await response.json();
-  console.log("json: ", json);
-  return json;
+export const useGuessResult = routeAction$(async (data, { cookie }) => {
+  //console.log("requestEvent: ", requestEvent);
+  // console.log("data: ", data);
+
+  // const gammeIdCookie = cookie.get("gameID");
+  // if (gammeIdCookie) {
+  //   console.log(gammeIdCookie);
+  // }
+
+  const response = await fetch(guessRoute + data.word, {
+    headers: {
+      cookie: cookie.get("gameID") ? "gameID=" + cookie.get("gameID")?.value : ""
+    }
+  });
+
+  //console.log("response headers: ", response.headers);
+  const gameId = response.headers.getSetCookie();
+  if (gameId) {
+    // console.log("gameId: ", gameId);
+    cookie.set(gameId[0].split("=")[0], gameId[0].split("=")[1]);
+  }
+  //console.log("response: ", response);
+  const result = await response.json();
+  // console.log("result: ", result);
+  return result;
 });
-
-
 
 export interface GameState {
   tryCount: number;
@@ -32,11 +62,15 @@ export interface GameState {
   CurrentGuess: ICurrentGuess;
   GuessResult: IGuessResult;
   LocaleDateString: string;
-  wordFromId?: IWordFromId;
-
+  wordFromId: IWordFromId;
 }
 
 export default component$(() => {
+
+  const guessResult = useGuessResult();
+  const currentId = useCurrentId();
+
+
   const store = useStore<GameState>(
     {
       tryCount: 0,
@@ -54,70 +88,15 @@ export default component$(() => {
           ILetterState.Undefiend
         ]
       },
-      LocaleDateString: new Date().toLocaleDateString()
+      LocaleDateString: new Date().toLocaleDateString(),
+      wordFromId: {}
     },
   )
 
-  const isToDay = $((localeDateString: string) => {
-    console.log("getting the current date");
-    const today = new Date();
-    console.log("today is", today.toLocaleDateString(), "localStorage is from", localeDateString);
-    if (today.toLocaleDateString() === localeDateString) {
-      console.log("Localstorage is from today");
-      return true;
-    }
-  });
-
-  const updateStateFromStorage = $((state: GameState) => {
-    isToDay(state.LocaleDateString).then(
-      (isToDay) => {
-        if (isToDay) {
-          console.log("Apply state from local storage");
-          store.tryCount = state.tryCount;
-          store.isComplete = state.isComplete;
-          store.isLoading = state.isLoading;
-          store.CurrentGuess = state.CurrentGuess;
-          store.GuessResult = state.GuessResult;
-          store.LocaleDateString = state.LocaleDateString;
-        } else {
-          console.log("Localstorage is not from today");
-          window.localStorage.removeItem("gameState");
-          console.log("state removed from local storage");
-        }
-      }
-    )
-  });
-
+  guessResult.submit({ word: store.CurrentGuess.letter.join("") });
 
   // load the state of the game from local storage
   useVisibleTask$(() => {
-    console.log("checking cookies for solutions");
-    const cookie = document.cookie.split(";").find(cookie => cookie.includes("gameId"));
-    if (cookie) {
-      const id = cookie.split("=")[1];
-      console.log("cookie found with id: ", id);
-      wordForIdResponse(id).then(
-        (wordFromId: IWordFromId) => {
-          console.log("word from id: ", wordFromId);
-          store.wordFromId = wordFromId;
-        }
-      )
-      document.cookie = '';
-      console.log("cookie removed");
-    }
-
-    console.log("checking local storage for game state");
-    const localStorage = Object.keys(window.localStorage).find(key => key === "gameState");
-    if (localStorage) {
-      console.log("local storage found");
-      const gameState = JSON.parse(window.localStorage.getItem("gameState") || "") as GameState;
-      // chck if the date day, month and year are the same
-      if (gameState) {
-        updateStateFromStorage(gameState);
-        console.log("store loaded from local storage");
-      }
-    }
-
     animate(
       ".loading",
       {
@@ -128,86 +107,21 @@ export default component$(() => {
         repeat: Infinity,
       }
     )
-    store.isLoading = false;
+    // store.isLoading = false;
   });
 
-  const onLetterChange = $((index: number, letter: string) => {
-    store.CurrentGuess.letter[index] = letter;
-  });
+
 
   return (
     <div class='grid h-screen place-items-center'>
-      <div>
-        {
-          store.wordFromId && (
-            <div class="flex-row items-center justify-center my-16">
-              <h3 class="text-3xl text-ctp-blue">Last time you played on: {store.wordFromId.date}.</h3>
-              <h3 class="text-3xl text-ctp-blue">Solution: {store.wordFromId.word?.toLocaleUpperCase()}</h3>
-            </div>
-          )
-        }
-      </div>
-      <div>
-        {
-          store.isLoading && (
-            <div class="flex items-center justify-center">
-              <h1 class="text-3xl loading">Loading ...</h1>
-            </div>
-          )
-        }
-        {
-          !store.isComplete && store.tryCount < 6 && !store.isLoading && (
-            <>
-              <div class="flex items-center justify-center">
-                {store.CurrentGuess.letter.map((letter, index) => (
-                  <Letter
-                    key={index}
-                    index={index}
-                    letter={letter}
-                    letterState={store.GuessResult.letterStates[index]}
-                    onLetterChange={onLetterChange} />
-                ))}
-              </div>
-              <div class="flex items-center justify-center my-16">
-                <button disabled={
-                  store.CurrentGuess.letter.join("").length < 5
-                } class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
-                  onClick$={async () => {
-                    const response = await guessResponse(store.CurrentGuess);
-                    store.GuessResult.letterStates = response.letterStates;
-                    store.tryCount = store.tryCount + 1;
-                    animate(".tryCount", {
-                      scale: [1, 1.5, 1],
-                    })
-                    window.localStorage.setItem("gameState", JSON.stringify(store));
-                  }}
-                >Raten</button>
-              </div>
-              <div class="flex items-center justify-center my-16">
-                <h3 class="text-3xl tryCount" > Versuche: {store.tryCount} / 6</h3>
-              </div>
-            </>
-          )
-        }
-        {
-          store.isComplete && !store.isLoading && (
-            <div class="flex items-center justify-center my-16">
-              <h1 class="text-3xl text-ctp-green">You made it</h1>
-            </div>
-          )
-        }
-        {
-          store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
-            <div class="flex items-center justify-center my-16">
-              <h1 class="text-3xl text-ctp-red">You lost</h1>
-            </div>
-          )
-        }
-      </div>
+      <h1>Hallo</h1>
+      <Form action={guessResult}>
+        <input type="text" name="word" />
+        <button type="submit">Guess</button>
+      </Form>
     </div>
   );
-}
-);
+});
 
 
 
