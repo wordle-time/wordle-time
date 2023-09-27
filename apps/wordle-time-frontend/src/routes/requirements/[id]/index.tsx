@@ -1,18 +1,20 @@
-import { Resource, component$ } from "@builder.io/qwik";
-import { Link, routeLoader$ } from "@builder.io/qwik-city";
-import { IRequirement } from "@wordle-time/models";
+import { Resource, component$ } from '@builder.io/qwik';
+import { Link, routeLoader$ } from '@builder.io/qwik-city';
+import { IRequirement } from '@wordle-time/models';
 
-export const useRequirement = routeLoader$<IRequirement>(async ({ params, redirect }) => {
-  const res = await fetch("http://localhost:8090/api/requirements/" + params.id);
+export const useRequirement = routeLoader$<IRequirement>(
+  async ({ params, redirect }) => {
+    const res = await fetch(
+      'http://localhost:8090/api/requirements/' + params.id
+    );
 
-  if (!res.ok) {
-    throw redirect(301, "..")
+    if (!res.ok) {
+      throw redirect(301, '..');
+    }
+
+    return (await res.json()) as IRequirement;
   }
-
-  return (await res.json() as IRequirement)
-
-})
-
+);
 
 export default component$(() => {
   const requirement = useRequirement();
@@ -25,17 +27,30 @@ export default component$(() => {
           <div>
             <h1>{requirement.title}</h1>
             <p>{requirement.description}</p>
-            <a href={requirement.reference} class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Auf GitHub ansehen </a>
+            <a
+              href={requirement.reference}
+              class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium"
+            >
+              Auf GitHub ansehen{' '}
+            </a>
             <p>{requirement.impact}</p>
             <ul class="list-disc pl-5">
               {requirement.criteria.map((c) => (
-                <li class="" key={c}>{c}</li>
+                <li class="" key={c}>
+                  {c}
+                </li>
               ))}
             </ul>
-            <img src={requirement.seqPic} width="200" height='200' />
-          </div>)} />
-      <Link href='/requirements' class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium">Anforderungen</Link>
-
-    </div >
-  )
-})
+            <img src={requirement.seqPic} width="200" height="200" />
+          </div>
+        )}
+      />
+      <Link
+        href="/requirements"
+        class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium"
+      >
+        Anforderungen
+      </Link>
+    </div>
+  );
+});

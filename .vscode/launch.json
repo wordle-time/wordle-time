@@ -1,40 +1,40 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Launch Backend",
-            "request": "launch",
-            "mainClass": "com.partytime.PartyTimeBackendApplication",
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch Swagger",
-            "type": "chrome",
-            "request": "launch",
-            "url": "http://localhost:8090/swagger",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch OpenApi",
-            "type": "chrome",
-            "request": "launch",
-            "url": "http://localhost:8090/openapi",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:5173",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Python: Export Anforderungen",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tools/export_requirements.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Backend",
+      "request": "launch",
+      "mainClass": "com.partytime.PartyTimeBackendApplication",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Swagger",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8090/swagger",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch OpenApi",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8090/openapi",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Export Anforderungen",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_requirements.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
 }

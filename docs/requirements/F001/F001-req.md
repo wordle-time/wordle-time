@@ -29,6 +29,6 @@ Ermöglicht die Interaktion des Spielers mit dem Spiel
 
 **Aktion:** Ich gebe ein Wort ein.
 
-**Erwartetes Ergebnis:**  Die Anzahl der Versuche wird um 1 erhöht.
+**Erwartetes Ergebnis:** Die Anzahl der Versuche wird um 1 erhöht.
 
 ![Testfall 1](test-name.png)

@@ -1,7 +1,6 @@
-import { component$ } from "@builder.io/qwik";
-import { Link } from "@builder.io/qwik-city";
-import { INavigationItem } from "@wordle-time/models";
-
+import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
+import { INavigationItem } from '@wordle-time/models';
 
 export default component$<INavigationItem>((props) => {
   return (

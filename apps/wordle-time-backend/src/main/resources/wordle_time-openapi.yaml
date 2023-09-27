@@ -1,188 +1,188 @@
-openapi: "3.0.3"
+openapi: '3.0.3'
 info:
-  title: "wordle_time API"
-  description: "wordle_time API"
-  version: "1.0.0"
+  title: 'wordle_time API'
+  description: 'wordle_time API'
+  version: '1.0.0'
 servers:
-  - url: "http://localhost:8090"
+  - url: 'http://localhost:8090'
 paths:
   /api/guess/word:
     get:
-      summary: "Guess the current wordl of the day"
+      summary: 'Guess the current wordl of the day'
       tags:
         - guess
       parameters:
-        - name: "gameID"
-          in: "cookie"
+        - name: 'gameID'
+          in: 'cookie'
           required: false
           schema:
-            type: "string"
-        - name: "word"
-          in: "query"
+            type: 'string'
+        - name: 'word'
+          in: 'query'
           required: true
           schema:
-            type: "string"
+            type: 'string'
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: 'OK'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GuessResult"
-        "400":
-          description: "Bad Request"
+                $ref: '#/components/schemas/GuessResult'
+        '400':
+          description: 'Bad Request'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GuessLengthError"
-        "404":
-          description: "Not Found"
+                $ref: '#/components/schemas/GuessLengthError'
+        '404':
+          description: 'Not Found'
           content:
             'application/json':
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/OldGameIDError"
-                  - $ref: "#/components/schemas/WrongGameIDError"
+                  - $ref: '#/components/schemas/OldGameIDError'
+                  - $ref: '#/components/schemas/WrongGameIDError'
   /api/guess/wordForGameID:
     get:
-      summary: "Get word for gameID"
-      description: "Get a past word by gameID"
+      summary: 'Get word for gameID'
+      description: 'Get a past word by gameID'
       tags:
         - guess
       parameters:
-        - name: "gameID"
-          in: "query"
+        - name: 'gameID'
+          in: 'query'
           required: true
           schema:
-            type: "integer"
+            type: 'integer'
             example: 1
       responses:
-        "404":
-          description: "Not Found"
+        '404':
+          description: 'Not Found'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GameIDNotFoundError"
-        "403":
-          description: "Forbidden"
+                $ref: '#/components/schemas/GameIDNotFoundError'
+        '403':
+          description: 'Forbidden'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/CurrentDayWordRequestError"
-        "200":
-          description: "OK"
+                $ref: '#/components/schemas/CurrentDayWordRequestError'
+        '200':
+          description: 'OK'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/WordContainer"
+                $ref: '#/components/schemas/WordContainer'
               example:
-                word: "apple"
+                word: 'apple'
                 gameID: 5
-                date: "2023-09-22"
+                date: '2023-09-22'
   /api/guess/currentGameID:
     get:
-      summary: "Get current gameID."
-      description: "Get the gameID of the current day. word will always be empty."
+      summary: 'Get current gameID.'
+      description: 'Get the gameID of the current day. word will always be empty.'
       tags:
         - guess
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: 'OK'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/WordContainer"
+                $ref: '#/components/schemas/WordContainer'
               example:
-                word: ""
+                word: ''
                 gameID: 6
-                date: "2023-09-23"
+                date: '2023-09-23'
   /api/requirements:
     get:
-      summary: "Get requirements of the project"
-      description: "Get all requirements of the project."
+      summary: 'Get requirements of the project'
+      description: 'Get all requirements of the project.'
       tags:
         - requirements
       responses:
-        "200":
-          description: "OK <br> A file response"
+        '200':
+          description: 'OK <br> A file response'
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RequirementsContainer"
+                $ref: '#/components/schemas/RequirementsContainer'
   /api/requirements/{id}:
     get:
-      summary: "Get a specific requirement of the project"
-      description: "Get a specific requirement of the project by id."
+      summary: 'Get a specific requirement of the project'
+      description: 'Get a specific requirement of the project by id.'
       tags:
         - requirements
       parameters:
-        - name: "id"
-          in: "path"
+        - name: 'id'
+          in: 'path'
           required: true
           schema:
-            type: "string"
-            example: "F001"
-          description: "id of the requirement (case-sensitive)"
+            type: 'string'
+            example: 'F001'
+          description: 'id of the requirement (case-sensitive)'
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: 'OK'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/Requirement"
-        "404":
-          description: "Not Found"
+                $ref: '#/components/schemas/Requirement'
+        '404':
+          description: 'Not Found'
           content:
             'text/plain':
               schema:
-                type: "string"
+                type: 'string'
               examples:
                 Example#1:
                   value: "Requirement with id 'F009' not found."
   /api/requirements/{id}/{fileName}:
     get:
-      summary: "Get picture of requirement"
-      description: "Retrieve a picture of a requirement by file name"
+      summary: 'Get picture of requirement'
+      description: 'Retrieve a picture of a requirement by file name'
       tags:
         - requirements
       parameters:
-        - name: "id"
-          in: "path"
+        - name: 'id'
+          in: 'path'
           required: true
           schema:
-            type: "string"
-            example: "F001"
-          description: "id of the requirement (case-sensitive)"
-        - name: "fileName"
-          in: "path"
+            type: 'string'
+            example: 'F001'
+          description: 'id of the requirement (case-sensitive)'
+        - name: 'fileName'
+          in: 'path'
           required: true
           schema:
-            type: "string"
-            example: "F001_act.png"
-          description: "file name of the picture (case-sensitive)"
+            type: 'string'
+            example: 'F001_act.png'
+          description: 'file name of the picture (case-sensitive)'
       responses:
-        "200":
-          description: "OK <br> A file response"
+        '200':
+          description: 'OK <br> A file response'
           content:
             image/png:
               schema:
                 type: string
                 format: binary
-        "400":
-          description: "Bad Request"
+        '400':
+          description: 'Bad Request'
           content:
             'text/plain':
               schema:
-                type: "string"
+                type: 'string'
               examples:
                 Example#1:
-                  value: "Selected file not child of F01 dir"
-        "404":
-          description: "Not Found"
+                  value: 'Selected file not child of F01 dir'
+        '404':
+          description: 'Not Found'
           content:
             'text/plain':
               schema:
-                type: "string"
+                type: 'string'
               examples:
                 Example#1:
                   value: "Requirement with id 'F009' not found."
@@ -190,96 +190,96 @@ paths:
 components:
   schemas:
     WordContainer:
-      type: "object"
+      type: 'object'
       properties:
         word:
-          type: "string"
+          type: 'string'
         gameID:
-          type: "integer"
-          format: "int32"
+          type: 'integer'
+          format: 'int32'
         date:
-          type: "string"
-          format: "date"
+          type: 'string'
+          format: 'date'
     OldGameIDError:
-      type: "object"
+      type: 'object'
       properties:
         oldWord:
-          type: "string"
+          type: 'string'
         message:
-          type: "string"
+          type: 'string'
     WrongGameIDError:
-      type: "object"
+      type: 'object'
       properties:
         message:
-          type: "string"
+          type: 'string'
     GuessLengthError:
-      type: "object"
+      type: 'object'
       properties:
         message:
-          type: "string"
+          type: 'string'
     GuessResult:
-      type: "object"
+      type: 'object'
       properties:
         letterStates:
-          type: "array"
+          type: 'array'
           items:
-            type: "string"
+            type: 'string'
             enum:
-              - "CorrectSpot"
-              - "WrongSpot"
-              - "WrongLetter"
+              - 'CorrectSpot'
+              - 'WrongSpot'
+              - 'WrongLetter'
     GameIDNotFoundError:
-      type: "object"
+      type: 'object'
       properties:
         message:
-          type: "string"
+          type: 'string'
     CurrentDayWordRequestError:
-      type: "object"
+      type: 'object'
       properties:
         message:
-          type: "string"
+          type: 'string'
     TestCase:
-      type: "object"
+      type: 'object'
       properties:
         name:
-          type: "string"
+          type: 'string'
         requirement:
-          type: "string"
+          type: 'string'
         action:
-          type: "string"
+          type: 'string'
         expectation:
-          type: "string"
+          type: 'string'
         testPic:
-          type: "string"
+          type: 'string'
     Requirement:
-      type: "object"
+      type: 'object'
       properties:
         id:
-          type: "string"
+          type: 'string'
         title:
-          type: "string"
+          type: 'string'
         reference:
-          type: "string"
+          type: 'string'
         description:
-          type: "string"
+          type: 'string'
         impact:
-          type: "string"
+          type: 'string'
         criteria:
-          type: "array"
+          type: 'array'
           items:
-            type: "string"
+            type: 'string'
         testCases:
-          type: "array"
+          type: 'array'
           items:
-            $ref: "#/components/schemas/TestCase"
+            $ref: '#/components/schemas/TestCase'
         actPic:
-          type: "string"
+          type: 'string'
         seqPic:
-          type: "string"
+          type: 'string'
     RequirementsContainer:
-      type: "object"
+      type: 'object'
       properties:
         requirements:
-          type: "array"
+          type: 'array'
           items:
-            $ref: "#/components/schemas/Requirement"
+            $ref: '#/components/schemas/Requirement'
