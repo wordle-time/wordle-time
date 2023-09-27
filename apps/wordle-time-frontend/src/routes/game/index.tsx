@@ -160,6 +160,7 @@ export default component$(() => {
 
   const onLetterChange = $((index: number, letter: string) => {
     store.CurrentGuess.letter[index] = letter;
+    document.getElementById("letter" + (index + 1))?.focus();
   });
 
   return (
@@ -191,7 +192,8 @@ export default component$(() => {
                     index={index}
                     letter={letter}
                     letterState={store.GuessResult.letterStates[index]}
-                    onLetterChange={onLetterChange} />
+                    onLetterChange={onLetterChange}
+                  />
                 ))}
               </div>
               <div class="flex items-center justify-center my-16">

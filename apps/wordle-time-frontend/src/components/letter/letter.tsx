@@ -1,11 +1,11 @@
 import { QRL, component$, useVisibleTask$ } from "@builder.io/qwik"
-import { LetterState } from "@wordle-time/models";
+import { ILetterState } from "@wordle-time/models";
 import { animate, stagger } from "motion";
 
 export interface LetterProps {
   letter: string,
   index: number,
-  letterState: string | LetterState,
+  letterState: string | ILetterState,
   onLetterChange: QRL<(index: number, letter: string) => void>;
 }
 
@@ -27,7 +27,7 @@ export default component$<LetterProps>((props) => {
 
   return (
     <>
-      <input type="text" placeholder="A" class={
+      <input type="text" placeholder="A" id={"letter" + props.index} class={
         ['w-8', 'letter', 'h-8', 'md:w-12', 'md:h-12', 'lg:w-24', 'lg:h-24', 'text-center', 'mx-2', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase', 'text-l', 'md:text-lg', 'lg:text-6xl', 'hover:scale-125',
           { "border-ctp-green": props.letterState == "CorrectSpot" },
           { "border-ctp-yellow": props.letterState == "WrongSpot" },
