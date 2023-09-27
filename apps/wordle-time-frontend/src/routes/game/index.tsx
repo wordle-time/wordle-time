@@ -1,8 +1,8 @@
 import { $, component$, useStore, useVisibleTask$ } from "@builder.io/qwik";
-import Letter from "../../components/letter/letter";
-import { Form, RequestHandler, routeAction$, routeLoader$, server$ } from "@builder.io/qwik-city";
-import { animate } from "motion";
+import { Form, routeAction$ } from "@builder.io/qwik-city";
 import { ICurrentGuess, IGuessResult, ILetterState, IWordFromId } from "@wordle-time/models";
+import Letter from "../../components/letter/letter";
+import { animate } from "motion";
 
 const guessRoute = "http://localhost:8090/api/guess/word?word=";
 const wordForIdRoute = "http://localhost:8090/api/guess/wordForGameID?gameID=";
@@ -58,10 +58,17 @@ export const useWordForId = routeAction$(async (data, { cookie }) => {
   if (result.word) {
     cookie.delete("gameID");
   }
-  //cookie.delete("gameID");
-  //console.log(result);
   return result;
 });
+
+const isToDay = $((localeDateString: string) => {
+  const today = new Date();
+  if (today.toLocaleDateString() === localeDateString) {
+    return true;
+  }
+});
+
+
 
 export interface GameState {
   tryCount: number;
@@ -104,6 +111,26 @@ export default component$(() => {
     },
   )
 
+  const updateStateFromStorage = $((state: GameState) => {
+    isToDay(state.LocaleDateString).then(
+      (isToDay) => {
+        if (isToDay) {
+          console.log("Apply state from local storage");
+          store.tryCount = state.tryCount;
+          store.isComplete = state.isComplete;
+          store.isLoading = state.isLoading;
+          store.CurrentGuess = state.CurrentGuess;
+          store.GuessResult = state.GuessResult;
+          store.LocaleDateString = state.LocaleDateString;
+        } else {
+          console.log("Localstorage is not from today");
+          window.localStorage.removeItem("gameState");
+          console.log("state removed from local storage");
+        }
+      }
+    )
+  });
+
   useVisibleTask$(async () => {
     const { value } = await currentId.submit();
     store.wordFromId = value;
@@ -113,28 +140,99 @@ export default component$(() => {
       store.wordFromId.gameID = 0;
       console.log(store.wordFromId.word);
     }
+
+    const localStorage = Object.keys(window.localStorage).find(key => key === "gameState");
+    if (localStorage) {
+      const gameState = JSON.parse(window.localStorage.getItem("gameState") || "") as GameState;
+      // chck if the date day, month and year are the same
+      if (gameState) {
+        updateStateFromStorage(gameState);
+      }
+    }
+    store.isLoading = false;
   }
 
-    // guessResult.submit({ word: store.CurrentGuess.letter.join("") });
-    //});
+
+
 
   );
 
 
-
-
-
+  const onLetterChange = $((index: number, letter: string) => {
+    store.CurrentGuess.letter[index] = letter;
+  });
 
   return (
     <div class='grid h-screen place-items-center'>
-      <h1>Hallo</h1>
-      <Form action={guessResult}>
-        <input type="text" name="word" />
-        <button type="submit" onClick$={() => {
-          store.tryCount += 1;
-          console.log(store.tryCount);
-        }}>Guess</button>
-      </Form>
+      <div>
+        {
+          store.wordFromId.word && (
+            <div class="flex-row items-center justify-center my-16">
+              <h3 class="text-3xl text-ctp-blue">Last time Solution: {store.wordFromId.word?.toLocaleUpperCase()}</h3>
+            </div>
+          )
+        }
+      </div>
+      <div>
+        {
+          store.isLoading && (
+            <div class="flex items-center justify-center">
+              <h1 class="text-3xl loading">Loading ...</h1>
+            </div>
+          )
+        }
+        {
+          !store.isComplete && store.tryCount < 6 && !store.isLoading && (
+            <>
+              <div class="flex items-center justify-center">
+                {store.CurrentGuess.letter.map((letter, index) => (
+                  <Letter
+                    key={index}
+                    index={index}
+                    letter={letter}
+                    letterState={store.GuessResult.letterStates[index]}
+                    onLetterChange={onLetterChange} />
+                ))}
+              </div>
+              <div class="flex items-center justify-center my-16">
+                <button disabled={
+                  store.CurrentGuess.letter.join("").length < 5
+                } class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
+                  onClick$={async () => {
+                    const result = await guessResult.submit({ word: store.CurrentGuess.letter.join("").toLocaleLowerCase() });
+                    console.log(result.value.letterStates);
+                    store.GuessResult.letterStates = result.value.letterStates;
+                    store.tryCount = store.tryCount + 1;
+                    animate(".tryCount", {
+                      scale: [1, 1.5, 1],
+                    })
+                    window.localStorage.setItem("gameState", JSON.stringify(store));
+                  }}
+                >Raten</button>
+              </div>
+              <div class="flex items-center justify-center my-16">
+                <h3 class="text-3xl tryCount" > Tries: {store.tryCount} / 6</h3>
+              </div>
+            </>
+          )
+        }
+        {
+          store.isComplete && !store.isLoading && (
+            <div class="flex items-center justify-center my-16">
+              <h1 class="text-3xl text-ctp-green">You made it</h1>
+            </div>
+          )
+        }
+        {
+          store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
+            <div class="flex-row items-center justify-center my-16 text-center">
+              <h2 class="text-3xl text-ctp-red">You lost for today</h2>
+              <h3 class="text-2xl pt-5 text-ctp-red">Come back tomorrow to reveal the solution and start a new game</h3>
+            </div>
+          )
+        }
+      </div>
     </div>
   );
-});
+}
+);
