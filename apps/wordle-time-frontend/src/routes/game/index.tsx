@@ -1,5 +1,5 @@
 import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
-import { routeAction$ } from '@builder.io/qwik-city';
+import { routeAction$, useNavigate } from '@builder.io/qwik-city';
 import {
   ICurrentGuess,
   IGuessResult,
@@ -75,7 +75,7 @@ const isToDay = $((localeDateString: string) => {
   }
 });
 
-export interface GameState {
+export interface IGameState {
   tryCount: number;
   isComplete: boolean;
   isLoading: boolean;
@@ -85,30 +85,40 @@ export interface GameState {
   wordFromId: IWordFromId;
 }
 
+const resetLocalStorage = () => {
+  window.localStorage.removeItem('gameState');
+}
+
+const setDefaultState = () => {
+  window.location.reload();
+}
+
+const initalState: IGameState = {
+  tryCount: 0,
+  isComplete: false,
+  isLoading: true,
+  CurrentGuess: {
+    letter: ['', '', '', '', ''],
+  },
+  GuessResult: {
+    letterStates: [
+      ILetterState.Undefiend,
+      ILetterState.Undefiend,
+      ILetterState.Undefiend,
+      ILetterState.Undefiend,
+      ILetterState.Undefiend,
+    ],
+  },
+  LocaleDateString: new Date().toLocaleDateString(),
+  wordFromId: {},
+}
+
 export default component$(() => {
   const guessResult = useGuessResult();
   const currentId = useCurrentId();
   const wordForId = useWordForId();
 
-  const store = useStore<GameState>({
-    tryCount: 0,
-    isComplete: false,
-    isLoading: true,
-    CurrentGuess: {
-      letter: ['', '', '', '', ''],
-    },
-    GuessResult: {
-      letterStates: [
-        ILetterState.Undefiend,
-        ILetterState.Undefiend,
-        ILetterState.Undefiend,
-        ILetterState.Undefiend,
-        ILetterState.Undefiend,
-      ],
-    },
-    LocaleDateString: new Date().toLocaleDateString(),
-    wordFromId: {},
-  });
+  const store = useStore<IGameState>(initalState);
 
   const updateStateFromStorage = $((state: GameState) => {
     isToDay(state.LocaleDateString).then((isToDay) => {
@@ -144,7 +154,7 @@ export default component$(() => {
     if (localStorage) {
       const gameState = JSON.parse(
         window.localStorage.getItem('gameState') || ''
-      ) as GameState;
+      ) as IGameState;
       // chck if the date day, month and year are the same
       if (gameState) {
         updateStateFromStorage(gameState);
@@ -225,9 +235,13 @@ export default component$(() => {
         )}
         {store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
           <div class="flex-row items-center justify-center my-16 text-center">
-            <h2 class="text-3xl text-ctp-red">You lost for today</h2>
-            <h3 class="text-2xl pt-5 text-ctp-red">
-              Come back tomorrow to reveal the solution and start a new game
+            <h2 class="text-3xl text-ctp-red">You lost</h2>
+            <h3 class="text-2xl pt-5">
+              Come back tomorrow to reveal the solution or <button class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base" onClick$={$(() => {
+                resetLocalStorage();
+                setDefaultState();
+              }
+              )}>try again</button>
             </h3>
           </div>
         )}
