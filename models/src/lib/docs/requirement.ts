@@ -6,8 +6,8 @@ export interface IRequirement {
   impact: string;
   criteria: string[];
   testCases: ITestCase[];
-  actPic: string;
-  seqPic: string;
+  actPic?: string;
+  seqPic?: string;
 }
 
 export interface ITestCase {
