@@ -27,7 +27,7 @@ export default component$<LetterProps>((props) => {
 
   return (
     <>
-      <input type="text" class={
+      <input type="text" placeholder="A" class={
         ['w-8', 'letter', 'h-8', 'md:w-12', 'md:h-12', 'lg:w-24', 'lg:h-24', 'text-center', 'mx-2', 'text-ctp-text', 'border', 'border-4', 'rounded-lg', 'bg-ctp-mantle', 'font-bold', 'uppercase', 'text-l', 'md:text-lg', 'lg:text-6xl', 'hover:scale-125',
           { "border-ctp-green": props.letterState == "CorrectSpot" },
           { "border-ctp-yellow": props.letterState == "WrongSpot" },

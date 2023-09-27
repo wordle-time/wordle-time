@@ -93,7 +93,7 @@ export default component$(() => {
       isComplete: false,
       isLoading: true,
       CurrentGuess: {
-        letter: ["A", "E", "I", "O", "U"]
+        letter: ["", "", "", "", ""]
       },
       GuessResult: {
         letterStates: [
