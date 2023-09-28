@@ -4,6 +4,9 @@
   "sourceRoot": "apps/wordle-time-e2e/src",
   "projectType": "application",
   "targets": {
+    "e2e:fullstack": {
+      "command": "npx nx run wordle-time-backend:serve & npx nx run wordle-time-e2e:e2e"
+    },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
@@ -13,7 +16,13 @@
       },
       "configurations": {
         "production": {
-          "devServerTarget": "wordle-time-frontend:serve:production"
+          "devServerTarget": "wordle-time-frontend:serve"
+        },
+        "watch": {
+          "cypressConfig": "apps/wordle-time-e2e/cypress.config.ts",
+          "devServerTarget": "wordle-time-frontend:serve",
+          "watch": true,
+          "testingType": "e2e"
         }
       }
     },
