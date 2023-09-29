@@ -6,10 +6,7 @@ describe('wordle-time-frontend', () => {
 
     cy.get("button").contains("Raten").should("exist");
 
-    for(let letterIndex = 0; letterIndex <= 4; letterIndex++) {
-      const letterId = "letter" + letterIndex;
-      cy.get(`#${letterId}`).type("A")
-    }
+    cy.typeWord("aaaaa");
 
     cy.get("button").contains("Raten").click();
 
