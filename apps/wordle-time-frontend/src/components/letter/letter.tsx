@@ -30,6 +30,9 @@ export default component$<LetterProps>((props) => {
     <>
       <input
         type="text"
+        onFocus$={(evt) => {
+          (evt.target as HTMLInputElement).select();
+        }}
         placeholder={previewChars[props.index]}
         id={'letter' + props.index}
         class={[
@@ -52,7 +55,6 @@ export default component$<LetterProps>((props) => {
           'text-l',
           'md:text-lg',
           'lg:text-6xl',
-          'hover:scale-125',
           { 'border-ctp-green': props.letterState == 'CorrectSpot' },
           { 'border-ctp-yellow': props.letterState == 'WrongSpot' },
           { 'border-ctp-red': props.letterState == 'WrongLetter' },
