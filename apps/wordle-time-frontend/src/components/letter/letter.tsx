@@ -10,6 +10,9 @@ export interface LetterProps {
 }
 
 export default component$<LetterProps>((props) => {
+
+  const previewChars = ['A', "E", "I", "O", "U"]
+
   useVisibleTask$(() => {
     animate(
       '.letter',
@@ -27,7 +30,7 @@ export default component$<LetterProps>((props) => {
     <>
       <input
         type="text"
-        placeholder="A"
+        placeholder={previewChars[props.index]}
         id={'letter' + props.index}
         class={[
           'w-8',
