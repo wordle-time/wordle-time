@@ -4,15 +4,14 @@ describe('wordle-time-frontend', () => {
   it('should navigate game', () => {
     cy.get("a[href='/game']").click();
 
-    cy.get("button").contains("Raten").should("exist");
+    cy.get('button').contains('Raten').should('exist');
 
-    cy.typeWord("aaaaa");
+    cy.typeWord('aaaaa');
 
-    cy.get("button").contains("Raten").click();
+    cy.get('button').contains('Raten').click();
 
-    cy.get("h3.tryCount").contains("Tries: 1 / 6").should("exist");
+    cy.get('h3.tryCount').contains('Tries: 1 / 6').should('exist');
 
-    
     /*
     // Custom command example, see `../support/commands.ts` file
     cy.login('my-email@something.com', 'myPassword');

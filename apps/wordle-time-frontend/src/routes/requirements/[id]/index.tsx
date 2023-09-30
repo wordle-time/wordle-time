@@ -41,7 +41,16 @@ export default component$(() => {
                 </li>
               ))}
             </ul>
-            <img src={"http://localhost:8090/api/requirements/" + requirement.id + "/" + requirement.seqPic} width="200" height="200" />
+            <img
+              src={
+                'http://localhost:8090/api/requirements/' +
+                requirement.id +
+                '/' +
+                requirement.seqPic
+              }
+              width="200"
+              height="200"
+            />
           </div>
         )}
       />

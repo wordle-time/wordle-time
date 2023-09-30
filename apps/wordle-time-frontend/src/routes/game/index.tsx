@@ -1,5 +1,5 @@
 import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
-import { routeAction$, useNavigate } from '@builder.io/qwik-city';
+import { routeAction$ } from '@builder.io/qwik-city';
 import {
   ICurrentGuess,
   IGuessResult,
@@ -87,11 +87,11 @@ export interface IGameState {
 
 const resetLocalStorage = () => {
   window.localStorage.removeItem('gameState');
-}
+};
 
 const setDefaultState = () => {
   window.location.reload();
-}
+};
 
 const initalState: IGameState = {
   tryCount: 0,
@@ -111,7 +111,7 @@ const initalState: IGameState = {
   },
   LocaleDateString: new Date().toLocaleDateString(),
   wordFromId: {},
-}
+};
 
 export default component$(() => {
   const guessResult = useGuessResult();
@@ -120,7 +120,7 @@ export default component$(() => {
 
   const store = useStore<IGameState>(initalState);
 
-  const updateStateFromStorage = $((state: GameState) => {
+  const updateStateFromStorage = $((state: IGameState) => {
     isToDay(state.LocaleDateString).then((isToDay) => {
       if (isToDay) {
         console.log('Apply state from local storage');
@@ -173,7 +173,7 @@ export default component$(() => {
       <div>
         {store.wordFromId.word && (
           <div class="flex-row items-center justify-center my-16">
-            <h3 class="text-3xl text-ctp-blue">
+            <h3 class="text-3xl text-ctp-blue" cy-data="last-time-solution">
               Last time Solution: {store.wordFromId.word?.toLocaleUpperCase()}
             </h3>
           </div>
@@ -182,7 +182,9 @@ export default component$(() => {
       <div>
         {store.isLoading && (
           <div class="flex items-center justify-center">
-            <h1 class="text-3xl loading">Loading ...</h1>
+            <h1 class="text-3xl loading" cy-data="loading-message">
+              Loading ...
+            </h1>
           </div>
         )}
         {!store.isComplete && store.tryCount < 6 && !store.isLoading && (
@@ -200,6 +202,7 @@ export default component$(() => {
             </div>
             <div class="flex items-center justify-center my-16">
               <button
+                cy-data="guess-button"
                 disabled={store.CurrentGuess.letter.join('').length < 5}
                 class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={async () => {
@@ -224,24 +227,37 @@ export default component$(() => {
               </button>
             </div>
             <div class="flex items-center justify-center my-16">
-              <h3 class="text-3xl tryCount"> Tries: {store.tryCount} / 6</h3>
+              <h3 class="text-3xl tryCount" cy-data="try-count">
+                {' '}
+                Tries: {store.tryCount} / 6
+              </h3>
             </div>
           </>
         )}
         {store.isComplete && !store.isLoading && (
           <div class="flex items-center justify-center my-16">
-            <h1 class="text-3xl text-ctp-green">You made it</h1>
+            <h1 class="text-3xl text-ctp-green" cy-data="guess-success">
+              You made it
+            </h1>
           </div>
         )}
         {store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
           <div class="flex-row items-center justify-center my-16 text-center">
-            <h2 class="text-3xl text-ctp-red">You lost</h2>
+            <h2 class="text-3xl text-ctp-red" cy-data="guess-fail">
+              You lost
+            </h2>
             <h3 class="text-2xl pt-5">
-              Come back tomorrow to reveal the solution or <button class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base" onClick$={$(() => {
-                resetLocalStorage();
-                setDefaultState();
-              }
-              )}>try again</button>
+              Come back tomorrow to reveal the solution or{' '}
+              <button
+                cy-data="reset-button"
+                class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
+                onClick$={$(() => {
+                  resetLocalStorage();
+                  setDefaultState();
+                })}
+              >
+                try again
+              </button>
             </h3>
           </div>
         )}

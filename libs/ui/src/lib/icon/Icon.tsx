@@ -3,6 +3,7 @@ import { component$ } from '@builder.io/qwik';
 export default component$(() => {
   return (
     <svg
+      cy-data="wordle-time-logo"
       width="62"
       height="62"
       viewBox="0 0 62 62"

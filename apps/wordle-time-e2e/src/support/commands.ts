@@ -19,12 +19,15 @@ declare namespace Cypress {
 //
 // -- This is a parent command --
 Cypress.Commands.add('typeWord', (word) => {
-  if(word.length != 5) throw new Error(`Can only guess words of length 5. ${word} has ${word.length} letters.`);
+  if (word.length != 5)
+    throw new Error(
+      `Can only guess words of length 5. ${word} has ${word.length} letters.`
+    );
 
   console.log(`Entering ${word}`);
 
-  for(let letterIndex = 0; letterIndex <= 4; letterIndex++) {
-    const letterId = "letter" + letterIndex;
+  for (let letterIndex = 0; letterIndex <= 4; letterIndex++) {
+    const letterId = 'letter' + letterIndex;
     cy.get(`#${letterId}`).clear();
     cy.get(`#${letterId}`).type(word[letterIndex]);
   }

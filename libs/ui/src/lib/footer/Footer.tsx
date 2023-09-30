@@ -27,6 +27,7 @@ export default component$(() => {
             <ul>
               <li class="mb-4">
                 <Link
+                  cy-data="design-link"
                   class="font-medium text-ctp-blue  hover:underline"
                   href="/design"
                 >
@@ -35,6 +36,7 @@ export default component$(() => {
               </li>
               <li class="mb-4">
                 <Link
+                  cy-data="glossary-link"
                   class="font-medium  text-ctp-blue hover:underline"
                   href="/glossary"
                 >
@@ -43,6 +45,7 @@ export default component$(() => {
               </li>
               <li class="mb-4">
                 <Link
+                  cy-data="non-goals-link"
                   class="font-medium  text-ctp-blue hover:underline"
                   href="/non-goals"
                 >
@@ -58,6 +61,7 @@ export default component$(() => {
             <ul>
               <li class="mb-4">
                 <Link
+                  cy-data="api-spec-link"
                   class="font-medium  text-ctp-blue hover:underline"
                   href="/api-spec"
                 >
@@ -66,6 +70,7 @@ export default component$(() => {
               </li>
               <li class="mb-4">
                 <Link
+                  cy-data="requirements-link"
                   class="font-medium  text-ctp-blue hover:underline"
                   href="/requirements"
                 >
@@ -81,6 +86,7 @@ export default component$(() => {
             <ul>
               <li class="mb-4">
                 <a
+                  cy-data="discord-link"
                   href="https://discord.gg/PRyZGKPB"
                   rel="noreferrer nofollow"
                   class="font-medium  text-ctp-blue hover:underline"
@@ -90,6 +96,7 @@ export default component$(() => {
               </li>
               <li class="mb-4">
                 <a
+                  cy-data="github-link"
                   href="https://github.com/wordle-time/"
                   rel="noreferrer nofollow"
                   class="font-medium  text-ctp-blue hover:underline"

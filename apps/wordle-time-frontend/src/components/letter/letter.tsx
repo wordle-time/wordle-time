@@ -10,8 +10,7 @@ export interface LetterProps {
 }
 
 export default component$<LetterProps>((props) => {
-
-  const previewChars = ['A', "E", "I", "O", "U"]
+  const previewChars = ['A', 'E', 'I', 'O', 'U'];
 
   useVisibleTask$(() => {
     animate(
@@ -29,12 +28,13 @@ export default component$<LetterProps>((props) => {
   return (
     <>
       <input
+        cy-data={'letter-' + props.index}
         type="text"
         onFocus$={(evt) => {
           (evt.target as HTMLInputElement).select();
         }}
         placeholder={previewChars[props.index]}
-        id={'letter' + props.index}
+        id={'letter-' + props.index}
         class={[
           'w-8',
           'letter',
