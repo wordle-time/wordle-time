@@ -16,30 +16,29 @@ export default component$(() => {
 
   return (
     <>
-      <div>
-        <Resource
-          value={requirements}
-          onPending={() => <div>Loading...</div>}
-          onResolved={(requirements) => (
-            <div>
-              {requirements.map((requirement) => (
-                <div key={requirement.id} class="m-20">
-                  <h3>
-                    <span>{requirement.id} -</span>
-                    {requirement.title}
-                  </h3>
-                  <Link
-                    href={`/requirements/${requirement.id}`}
-                    class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium"
-                  >
-                    Read More
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
-        />
-      </div>
+      <Resource
+        value={requirements}
+        onPending={() => <div>Loading...</div>}
+        onResolved={(requirements) => (
+          <div class="flex flex-wrap" >
+            {requirements.map((requirement) => (
+              <div key={requirement.id} class="w-52 m-6 border-2 rounded-xl p-4 hover:border-ctp-yellow">
+                <h3 class="text-5xl">
+                  {requirement.id}
+                </h3>
+                <h4 class="text-xl">{requirement.title}</h4>
+                <p class="py-2 pb-4 text-sm">{requirement.description}</p>
+                <Link
+                  href={`/requirements/${requirement.id}`}
+                  class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Read More
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      />
     </>
   );
 });
