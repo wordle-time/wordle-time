@@ -11,7 +11,7 @@ export default component$(() => {
               <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
                 <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"></span>
               </span>
-              <span class="self-center ml-3 text-2xl text-ctp-text font-semibold ">
+              <span class="self-center  text-2xl text-ctp-text font-semibold ">
                 Wordle Time
               </span>
             </a>
