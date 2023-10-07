@@ -27,8 +27,8 @@ Cypress.Commands.add('typeWord', (word) => {
   console.log(`Entering ${word}`);
 
   for (let letterIndex = 0; letterIndex <= 4; letterIndex++) {
-    const letterId = 'letter' + letterIndex;
-    cy.get(`#${letterId}`).clear();
+    const letterId = 'letter-' + letterIndex;
+    cy.get(`[data-cy="${letterId}"]`).clear();
     cy.get(`#${letterId}`).type(word[letterIndex]);
   }
 });

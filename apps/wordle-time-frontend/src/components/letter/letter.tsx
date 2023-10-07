@@ -28,7 +28,7 @@ export default component$<LetterProps>((props) => {
   return (
     <>
       <input
-        cy-data={'letter-' + props.index}
+        data-cy={'letter-' + props.index}
         type="text"
         onFocus$={(evt) => {
           (evt.target as HTMLInputElement).select();

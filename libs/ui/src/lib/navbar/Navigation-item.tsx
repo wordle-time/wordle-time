@@ -5,7 +5,7 @@ import { INavigationItem } from './interface/navigation';
 export default component$<INavigationItem>((props) => {
   return (
     <Link
-      cy-data={'navbutton-' + props.text}
+      data-cy={'navbutton-' + props.text}
       class="m-3 text-ctp-blue hover:underline rounded-md px-3 text-sm font-medium"
       href={props.href}
     >

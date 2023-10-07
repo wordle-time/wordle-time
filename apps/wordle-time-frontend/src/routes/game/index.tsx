@@ -173,7 +173,7 @@ export default component$(() => {
       <div>
         {store.wordFromId.word && (
           <div class="flex-row items-center justify-center my-16">
-            <h3 class="text-3xl text-ctp-blue" cy-data="last-time-solution">
+            <h3 class="text-3xl text-ctp-blue" data-cy="last-time-solution">
               Last time Solution: {store.wordFromId.word?.toLocaleUpperCase()}
             </h3>
           </div>
@@ -182,7 +182,7 @@ export default component$(() => {
       <div>
         {store.isLoading && (
           <div class="flex items-center justify-center">
-            <h1 class="text-3xl loading" cy-data="loading-message">
+            <h1 class="text-3xl loading" data-cy="loading-message">
               Loading ...
             </h1>
           </div>
@@ -202,7 +202,7 @@ export default component$(() => {
             </div>
             <div class="flex items-center justify-center my-16">
               <button
-                cy-data="guess-button"
+                data-cy="guess-button"
                 disabled={store.CurrentGuess.letter.join('').length < 5}
                 class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={async () => {
@@ -227,7 +227,7 @@ export default component$(() => {
               </button>
             </div>
             <div class="flex items-center justify-center my-16">
-              <h3 class="text-3xl tryCount" cy-data="try-count">
+              <h3 class="text-3xl tryCount" data-cy="try-count">
                 {' '}
                 Tries: {store.tryCount} / 6
               </h3>
@@ -236,20 +236,20 @@ export default component$(() => {
         )}
         {store.isComplete && !store.isLoading && (
           <div class="flex items-center justify-center my-16">
-            <h1 class="text-3xl text-ctp-green" cy-data="guess-success">
+            <h1 class="text-3xl text-ctp-green" data-cy="guess-success">
               You made it
             </h1>
           </div>
         )}
         {store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
           <div class="flex-row items-center justify-center my-16 text-center">
-            <h2 class="text-3xl text-ctp-red" cy-data="guess-fail">
+            <h2 class="text-3xl text-ctp-red" data-cy="guess-fail">
               You lost
             </h2>
             <h3 class="text-2xl pt-5">
               Come back tomorrow to reveal the solution or{' '}
               <button
-                cy-data="reset-button"
+                data-cy="reset-button"
                 class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={$(() => {
                   resetLocalStorage();
