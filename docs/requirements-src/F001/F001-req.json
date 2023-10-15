@@ -12,9 +12,23 @@
     {
       "name": "Testfall 1",
       "requirement": "Das Spiel wurde gestartet.",
-      "action": "Ich gebe ein Wort ein.",
-      "expectation": " Die Anzahl der Versuche wird um 1 erhöht.",
-      "testPic": "test-name.png"
+      "action": "Ich gebe einen Buchstaben ein.",
+      "expectation": "Der Buchstabe wird in das erste Buchstaben-Feld eingetragen.",
+      "testPic": "worteingabe -- should show letter_input.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Das Spiel wurde gestartet.",
+      "action": "Ich gebe eine Zahl ein.",
+      "expectation": "Die Eingabe in das erste Buchstaben-Feld wird abgelehnt.",
+      "testPic": "worteingabe-error -- should show number_input.png"
+    },
+    {
+      "name": "Testfall 3",
+      "requirement": "Das Spiel wurde gestartet.",
+      "action": "Ich gebe 6 Buchstaben ein.",
+      "expectation": "5 Buchstaben werden eingegeben, der 6. Buchstabe wird ignoriert.",
+      "testPic": "worteingabe-error -- should show too_many_letters.png"
     }
   ]
 }
