@@ -2,11 +2,11 @@
   "id": "F003",
   "title": "Zählmechanismus",
   "reference": "https://github.com/wordle-time/wordle-time/issues/3",
-  "description": "Als Spieler möchte ich ein Wort oder einen Buchstaben eingeben können, damit ich am Spiel teilnehmen und das Wort erraten kann.",
-  "impact": "Ermöglicht die Interaktion des Spielers mit dem Spiel",
+  "description": "Als Spieler möchte ich sehen, wie viele Versuche ich bereits gemacht habe, damit ich meine Strategie entsprechend anpassen kann.",
+  "impact": "Begrenzt die Anzahl der Versuche und erhöht den Schwierigkeitsgrad.",
   "criteria": [
-    "Das Eingabefeld akzeptiert und validiert meine Eingabe",
-    "Ich erhalte eine Rückmeldung, wenn meine Eingabe ungültig ist"
+    "Die Anzahl der Versuche wird korrekt gezählt.",
+    "Ich sehe deutlich, wie viele Versuche mir noch bleiben."
   ],
   "test-cases": []
 }
