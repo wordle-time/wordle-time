@@ -21,7 +21,7 @@
       "requirement": "Das Spiel wurde gestartet.",
       "action": "Ich gebe eine Zahl ein.",
       "expectation": "Die Eingabe in das erste Buchstaben-Feld wird abgelehnt.",
-      "testPic": "worteingabe-error -- should show number_input.png"
+      "testPic": "worteingabe-error -- should show non_letter_input.png"
     },
     {
       "name": "Testfall 3",
