@@ -15,16 +15,23 @@
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Launch OpenApi",
+      "name": "Launch Chrome and open OpenApi",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:8090/openapi",
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Launch Chrome",
+      "name": "Launch Chrome and open Frontend",
       "request": "launch",
       "type": "chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Firefox and open Frontend",
+      "request": "launch",
+      "type": "firefox",
       "url": "http://localhost:5173",
       "webRoot": "${workspaceFolder}"
     },
