@@ -9,9 +9,9 @@ import {
 import Letter from '../../components/letter/letter';
 import { animate } from 'motion';
 
-const guessRoute = 'http://localhost:8090/api/guess/word?word=';
-const wordForIdRoute = 'http://localhost:8090/api/guess/wordForGameID?gameID=';
-const currentIdRoute = 'http://localhost:8090/api/guess/currentGameID';
+const guessRoute = 'http://127.0.0.1:8090/api/guess/word?word=';
+const wordForIdRoute = 'http://127.0.0.1:8090/api/guess/wordForGameID?gameID=';
+const currentIdRoute = 'http://127.0.0.1:8090/api/guess/currentGameID';
 
 export const useCurrentId = routeAction$(
   async (data, { cookie }): Promise<IWordFromId> => {
