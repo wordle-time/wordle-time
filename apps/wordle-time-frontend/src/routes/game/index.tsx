@@ -1,4 +1,4 @@
-import { $, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
+import { $, QRL, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
 import { routeAction$ } from '@builder.io/qwik-city';
 import {
   ICurrentGuess,
@@ -75,8 +75,9 @@ const isToDay = $((localeDateString: string) => {
   }
 });
 
-export interface IGameState {
+interface IGameState {
   tryCount: number;
+  incrementTryCount: QRL<(this: IGameState) => void>;
   isComplete: boolean;
   isLoading: boolean;
   CurrentGuess: ICurrentGuess;
@@ -93,20 +94,24 @@ const setDefaultState = () => {
   window.location.reload();
 };
 
-const initalState: IGameState = {
+const initialState: IGameState = {
   tryCount: 0,
+  incrementTryCount: $(function (this: IGameState) {
+    this.tryCount++;
+  }),
+
   isComplete: false,
   isLoading: true,
   CurrentGuess: {
-    letter: ['', '', '', '', ''],
+    letter: ['A', 'P', 'P', 'L', 'O'],
   },
   GuessResult: {
     letterStates: [
-      ILetterState.Undefiend,
-      ILetterState.Undefiend,
-      ILetterState.Undefiend,
-      ILetterState.Undefiend,
-      ILetterState.Undefiend,
+      ILetterState.Undefined,
+      ILetterState.Undefined,
+      ILetterState.Undefined,
+      ILetterState.Undefined,
+      ILetterState.Undefined,
     ],
   },
   LocaleDateString: new Date().toLocaleDateString(),
@@ -118,7 +123,7 @@ export default component$(() => {
   const currentId = useCurrentId();
   const wordForId = useWordForId();
 
-  const store = useStore<IGameState>(initalState);
+  const store = useStore<IGameState>(initialState);
 
   const updateStateFromStorage = $((state: IGameState) => {
     isToDay(state.LocaleDateString).then((isToDay) => {
@@ -165,7 +170,7 @@ export default component$(() => {
 
   const onLetterChange = $((index: number, letter: string) => {
     store.CurrentGuess.letter[index] = letter;
-    document.getElementById('letter' + (index + 1))?.focus();
+    document.getElementById('letter-' + (index + 1))?.focus();
   });
 
   return (
@@ -213,7 +218,7 @@ export default component$(() => {
                   });
                   console.log(result.value.letterStates);
                   store.GuessResult.letterStates = result.value.letterStates;
-                  store.tryCount = store.tryCount + 1;
+                  store.incrementTryCount();
                   animate('.tryCount', {
                     scale: [1, 1.5, 1],
                   });
