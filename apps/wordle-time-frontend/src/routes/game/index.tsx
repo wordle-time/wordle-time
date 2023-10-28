@@ -8,6 +8,7 @@ import {
 } from '@wordle-time/models';
 import Letter from '../../components/letter/letter';
 import { animate } from 'motion';
+import { Loading } from '@wordle-time/ui';
 
 const guessRoute = 'http://127.0.0.1:8090/api/guess/word?word=';
 const wordForIdRoute = 'http://127.0.0.1:8090/api/guess/wordForGameID?gameID=';
@@ -136,7 +137,7 @@ export default component$(() => {
         store.GuessResult = state.GuessResult;
         store.LocaleDateString = state.LocaleDateString;
       } else {
-        console.log('Localstorage is not from today');
+        console.log('Local-storage is not from today');
         window.localStorage.removeItem('gameState');
         console.log('state removed from local storage');
       }
@@ -160,7 +161,7 @@ export default component$(() => {
       const gameState = JSON.parse(
         window.localStorage.getItem('gameState') || ''
       ) as IGameState;
-      // chck if the date day, month and year are the same
+      // check if the date day, month and year are the same
       if (gameState) {
         updateStateFromStorage(gameState);
       }
@@ -178,18 +179,14 @@ export default component$(() => {
       <div>
         {store.wordFromId.word && (
           <div class="flex-row items-center justify-center my-16">
-            <h3 class="text-3xl text-ctp-blue" data-cy="last-time-solution">
-              Last time Solution: {store.wordFromId.word?.toLocaleUpperCase()}
-            </h3>
+            <LastTimeSolutionComponent wordFromId={store.wordFromId.word?.toLocaleUpperCase()} />
           </div>
         )}
       </div>
       <div>
         {store.isLoading && (
           <div class="flex items-center justify-center">
-            <h1 class="text-3xl loading" data-cy="loading-message">
-              Loading ...
-            </h1>
+            <Loading />
           </div>
         )}
         {!store.isComplete && store.tryCount < 6 && !store.isLoading && (
@@ -232,41 +229,77 @@ export default component$(() => {
               </button>
             </div>
             <div class="flex items-center justify-center my-16">
-              <h3 class="text-3xl tryCount" data-cy="try-count">
-                {' '}
-                Tries: {store.tryCount} / 6
-              </h3>
+              <CounterComponent tryCount={store.tryCount} />
             </div>
           </>
         )}
         {store.isComplete && !store.isLoading && (
-          <div class="flex items-center justify-center my-16">
-            <h1 class="text-3xl text-ctp-green" data-cy="guess-success">
-              You made it
-            </h1>
-          </div>
+          <WonComponent />
         )}
         {store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
-          <div class="flex-row items-center justify-center my-16 text-center">
-            <h2 class="text-3xl text-ctp-red" data-cy="guess-fail">
-              You lost
-            </h2>
-            <h3 class="text-2xl pt-5">
-              Come back tomorrow to reveal the solution or{' '}
-              <button
-                data-cy="reset-button"
-                class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
-                onClick$={$(() => {
-                  resetLocalStorage();
-                  setDefaultState();
-                })}
-              >
-                try again
-              </button>
-            </h3>
-          </div>
+          <LostComponent />
         )}
       </div>
     </div>
   );
+});
+
+
+interface ILastTimeSolutionComponentProps {
+  wordFromId: string
+}
+
+const LastTimeSolutionComponent = component$<ILastTimeSolutionComponentProps>((props) => {
+  return <>
+    <h3 class="text-3xl text-ctp-blue" data-cy="last-time-solution">
+      Last time Solution: {props.wordFromId}
+    </h3>
+  </>
+})
+
+interface ICounterComponentProps {
+  tryCount: number
+}
+
+const CounterComponent = component$<ICounterComponentProps>((props) => {
+  return <>
+    <h3 class="text-3xl tryCount" data-cy="try-count">
+      {' '}
+      Tries: {props.tryCount} / 6
+    </h3>
+  </>
+})
+
+const WonComponent = component$(() => {
+  return <>
+    <div class="flex items-center justify-center my-16">
+      <h1 class="text-3xl text-ctp-green" data-cy="guess-success">
+        You made it
+      </h1>
+    </div>
+  </>
+})
+
+
+const LostComponent = component$(() => {
+  return <>
+    <div class="flex-row items-center justify-center my-16 text-center">
+      <h2 class="text-3xl text-ctp-red" data-cy="guess-fail">
+        You lost
+      </h2>
+      <h3 class="text-2xl pt-5">
+        Come back tomorrow to reveal the solution or{' '}
+        <button
+          data-cy="reset-button"
+          class="rounded-lg border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
+          onClick$={$(() => {
+            resetLocalStorage();
+            setDefaultState();
+          })}
+        >
+          try again
+        </button>
+      </h3>
+    </div>
+  </>
 });
