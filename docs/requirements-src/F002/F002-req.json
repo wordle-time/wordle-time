@@ -2,8 +2,8 @@
   "id": "F002",
   "title": "Feedback-Mechanismus",
   "reference": "https://github.com/wordle-time/wordle-time/issues/2",
-  "description": "Als Spieler möchte ich nach jeder Eingabe Feedback erhalten, damit ich weiß, wie nah ich am richtigen Wort bin.",
-  "impact": "Informiert den Spieler über den Status seiner Eingabe.",
+  "description": "Als Spieler möchte ich nach jedem Rateversuch Feedback erhalten, damit ich weiß, wie nah ich am richtigen Wort bin.",
+  "impact": "Informiert den Spieler über das Ergebnis seines Rateversuchs.",
   "criteria": [
     "Ich sehe Farbcodes oder Symbole, die den Status meiner Eingabe anzeigen.",
     "Das Feedback ist konsistent und leicht verständlich."

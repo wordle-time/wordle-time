@@ -1,5 +1,17 @@
 @startuml F001_seq
 title "Worteingabe"
 
-Bob -> Alice : hello
+actor "Spieler" as user
+boundary "Frontend" as frontend
+
+activate user
+user -> frontend: Spiel öffnen
+activate frontend
+user <- frontend: Spiel anzeigen
+loop 5 Mal
+    user -> frontend: Buchstabe eingeben
+    user <- frontend: Buchstabe anzeigen
+end
+deactivate frontend
+deactivate user
 @enduml
