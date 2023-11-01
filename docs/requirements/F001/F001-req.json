@@ -15,6 +15,13 @@
       "action": "Ich gebe ein Wort ein.",
       "expectation": " Die Anzahl der Versuche wird um 1 erhöht.",
       "test-pic": "test-name.png"
+    },
+    {
+      "name": "<strong>This text is important!</strong>",
+      "requirement": "Das Spiel wurde gestartet.",
+      "action": "Ich gebe ein Wort ein.",
+      "expectation": " Die Anzahl der Versuche wird um 1 erhöht.",
+      "test-pic": "test-name.png"
     }
   ]
 }

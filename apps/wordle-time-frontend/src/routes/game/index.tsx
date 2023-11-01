@@ -79,8 +79,10 @@ const isToDay = $((localeDateString: string) => {
 interface IGameState {
   tryCount: number;
   incrementTryCount: QRL<(this: IGameState) => void>;
+  computeCompleted: QRL<(this: IGameState) => void>;
   isComplete: boolean;
   isLoading: boolean;
+  isGameWon: boolean;
   CurrentGuess: ICurrentGuess;
   GuessResult: IGuessResult;
   LocaleDateString: string;
@@ -97,8 +99,19 @@ const setDefaultState = () => {
 
 const initialState: IGameState = {
   tryCount: 0,
+  isGameWon: false,
   incrementTryCount: $(function (this: IGameState) {
     this.tryCount++;
+  }),
+  computeCompleted: $(function (this: IGameState) {
+    const isGameWon = this.GuessResult.letterStates.every((x) => {
+      return x.toString() == ILetterState[ILetterState.CorrectSpot];
+    })
+
+    if (isGameWon) {
+      this.isGameWon = true;
+    }
+    this.isComplete = isGameWon || this.tryCount >= 6;
   }),
 
   isComplete: false,
@@ -215,7 +228,9 @@ export default component$(() => {
                   });
                   console.log(result.value.letterStates);
                   store.GuessResult.letterStates = result.value.letterStates;
+
                   store.incrementTryCount();
+                  store.computeCompleted();
                   animate('.tryCount', {
                     scale: [1, 1.5, 1],
                   });
@@ -233,10 +248,10 @@ export default component$(() => {
             </div>
           </>
         )}
-        {store.isComplete && !store.isLoading && (
+        {store.isGameWon && store.isComplete && !store.isLoading && (
           <WonComponent />
         )}
-        {store.tryCount >= 6 && !store.isComplete && !store.isLoading && (
+        {!store.isGameWon && store.isComplete && !store.isLoading && (
           <LostComponent />
         )}
       </div>
