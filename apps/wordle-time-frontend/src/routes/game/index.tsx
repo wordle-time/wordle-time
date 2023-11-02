@@ -248,12 +248,7 @@ export default component$(() => {
             </div>
           </>
         )}
-        {store.isGameWon && store.isComplete && !store.isLoading && (
-          <WonComponent />
-        )}
-        {!store.isGameWon && store.isComplete && !store.isLoading && (
-          <LostComponent />
-        )}
+        {!store.isLoading && store.isComplete && (store.isGameWon ? <WonComponent /> : <LostComponent />)}
       </div>
     </div>
   );
