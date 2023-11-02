@@ -59,8 +59,7 @@ export default component$(() => {
               <Icon />
               <div class="hidden sm:ml-6 sm:block">
                 <NavigationItem href="/" text="Home" />
-                <NavigationItem href="/rules" text="Regeln" />
-                <NavigationItem href="/game" text="Spiel" />
+                <NavigationItem href="/game" text="Game" />
               </div>
             </div>
           </div>
@@ -70,8 +69,7 @@ export default component$(() => {
       {isHamburgerOpen.value && (
         <div class="sm:hidden flex flex-col h-screen" id="mobile-menu">
           <NavigationItem href="/" text="Home" />
-          <NavigationItem href="/rules" text="Regeln" />
-          <NavigationItem href="/game" text="Spiel" />
+          <NavigationItem href="/game" text="Game" />
         </div>
       )}
     </nav>
