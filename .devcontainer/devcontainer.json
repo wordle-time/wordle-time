@@ -13,8 +13,9 @@
       "nodeGypDependencies": true,
       "version": "lts"
     },
-    "ghcr.io/devcontainers-contrib/features/gradle-sdkman:2": {
-      "version": "latest"
+    "ghcr.io/devcontainers-contrib/features/gradle-sdkman": {
+      "version": "latest",
+      "jdkVersion": "17"
     },
     "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
       "version": "latest"
