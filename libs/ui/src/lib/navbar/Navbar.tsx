@@ -1,9 +1,10 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal } from '@builder.io/qwik';
 import Icon from '../icon/Icon';
 import NavigationItem from './Navigation-item';
 
 export default component$(() => {
   const isHamburgerOpen = useSignal(false);
+  const closePanel$ = $(() => isHamburgerOpen.value = false); 
 
   return (
     <nav class="from-ctp-surface0 to-ctp-base bg-gradient-to-b">
@@ -58,8 +59,8 @@ export default component$(() => {
             <div class="flex flex-shrink-0 items-center">
               <Icon />
               <div class="hidden sm:ml-6 sm:block">
-                <NavigationItem href="/" text="Home" />
-                <NavigationItem href="/game" text="Game" />
+                <NavigationItem href="/" text="Home" closePanel$={closePanel$}/>
+                <NavigationItem href="/game" text="Game" closePanel$={closePanel$}/>
               </div>
             </div>
           </div>
@@ -68,8 +69,16 @@ export default component$(() => {
 
       {isHamburgerOpen.value && (
         <div class="sm:hidden flex flex-col h-screen" id="mobile-menu">
-          <NavigationItem href="/" text="Home" />
-          <NavigationItem href="/game" text="Game" />
+          <NavigationItem
+            href="/"
+            text="Home"
+            closePanel$={closePanel$}
+          />
+          <NavigationItem
+            href="/game"
+            text="Game"
+            closePanel$={closePanel$}
+          />
         </div>
       )}
     </nav>
