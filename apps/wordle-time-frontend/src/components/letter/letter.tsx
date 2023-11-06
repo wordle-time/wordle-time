@@ -4,9 +4,9 @@ import { animate, stagger } from 'motion';
 
 export interface LetterProps {
   letter: string;
-  index: number;
+  index?: number;
   letterState: string | ILetterState;
-  onLetterChange: QRL<(index: number, letter: string) => void>;
+  onLetterChange?: QRL<(index: number, letter: string) => void>;
 }
 
 export default component$<LetterProps>((props) => {
