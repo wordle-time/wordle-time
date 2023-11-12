@@ -1,113 +1,76 @@
 import { component$ } from '@builder.io/qwik';
 import { Link } from '@builder.io/qwik-city';
 
+interface NavLink {
+  href: string;
+  text: string;
+}
+
 export default component$(() => (
-  <footer class="justify-self-end pt-16 pb-8 lg:pt-24 lg:pb-1 to-ctp-surface0 from-ctp-base bg-gradient-to-b">
+  <footer class="justify-self-end pt-16 pb-8 lg:pt-24 lg:pb-1 bg-gradient-to-b from-ctp-base to-ctp-surface0">
     <div class="px-4 mx-auto max-w-8xl lg:px-4">
-      <div class="grid gap-12 lg:grid-cols-5 lg:gap-18">
+      <nav class="grid gap-12 lg:grid-cols-5 lg:gap-18">
         <div class="col-span-2">
-          <a class="flex mb-6" href="/">
-            <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-              <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;"></span>
-            </span>
-            <span class="self-center  text-2xl text-ctp-text font-semibold ">
+          <Link href="/" class="flex mb-6">
+            <span class="text-2xl text-ctp-text font-semibold">
               Wordle Time
             </span>
-          </a>
+          </Link>
           <p class="text-ctp-subtext0">
             Wordle Time is a word game where players try to guess the secret
             word of the day in just six tries.
           </p>
         </div>
-        <div>
-          <h3 class="mb-6 text-sm font-semibold text-ctp-subtext1 uppercase ">
-            Dokumentation
-          </h3>
-          <ul>
-            <li class="mb-4">
-              <Link
-                data-cy="design-link"
-                class="font-medium text-ctp-blue  hover:underline"
-                href="/design"
-              >
-                Designentscheidungen
-              </Link>
-            </li>
-            <li class="mb-4">
-              <Link
-                data-cy="glossary-link"
-                class="font-medium  text-ctp-blue hover:underline"
-                href="/glossary"
-              >
-                Glossar
-              </Link>
-            </li>
-            <li class="mb-4">
-              <Link
-                data-cy="non-goals-link"
-                class="font-medium  text-ctp-blue hover:underline"
-                href="/non-goals"
-              >
-                Nicht-Ziele
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="mb-6 text-sm font-semibold text-ctp-subtext1 uppercase ">
-            Support
-          </h3>
-          <ul>
-            <li class="mb-4">
-              <Link
-                data-cy="api-spec-link"
-                class="font-medium  text-ctp-blue hover:underline"
-                href="/api-spec"
-              >
-                API Spezifikation
-              </Link>
-            </li>
-            <li class="mb-4">
-              <Link
-                data-cy="requirements-link"
-                class="font-medium  text-ctp-blue hover:underline"
-                href="/requirements"
-              >
-                Anforderungen
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="mb-6 text-sm font-semibold text-ctp-subtext1 uppercase ">
-            Kontakt
-          </h3>
-          <ul>
-            <li class="mb-4">
-              <a
-                data-cy="discord-link"
-                href="https://discord.gg/PRyZGKPB"
-                rel="noreferrer nofollow"
-                class="font-medium  text-ctp-blue hover:underline"
-              >
-                Discord
-              </a>
-            </li>
-            <li class="mb-4">
-              <a
-                data-cy="github-link"
-                href="https://github.com/wordle-time/"
-                rel="noreferrer nofollow"
-                class="font-medium  text-ctp-blue hover:underline"
-              >
-                Github
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+        {renderSection("Dokumentation", [
+          { href: "/design", text: "Designentscheidungen" },
+          { href: "/glossary", text: "Glossar" },
+          { href: "/non-goals", text: "Nicht-Ziele" },
+        ])}
+        {renderSection("Support", [
+          { href: "/api-spec", text: "API Spezifikation" },
+          { href: "/requirements", text: "Anforderungen" },
+        ])}
+        {renderSection("Kontakt", [
+          { href: "https://discord.gg/PRyZGKPB", text: "Discord" },
+          { href: "https://github.com/wordle-time/", text: "Github" },
+        ])}
+      </nav>
       <hr class="my-8 border-gray-200 dark:border-gray-700 lg:my-12" />
-      <span class="block font-normal text-center ">Wintersemester 2023 </span>
+      <span class="block font-normal text-center ">Wintersemester 2023</span>
     </div>
   </footer>
 ));
+
+function renderSection(title: string, links: NavLink[]) {
+  return (
+    <div>
+      <h3 class="mb-6 text-sm font-semibold text-ctp-subtext1 uppercase">
+        {title}
+      </h3>
+      <ul>
+        {links.map((link, index) => (
+          <li key={index} class="mb-4">
+            <LinkOrExternalLink key={index} href={link.href} text={link.text} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function LinkOrExternalLink({ href, text }: NavLink) {
+  const isExternal = href.startsWith("http");
+  const linkProps = isExternal
+    ? { href, target: "_blank", rel: "noopener noreferrer" }
+    : { href };
+
+  return (
+    <Link
+      {...linkProps}
+      data-cy={`${text.toLowerCase().replace(/\s+/g, '-')}-link`}
+      class="font-medium text-ctp-blue hover:underline"
+    >
+      {text}
+    </Link>
+  );
+}
