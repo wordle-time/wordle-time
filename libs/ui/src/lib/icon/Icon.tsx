@@ -1,12 +1,11 @@
 import { component$, useVisibleTask$ } from '@builder.io/qwik';
-import { animate } from 'motion';
 
 export default component$(() => {
   useVisibleTask$(() => {
     const logo = document.getElementById('wordle-time-logo');
     if (!logo) return;
 
-    const onMouseMove = (e) => {
+    const onMouseMove = (e: { clientX: number; clientY: number; }) => {
       const { clientX, clientY } = e;
       const { left, top, width, height } = logo.getBoundingClientRect();
       const centerX = left + width / 2;
