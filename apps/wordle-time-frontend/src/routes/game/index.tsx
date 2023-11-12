@@ -110,6 +110,7 @@ const initialState: IGameState = {
       this.isGameWon = true;
     }
     this.isComplete = isGameWon || this.tryCount >= 6;
+
   }),
 
   isComplete: false,
@@ -228,7 +229,7 @@ export default component$(() => {
                   store.GuessResult.letterStates = result.value.letterStates;
 
                   store.incrementTryCount();
-                  store.computeCompleted();
+                  await store.computeCompleted();
                   animate('.tryCount', {
                     scale: [1, 1.5, 1],
                   });
