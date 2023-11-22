@@ -14,7 +14,12 @@ start
 :Buchstaben-Rahmen Farben entsprechend validität zuweisen;
 :Buchstaben-Rahmen anzeigen;
 |Spieler|
-:Buchstaben-Rahmen ansehen und validität verstehen;
+:Buchstaben-Rahmen ansehen und Validität verstehen;
+note right
+    correct_letter: Korrekter Buchstabe wurde an richtiger Stelle eingegeben
+    wrong_spot: Korrekter Buchstabe wurde an falscher Stelle eingegeben
+    wrong_letter: Falscher Buchstabe wurde eingegeben
+end note
 end
 
 @enduml

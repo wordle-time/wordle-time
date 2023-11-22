@@ -8,5 +8,13 @@
     "Die Anzahl der Versuche wird korrekt gezählt.",
     "Ich sehe deutlich, wie viele Versuche mir noch bleiben."
   ],
-  "test-cases": []
+  "test-cases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Rateversuch Zähler wird um 1 erhöht.",
+      "testPic": "counter -- should show incremented.png"
+    }
+  ]
 }

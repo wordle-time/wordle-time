@@ -13,5 +13,5 @@ backend -> frontend: Ergebnis der Rateversuch-Validierung senden
 deactivate backend
 frontend -> frontend: Buchstaben-Rahmen Farben entsprechend validität zuweisen
 frontend -> user: Buchstaben-Rahmen anzeigen
-user -> user: Buchstaben-Rahmen ansehen und validität verstehen
+user -> user: Buchstaben-Rahmen ansehen und Validität verstehen
 @enduml

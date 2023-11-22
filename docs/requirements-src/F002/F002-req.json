@@ -8,5 +8,27 @@
     "Ich sehe Farbcodes oder Symbole, die den Status meiner Eingabe anzeigen.",
     "Das Feedback ist konsistent und leicht verständlich."
   ],
-  "test-cases": []
+  "test-cases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",
+      "action": "Buchstaben-Rahmen werden ihrer Validität nach eingefärbt.",
+      "expectation": "Ein richtiger Buchstabe an der richtigen Stelle wird mit einem grünen Rahmen gekennzeichnet.",
+      "testPic": "feedback -- should show correct_letter.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",
+      "action": "Buchstaben-Rahmen werden ihrer Validität nach eingefärbt.",
+      "expectation": "Ein richtiger Buchstabe an der falschen Stelle wird mit einem gelben Rahmen gekennzeichnet.",
+      "testPic": "feedback -- should show wrong_spot.png"
+    },
+    {
+      "name": "Testfall 3",
+      "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",
+      "action": "Buchstaben-Rahmen werden ihrer Validität nach eingefärbt.",
+      "expectation": "Ein falscher Buchstabe wird mit einem roten Rahmen gekennzeichnet.",
+      "testPic": "feedback -- should show wrong_letter.png"
+    }
+  ]
 }
