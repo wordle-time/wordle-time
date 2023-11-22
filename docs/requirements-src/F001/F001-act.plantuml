@@ -2,9 +2,11 @@
 <style file=plantStyle.css>
 title "Worteingabe"
 
+|Backend|
 |Frontend|
 |Spieler|
 
+|Spieler|
 start
 :Spiel öffnen;
 repeat
@@ -30,6 +32,12 @@ repeat
     endif
     |Spieler|
 repeat while(Spieler möchte weiteren Buchstaben eingeben) is (Ja) not (Nein)
+:"Guess"-Knopf anklicken;
+|Frontend|
+:Rateversuch an Backend senden;
+|Backend|
+:Rateversuch empfangen;
+:Rateversuch validieren;
 end
 
 @enduml

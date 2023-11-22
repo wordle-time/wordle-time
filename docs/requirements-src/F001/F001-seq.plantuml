@@ -3,6 +3,7 @@ title "Worteingabe"
 
 actor "Spieler" as user
 boundary "Frontend" as frontend
+boundary "Backend" as backend
 
 activate user
 user -> frontend: Spiel öffnen
@@ -12,6 +13,7 @@ loop 5 Mal
     user -> frontend: Buchstabe eingeben
     user <- frontend: Buchstabe anzeigen
 end
-deactivate frontend
-deactivate user
+user -> frontend: "Guess"-Knopf anklicken
+frontend -> backend: Rateversuch senden
+backend -> backend: Rateversuch validieren
 @enduml

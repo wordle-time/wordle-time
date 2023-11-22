@@ -2,5 +2,19 @@
 <style file=plantStyle.css>
 title "Feedback-Mechanismus"
 
-Bob -> Alice : hello
+|Backend|
+|Frontend|
+|Spieler|
+
+|Backend|
+start
+:Ergebnis der Rateversuch-Validierung senden;
+|Frontend|
+:Ergebnis der Rateversuch-Validierung empfangen;
+:Buchstaben-Rahmen Farben entsprechend validität zuweisen;
+:Buchstaben-Rahmen anzeigen;
+|Spieler|
+:Buchstaben-Rahmen ansehen und validität verstehen;
+end
+
 @enduml

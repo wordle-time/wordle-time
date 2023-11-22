@@ -1,5 +1,17 @@
 @startuml F002_seq
 title "Feedback-Mechanismus"
 
-Bob -> Alice : hello
+boundary "Backend" as backend
+boundary "Frontend" as frontend
+actor "Spieler" as user
+
+activate backend
+activate frontend
+activate user
+
+backend -> frontend: Ergebnis der Rateversuch-Validierung senden
+deactivate backend
+frontend -> frontend: Buchstaben-Rahmen Farben entsprechend validität zuweisen
+frontend -> user: Buchstaben-Rahmen anzeigen
+user -> user: Buchstaben-Rahmen ansehen und validität verstehen
 @enduml
