@@ -8,7 +8,7 @@
     "Ich sehe Farbcodes oder Symbole, die den Status meiner Eingabe anzeigen.",
     "Das Feedback ist konsistent und leicht verständlich."
   ],
-  "test-cases": [
+  "testCases": [
     {
       "name": "Testfall 1",
       "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",

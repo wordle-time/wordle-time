@@ -3,7 +3,7 @@ import shutil
 import json
 
 docs_path = Path.cwd().joinpath("docs")
-requirements_output_path = docs_path.joinpath("requirements")
+requirements_output_path = docs_path.joinpath(".requirements")
 requirements_output_path.mkdir(exist_ok=True)
 
 requirements_src_path = docs_path.joinpath("requirements-src")
@@ -37,7 +37,7 @@ def json_dict_to_md(json_dict):
 
     
 
-    if json_dict['test-cases']:
+    if json_dict['testCases']:
         def testcase_dict_to_md(testcase_dict):
             test_case_lines = [
                 "",
@@ -49,7 +49,7 @@ def json_dict_to_md(json_dict):
                 "",
                 f"**Erwartetes Ergebnis:** {testcase_dict['expectation']}",
                 "",
-                f"![{testcase_dict['name']}]({testcase_dict['test-pic']})"
+                f"![{testcase_dict['name']}]({testcase_dict['testPic']})"
             ]
 
             return "\n".join(test_case_lines)
@@ -59,7 +59,7 @@ def json_dict_to_md(json_dict):
             "## Testfälle"
         ]
 
-        for testcase_dict in json_dict['test-cases']:
+        for testcase_dict in json_dict['testCases']:
             test_cases_lines.append(testcase_dict_to_md(testcase_dict))
 
         full_text += "\n".join(test_cases_lines)

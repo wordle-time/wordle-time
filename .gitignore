@@ -49,3 +49,5 @@ apps/wordle-time-backend/docs/.swagger-codegen/VERSION
 /plantuml-release.jar
 
 .nx/cache
+
+/docs/.requirements

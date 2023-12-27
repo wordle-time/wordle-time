@@ -8,7 +8,7 @@
     "Die Anzahl der Versuche wird korrekt gezählt.",
     "Ich sehe deutlich, wie viele Versuche mir noch bleiben."
   ],
-  "test-cases": [
+  "testCases": [
     {
       "name": "Testfall 1",
       "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",

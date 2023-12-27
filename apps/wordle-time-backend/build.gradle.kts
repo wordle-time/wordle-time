@@ -78,7 +78,7 @@ application {
 }
 
 tasks.processResources {
-  from("../../docs/requirements") {
+  from("../../docs/.requirements") {
     into("requirements/")
     exclude("**/*.md")
     exclude("**/*.pdf")
