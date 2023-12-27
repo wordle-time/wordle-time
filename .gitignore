@@ -47,3 +47,5 @@ apps/wordle-time-backend/docs/.swagger-codegen/VERSION
 
 # PlantUML
 /plantuml-release.jar
+
+.nx/cache
