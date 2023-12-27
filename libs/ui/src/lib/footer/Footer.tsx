@@ -24,10 +24,6 @@ export default component$(() => (
         {renderSection("Dokumentation", [
           { href: "/design", text: "Designentscheidungen" },
           { href: "/glossary", text: "Glossar" },
-          { href: "/non-goals", text: "Nicht-Ziele" },
-        ])}
-        {renderSection("Support", [
-          { href: "/api-spec", text: "API Spezifikation" },
           { href: "/requirements", text: "Anforderungen" },
         ])}
         {renderSection("Kontakt", [
