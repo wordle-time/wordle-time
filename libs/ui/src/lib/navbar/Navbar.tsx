@@ -61,32 +61,46 @@ export default component$(() => {
               <div class="hidden sm:ml-6 sm:block">
                 <NavigationItem href="/" text="Home" closePanel$={closePanel$} />
                 <NavigationItem href="/game" text="Game" closePanel$={closePanel$} />
-                <NavigationItem href="/docs" text="Docs" closePanel$={closePanel$} />
+                <NavigationItem href="/docs/glossary" text="Glossary" closePanel$={closePanel$} />
+                <NavigationItem href="/docs/design" text="Designchoises" closePanel$={closePanel$} />
+                <NavigationItem href="/docs/requirements" text="Requirements" closePanel$={closePanel$} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {isHamburgerOpen.value && (
-        <div class="sm:hidden flex flex-col h-screen" id="mobile-menu">
-          <NavigationItem
-            href="/"
-            text="Home"
-            closePanel$={closePanel$}
-          />
-          <NavigationItem
-            href="/game"
-            text="Game"
-            closePanel$={closePanel$}
-          />
-          <NavigationItem
-            href="/docs"
-            text="Docs"
-            closePanel$={closePanel$}
-          />
-        </div>
-      )}
-    </nav>
+      {
+        isHamburgerOpen.value && (
+          <div class="sm:hidden flex flex-col h-screen" id="mobile-menu">
+            <NavigationItem
+              href="/"
+              text="Home"
+              closePanel$={closePanel$}
+            />
+            <NavigationItem
+              href="/game"
+              text="Game"
+              closePanel$={closePanel$}
+            />
+            <NavigationItem
+              href="/docs/glossary"
+              text="Glossary"
+              closePanel$={closePanel$}
+            />
+            <NavigationItem
+              href="/docs/design"
+              text="Designchoises"
+              closePanel$={closePanel$}
+            />
+            <NavigationItem
+              href="/docs/requirements"
+              text="Requirements"
+              closePanel$={closePanel$}
+            />
+          </div>
+        )
+      }
+    </nav >
   );
 });
