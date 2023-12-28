@@ -1,27 +1,29 @@
-import { component$, useStylesScoped$, useVisibleTask$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 import { Link, type DocumentHead } from '@builder.io/qwik-city';
-import { animate, spring } from 'motion';
 import Letter from '../components/letter/letter';
-import { ILetterState } from '@wordle-time/models';
 
+const getRandomLetterStateString = () => {
+  const states = ['CorrectSpot', 'WrongSpot', 'WrongLetter', 'Undefined'];
+  return states[Math.floor(Math.random() * states.length)];
+}
 
 export default component$(() => {
   return (
     <div class="grid-rows-3">
       <div class="h-[30vh] text-center flex-row justify-center items-center">
         <div class="p-4 ">
-          <Letter letterState={"CorrectSpot"} letter='W'  />
-          <Letter letterState={ILetterState.CorrectSpot} letter='O'  />
-          <Letter letterState={ILetterState.CorrectSpot} letter='R'  />
-          <Letter letterState={ILetterState.CorrectSpot} letter='D'  />
-          <Letter letterState={ILetterState.CorrectSpot} letter='L'  />
-          <Letter letterState={ILetterState.CorrectSpot} letter='E'  />
-</div>
-<div class="p-4">
-          <Letter letterState={ILetterState.WrongSpot} letter='T'  />
-          <Letter letterState={ILetterState.WrongSpot} letter='I'  />
-          <Letter letterState={ILetterState.WrongSpot} letter='M'  />
-          <Letter letterState={ILetterState.Undefined} letter='E'  />
+          <Letter letterState={getRandomLetterStateString()} letter='W' />
+          <Letter letterState={getRandomLetterStateString()} letter='O' />
+          <Letter letterState={getRandomLetterStateString()} letter='R' />
+          <Letter letterState={getRandomLetterStateString()} letter='D' />
+          <Letter letterState={getRandomLetterStateString()} letter='L' />
+          <Letter letterState={getRandomLetterStateString()} letter='E' />
+        </div>
+        <div class="p-4">
+          <Letter letterState={getRandomLetterStateString()} letter='T' />
+          <Letter letterState={getRandomLetterStateString()} letter='I' />
+          <Letter letterState={getRandomLetterStateString()} letter='M' />
+          <Letter letterState={getRandomLetterStateString()} letter='E' />
         </div>
         <h2 class="text-4xl">Can you guess the word of the day?</h2>
       </div>
