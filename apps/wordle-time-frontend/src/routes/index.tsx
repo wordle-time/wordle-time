@@ -11,6 +11,7 @@ export default component$(() => {
   return (
     <div class="grid-rows-3">
       <div class="h-[30vh] text-center flex-row justify-center items-center">
+        <h2 class="text-4xl py-10">Can you guess the word of the day?</h2>
         <div class="p-4 ">
           <Letter letterState={getRandomLetterStateString()} letter='W' />
           <Letter letterState={getRandomLetterStateString()} letter='O' />
@@ -25,13 +26,12 @@ export default component$(() => {
           <Letter letterState={getRandomLetterStateString()} letter='M' />
           <Letter letterState={getRandomLetterStateString()} letter='E' />
         </div>
-        <h2 class="text-4xl">Can you guess the word of the day?</h2>
       </div>
-      <div class="h-[50vh] text-center pt-20">
-        <h3>The word to guess changes daily, giving players a new challenge every day.</h3>
-        <h4>How to Play?</h4>
-        <p>Letter Input: The player inputs a letter, and the server responds with one of three possible clues:</p>
-        <ul class="list-disc list-inside">
+      <div class="h-[50vh] text-center md:pt-40">
+        <h3 class="text-2xl " >The word to guess changes daily, giving players a new challenge every day.</h3>
+        <h4 class="text-xl py-4">How to Play?</h4>
+        <p>The player inputs a letter, and the server responds with one of three possible clues:</p>
+        <ul class="list-disc list-inside py-2">
           <li>The letter is present in the word.</li>
           <li>The letter is in the correct position in the word.</li>
           <li>The letter is not in the word at all.</li>
