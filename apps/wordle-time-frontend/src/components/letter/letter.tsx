@@ -33,7 +33,7 @@ export default component$<LetterProps>((props) => {
         onFocus$={(evt) => {
           (evt.target as HTMLInputElement).select();
         }}
-        placeholder={previewChars[props.index]}
+        placeholder={previewChars[props.index || 0]}
         id={'letter-' + props.index}
         class={[
           'w-8',
@@ -63,10 +63,12 @@ export default component$<LetterProps>((props) => {
         value={props.letter}
         maxLength={1}
         onInput$={(evt) => {
-          props.onLetterChange(
-            props.index,
-            (evt.target as HTMLInputElement).value
-          );
+          if (props.onLetterChange) {
+            props.onLetterChange(
+              props.index || 0,
+              (evt.target as HTMLInputElement).value
+            );
+          }
         }}
       />
     </>
