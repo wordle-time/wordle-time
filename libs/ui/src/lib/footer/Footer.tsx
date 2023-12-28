@@ -22,9 +22,9 @@ export default component$(() => (
           </p>
         </div>
         {renderSection("Dokumentation", [
-          { href: "/design", text: "Designentscheidungen" },
-          { href: "/glossary", text: "Glossar" },
-          { href: "/requirements", text: "Anforderungen" },
+          { href: "/docs/design", text: "Designentscheidungen" },
+          { href: "/docs/glossary", text: "Glossar" },
+          { href: "/docs/requirements", text: "Anforderungen" },
         ])}
         {renderSection("Kontakt", [
           { href: "https://discord.gg/PRyZGKPB", text: "Discord" },
