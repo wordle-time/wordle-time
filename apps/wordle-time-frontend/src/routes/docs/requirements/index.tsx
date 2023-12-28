@@ -7,7 +7,7 @@ import {
 import fetch from 'node-fetch';
 
 export const useRequirements = routeLoader$<IRequirement[]>(async () => {
-  const res = await fetch('http://localhost:8090/api/requirements');
+  const res = await fetch('http://127.0.0.1:8090/api/requirements');
   return ((await res.json()) as IRequirements).requirements;
 });
 

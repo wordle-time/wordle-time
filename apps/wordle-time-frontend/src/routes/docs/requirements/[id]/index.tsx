@@ -5,7 +5,7 @@ import { IRequirement } from '@wordle-time/models';
 export const useRequirement = routeLoader$<IRequirement>(
   async ({ params, redirect }) => {
     const res = await fetch(
-      'http://localhost:8090/api/requirements/' + params.id
+      'http://127.0.0.1:8090/api/requirements/' + params.id
     );
 
     if (!res.ok) {
