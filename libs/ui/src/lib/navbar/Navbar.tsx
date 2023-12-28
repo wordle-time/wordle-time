@@ -4,7 +4,7 @@ import NavigationItem from './Navigation-item';
 
 export default component$(() => {
   const isHamburgerOpen = useSignal(false);
-  const closePanel$ = $(() => isHamburgerOpen.value = false); 
+  const closePanel$ = $(() => isHamburgerOpen.value = false);
 
   return (
     <nav class="from-ctp-surface0 to-ctp-base bg-gradient-to-b">
@@ -59,8 +59,9 @@ export default component$(() => {
             <div class="flex flex-shrink-0 items-center">
               <Icon />
               <div class="hidden sm:ml-6 sm:block">
-                <NavigationItem href="/" text="Home" closePanel$={closePanel$}/>
-                <NavigationItem href="/game" text="Game" closePanel$={closePanel$}/>
+                <NavigationItem href="/" text="Home" closePanel$={closePanel$} />
+                <NavigationItem href="/game" text="Game" closePanel$={closePanel$} />
+                <NavigationItem href="/docs" text="Docs" closePanel$={closePanel$} />
               </div>
             </div>
           </div>
@@ -77,6 +78,11 @@ export default component$(() => {
           <NavigationItem
             href="/game"
             text="Game"
+            closePanel$={closePanel$}
+          />
+          <NavigationItem
+            href="/docs"
+            text="Docs"
             closePanel$={closePanel$}
           />
         </div>
