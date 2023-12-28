@@ -27,7 +27,7 @@ export default component$(() => {
         </div>
         <h2 class="text-4xl">Can you guess the word of the day?</h2>
       </div>
-      <div class="h-[50vh] text-center">
+      <div class="h-[50vh] text-center pt-20">
         <h3>The word to guess changes daily, giving players a new challenge every day.</h3>
         <h4>How to Play?</h4>
         <p>Letter Input: The player inputs a letter, and the server responds with one of three possible clues:</p>
