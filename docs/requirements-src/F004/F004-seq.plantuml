@@ -1,5 +1,13 @@
 @startuml F004_seq
 title "Tägliches Wort"
 
-Bob -> Alice : hello
+boundary "Frontend" as frontend
+boundary "Backend" as backend
+
+frontend -> backend: Rateversuch senden
+alt Word-Container nicht valide
+    backend -> backend: Neuen Word-Container erzeugen und speichern
+end
+backend -> backend: GuessResult erzeugen
+frontend <-- backend: GuessResult übermitteln
 @enduml
