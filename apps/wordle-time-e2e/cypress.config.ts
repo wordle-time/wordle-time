@@ -5,5 +5,7 @@ export default defineConfig({
   e2e: {
     ...nxE2EPreset(__dirname),
     screenshotsFolder: '../../docs/requirements-src/',
+    viewportWidth: 1920,
+    viewportHeight: 1080,
   },
 });
