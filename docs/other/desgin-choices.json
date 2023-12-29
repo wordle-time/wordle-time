@@ -3,11 +3,23 @@
     {
       "title": "NX",
       "description": "Das Projekt verwendet das _NX_-Entwicklungs-Framework für die Verwaltung des _Monorepo_, der Codegenerierung und der Build- und Test-Workflows.",
-      "reason": [
-        "_Monorepo_-Verwaltung: _NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet.",
-        "Codegenerierung: _NX_ bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von _Scaffold_ für neue _Komponenten_, _Services_ und _Libraries_.",
-        "Build- und Test-Workflows: _NX_ vereinfacht die Konfiguration von Build- und Test-Workflows für das gesamte _Monorepo_, einschließlich der Integration von _Cypress_ für Tests für die Verwendung in einer Continuous-Integration/Continuous-Delivery-Pipeline (_CI/CD_).",
-        "Skalierbarkeit: _NX_ ermöglicht es eine _monolithische Architektur_ für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das _Monorepo_ sowohl das _Frontend_ als auch das _Backend_ der _Anwendung_, sowie _E2E-Tests_."
+      "reasons": [
+        {
+          "type": "Monorepo-Verwaltung",
+          "reason": "_NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet."
+        },
+        {
+          "type": "Codegenerierung",
+          "reason": "_NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet."
+        },
+        {
+          "type": "Build- und Test-Workflows",
+          "reason": "_NX_ vereinfacht die Konfiguration von Build- und Test-Workflows für das gesamte _Monorepo_, einschließlich der Integration von _Cypress_ für Tests für die Verwendung in einer Continuous-Integration/Continuous-Delivery-Pipeline (_CI/CD_)."
+        },
+        {
+          "type": "Skalierbarkeit",
+          "reason": "_NX_ ermöglicht es eine _monolithische Architektur_ für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das _Monorepo_ sowohl das _Frontend_ als auch das _Backend_ der _Anwendung_, sowie _E2E-Tests_."
+        }
       ]
     }
   ]
