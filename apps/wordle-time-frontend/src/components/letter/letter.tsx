@@ -62,14 +62,22 @@ export default component$<LetterProps>((props) => {
         ]}
         value={props.letter}
         maxLength={1}
+        pattern='[A-Za-z]'
+        required={true}
+        title="Three letter country code"
         onInput$={(evt) => {
+          const input = evt.target as HTMLInputElement;
+          if (!input.value.match(/[A-Za-z]/)) {
+            input.value = '';
+          }
           if (props.onLetterChange) {
             props.onLetterChange(
               props.index || 0,
               (evt.target as HTMLInputElement).value
             );
           }
-        }}
+        }
+        }
       />
     </>
   );
