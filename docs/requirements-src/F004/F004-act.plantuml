@@ -2,5 +2,20 @@
 <style file=plantStyle.css>
 title "Tägliches Wort"
 
-Bob -> Alice : hello
+|Frontend|
+:Rateversuch an Backend senden;
+|Backend|
+:Rateversuch empfangen;
+group Rateversuch validieren
+    if(Wort-Container für heutigen Tag valide) then (Ja)
+    else (Nein)
+        :Neuen Wort-Container anfordern und speichern;
+    endif
+    :Wort aus Rateversuch mit validem Wort-Container vergleichen;
+    :GuessResult erzeugen;
+end group
+:GuessResult an Client zurückschicken;
+|Frontend|
+:GuessResult empfangen;
+end
 @enduml
