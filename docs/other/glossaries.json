@@ -1,7 +1,7 @@
 {
   "glossaries": [
     {
-      "title": "Anwendung",
+      "name": "Anwendung",
       "description": "Eine _Anwendung_ ist eine Software, die eine bestimmte Funktionalität bereitstellt. Eine _Anwendung_ kann aus mehreren _Komponenten_ bestehen, z. B. einem _Frontend_, einem _Backend_ und einer _Datenbank_."
     },
     {
