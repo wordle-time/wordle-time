@@ -22,7 +22,8 @@
     },
     "ghcr.io/rocker-org/devcontainer-features/pandoc:latest": {
       "version": "latest"
-    }
+    },
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [
