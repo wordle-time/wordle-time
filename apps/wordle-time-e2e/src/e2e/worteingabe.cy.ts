@@ -8,7 +8,10 @@ describe(error_group, () => {
 
   const wrong_char_test = 'should disable guess button if wrong char';
   it(wrong_char_test, () => {
-    // wait for loading screen to disappear
+    // wait for loading screen to disappear and set timeout to 10s
+    cy.get('[data-cy="loading-message"]', { timeout: 15_000 }).should(
+      'not.exist'
+    );
     // if wrong char is entered, guess button should be disabled && input field should be empty
     cy.get('[data-cy="letter-0"]').should('exist');
     cy.get('[data-cy="letter-0"]').clear();
