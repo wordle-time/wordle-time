@@ -35,7 +35,7 @@ export default component$(() => {
       xmlns="http://www.w3.org/2000/svg"
       style="transition: transform 0.1s linear;"
     >
-      <g fill="none" stroke="currentColor" strokeWidth="1.5">
+      <g fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M41.761 21.1302H41.751V21.1402H41.761V21.1302Z" fill="#7FA768" />
         <path d="M41.751 22.6515V58.1213H54.6218C56.5534 58.1213 58.1247 56.57 58.1247 54.6584V40.3163V22.7316L41.751 22.6515Z" fill="#6AAA64" />
         <path d="M57.5542 7.22854V19.719L41.771 19.649L41.8411 3.8457H54.1714C56.033 3.8457 57.5542 5.36698 57.5542 7.22854Z" fill="white" />
