@@ -4,104 +4,13 @@ title: Design Entscheidungen
 
 # Design Entscheidungen
 
-## Verwendung von NX
-
-Das Projekt verwendet das _NX_ - Entwicklungs - Framework für die Verwaltung des _Monorepo_, der Codegenerierung und der Build - und Test - Workflows.
-
-**Begründung**:
-Die Verwendung von _NX_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- _Monorepo_ - Verwaltung: _NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet.
-- Codegenerierung: _NX_ bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von _Scaffold_ für neue _Komponenten_, _Services_ und _Libraries_.
-- Build - und Test - Workflows: _NX_ vereinfacht die Konfiguration von Build - und Test - Workflows für das gesamte _Monorepo_, einschließlich der Integration von _Cypress_ für Tests für die Verwendung in einer Continuous - Integration / Continuous - Delivery - Pipeline(_CI / CD_).
-- Skalierbarkeit: _NX_ ermöglicht es eine _monolithische Architektur_ für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet.Im Rahmen unseres Projekts beinhaltet das _Monorepo_ sowohl das _Frontend_ als auch das _Backend_ der _Anwendung_, sowie _E2E - Tests_.
-
-## Verwendung von Client Server
-
-Die _Client - Server - Architektur_ wird für die Implementierung der _Anwendung_ verwendet.
-
-** Begründung **:
-Die Verwendung der _Client - Server - Architektur_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Skalierbarkeit: Durch die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ kann jeder Teil der _Anwendung_ unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen.
-- Sicherheit: Die Verwendung einer _Client - Server - Architektur_ ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der _Backend_ - Seite zu implementieren, um die _Anwendung_ vor Angriffen zu schützen.Wir können somit beispielsweise dem \_Veranstalter_eines Events mehr Rechte geben als einem Teilnehmer.
-- Wiederverwendbarkeit: Die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ ermöglicht es, die Wiederverwendung von _Komponenten_ besser zu organisieren.In unserem Projekt werden _Frontend_ - _Komponenten_ nur im _Frontend_ wiederverwendet und _Backend_ - Komponenten nur im _Backend_ wiederverwendet.
-
-## Verwendung eines RESTful - Webservices
-
-Die _Anwendung_ verwendet _RESTful - Webservices_ zur Kommunikation zwischen dem _Frontend_ und dem _Backend_.
-
-** Begründung **:
-Die Verwendung eines _RESTful - Webservices_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Interoperabilität: _RESTful - Webservices_ verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein _Angular_ _Frontend_(geschrieben _TypeScript_) mit einem _Java_ _Backend_ kommunizieren.
-- Skalierbarkeit: _RESTful - Webservices_ ermöglichen die Skalierung der _Anwendung_, indem sie das _Frontend_ und das _Backend_ entkoppeln und es dem _Backend_ ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten.Unabhängig davon wie viele Clients das _Frontend_ der Party Time _Anwendung_ verwenden, kann das _Backend_ die Anfragen verarbeiten.
-- Einfachheit: _RESTful - Webservices_ sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren.
-
 ## Verwendung von Kotlin
 
 ## Verwendung von Gradle
 
-## Verwendung von Single - Page - Anwendung
-
-Das Projekt implementiert eine Single - Page - Anwendungen(_SPA_) - Architektur für das Frontend.
-
-** Begründung **:
-Die Verwendung von einer _SPA_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Trennung des _Frontend_ vom _Backend_, was die Wartbarkeit erhöht und die Entwicklung erleichtert.Die _SPA_ kann unabhängig vom _Backend_ entwickelt werden, solange die Schnittstellen zwischen _Frontend_ und _Backend_ definiert sind.In diesem Projekt werden die Schnittstellen mit _Swagger_ definiert.
-- Verbesserte Benutzererfahrung, da das Laden und Navigieren zwischen den Seiten nicht zu vollständigen Neuladungen führt, ist die _Anwendung_ reaktionsschneller und bietet eine flüssige Benutzererfahrung.
-
 ## Verwendung von Qwik
 
 ## Verwendung von PNPM(Node Package Manager)
-
-## Verwendung von Cypress
-
-Das Projekt verwendet das _Cypress_ - Testing - Framework für die Automatisierung von _E2E - Tests_ im _Frontend_.
-
-** Begründung **:
-Die Verwendung von _Cypress_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Integration: _Cypress_ lässt sich nahtlos in die Continuous - Integration / Continuous - Delivery - Pipeline des Projekts integrieren und ermöglicht es dem Team, automatisierte Tests zu erstellen und auszuführen, bevor Code übernommen wird.
-- Dokumentation: Im Verlauf von _Cypress_ Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen.Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens im Bezug auf die in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht.
-
-## Verwendung von Tailwind CSS
-
-Das Projekt verwendet das _Tailwind CSS_ Framework für die Gestaltung des Frontends._Tailwind CSS_ ist ein Utility - First CSS - Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.
-
-** Begründung **:
-Die Verwendung von _Tailwind CSS_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Effizienz: _Tailwind CSS_ bietet eine Vielzahl von vordefinierten Utility - Klassen.
-- Flexibilität: _Tailwind CSS_ ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS - Regeln schreiben zu müssen.
-- Responsivität: _Tailwind CSS_ verfolgt den Mobile - First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte.
-- Design: Einheitliches Design für alle _Frontend_ - Komponenten der Party Time Plattform.
-
-## Verwendung von GitHub
-
-Das Projekt verwendet _GitHub_ als Code - Repository und Kollaborationsplattform für _Issue_ - Tracking.
-
-** Begründung **:
-Die Verwendung von _GitHub_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Kollaboration: _GitHub_ bietet eine benutzerfreundliche und intuitive Plattform für die Zusammenarbeit zwischen Entwicklern, die es einfach macht, Code zu teilen, zu kommentieren und zusammenzuarbeiten.
-- Versionskontrolle: _GitHub_ bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen.
-- Code - Review: _GitHub_ bietet eine integrierte Code - Review - Funktion, die es Entwicklern ermöglicht, den Code zu überprüfen und Feedback zu geben.
-- Integrationen: _GitHub_ bietet Integrationen mit einer Vielzahl von Tools und Services, welche die Entwicklung und Wartung der Party Time Plattform erleichtern, wie z.B.Continuous Integration / Continuous Deployment(_CI / CD_) Tools und _NX_.
-
-## Verwendung von PlantUML
-
-Das Projekt verwendet _PlantUML_ als Werkzeug für die Erstellung von UML - Diagrammen.
-
-** Begründung **:
-Die Verwendung von _PlantUML_ bietet mehrere Vorteile für das Projekt, einschließlich:
-
-- Einfache Syntax: _PlantUML_ verwendet eine einfache, textbasierte Syntax, um UML - Diagramme zu erstellen.
-
-- Flexibilität: _PlantUML_ unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen.In diesem Projekt wird mit _PlantUML_ das Datenbankschema der _Anwendung_ modelliert, sowie mit Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben.
-- Integration: _PlantUML_ kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs, CI / CD - Pipelines oder Dokumentationsprozesse.
-- Export: _PlantUML_ bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei.In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden.
 
 ## Verwendung von Swagger
 
@@ -114,3 +23,5 @@ Die Verwendung von _PlantUML_ bietet mehrere Vorteile für das Projekt, einschli
 ## Verwendung von LocalStorage
 
 ## Verwendung von Cookie
+
+## Verwendung von SSR

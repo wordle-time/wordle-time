@@ -24,7 +24,7 @@ fun VersionCatalogBuilder.addCommon(alias: String, commonGroup: String, version:
 dependencyResolutionManagement {
   versionCatalogs {
     val coroutineVersion = "1.7.3"
-    val ktorVersion = "2.3.4"
+    val ktorVersion = "2.3.7"
 
     create("libs") {
       //Server - ktor
@@ -45,12 +45,12 @@ dependencyResolutionManagement {
       )
 
       //Swagger Codegen
-      val swagger = version("swagger", "1.0.42")
+      val swagger = version("swagger", "1.0.45")
       library(swagger, "io.swagger.codegen.v3", "swagger-codegen-generators").versionRef(swagger)
 
       //DI - Kodein
       addCommon(
-        "kodein", "org.kodein.di", "7.20.2", listOf(
+        "kodein", "org.kodein.di", "7.21.1", listOf(
           "kodein-di", "kodein-di-framework-ktor-server-jvm"
         )
       )
@@ -64,11 +64,11 @@ dependencyResolutionManagement {
 
       //Logging - log4j2
       addCommon(
-        "log4j2", "org.apache.logging.log4j", "2.20.0", listOf(
+        "log4j2", "org.apache.logging.log4j", "2.22.1", listOf(
           "log4j", "log4j-api", "log4j-core", "log4j-slf4j2-impl"
         )
       )
-      val jackson = version("jackson", "2.15.2")
+      val jackson = version("jackson", "2.16.1")
       library(
         "jacksonDataformatYaml",
         "com.fasterxml.jackson.dataformat",
@@ -81,7 +81,7 @@ dependencyResolutionManagement {
       ).versionRef(jackson)
 
       //Logging - kotlin-logging
-      val kotlinLogging = version("kotlinLogging", "5.1.0")
+      val kotlinLogging = version("kotlinLogging", "6.0.1")
       library(kotlinLogging, "io.github.oshai", "kotlin-logging").versionRef(kotlinLogging)
 
       //Parallel Processing - coroutines
@@ -92,13 +92,13 @@ dependencyResolutionManagement {
     create("testLibs") {
       // Testing - kotlin-test-junit5
       addCommon(
-        "junit", "org.junit.jupiter", "5.10.0", listOf(
+        "junit", "org.junit.jupiter", "5.10.1", listOf(
           "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
         )
       )
 
       // Testing - JUnit Platform launcher
-      val junitPlatformLauncher = version("junitPlatformLauncher", "1.10.0")
+      val junitPlatformLauncher = version("junitPlatformLauncher", "1.10.1")
       library(junitPlatformLauncher, "org.junit.platform", "junit-platform-launcher").versionRef(junitPlatformLauncher)
 
       // Testing - ktor-host
@@ -109,7 +109,7 @@ dependencyResolutionManagement {
       )
 
       //Mocking - mockk
-      val mockk = version("mockk", "1.13.5")
+      val mockk = version("mockk", "1.13.8")
       library("mockk", "io.mockk", "mockk").versionRef(mockk)
 
       //Parallel Processing - coroutines

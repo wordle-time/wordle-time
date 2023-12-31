@@ -10,7 +10,7 @@
         },
         {
           "type": "Codegenerierung",
-          "reason": "_NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet."
+          "reason": "_NX_ bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von _Scaffold_ für neue _Komponenten_, _Services_ und _Libraries_."
         },
         {
           "type": "Build- und Test-Workflows",
@@ -19,6 +19,154 @@
         {
           "type": "Skalierbarkeit",
           "reason": "_NX_ ermöglicht es eine _monolithische Architektur_ für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das _Monorepo_ sowohl das _Frontend_ als auch das _Backend_ der _Anwendung_, sowie _E2E-Tests_."
+        }
+      ]
+    },
+    {
+      "title": "Client Server",
+      "description": "Die _Client - Server - Architektur_ wird für die Implementierung der _Anwendung_ verwendet.",
+      "reasons": [
+        {
+          "type": "Skalierbarkeit",
+          "reason": "Durch die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ kann jeder Teil der _Anwendung_ unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen."
+        },
+        {
+          "type": "Sicherheit",
+          "reason": "Die Verwendung einer _Client - Server - Architektur_ ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der _Backend_ - Seite zu implementieren, um die _Anwendung_ vor Angriffen zu schützen.Wir können somit beispielsweise dem _Veranstalter_eines Events mehr Rechte geben als einem Teilnehmer."
+        },
+        {
+          "type": "Wiederverwendbarkeit",
+          "reason": "Die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ ermöglicht es, die Wiederverwendung von _Komponenten_ besser zu organisieren.In unserem Projekt werden _Frontend_ - _Komponenten_ nur im _Frontend_ wiederverwendet und _Backend_ - Komponenten nur im _Backend_ wiederverwendet."
+        }
+      ]
+    },
+    {
+      "title": "RESTful - Webservices",
+      "description": "Die _Anwendung_ verwendet _RESTful - Webservices_ zur Kommunikation zwischen dem _Frontend_ und dem _Backend_.",
+      "reasons": [
+        {
+          "type": "Interoperabilität",
+          "reason": "_RESTful - Webservices_ verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein _Angular_ _Frontend_(geschrieben _TypeScript_) mit einem _Java_ _Backend_ kommunizieren."
+        },
+        {
+          "type": "Skalierbarkeit",
+          "reason": " _RESTful - Webservices_ ermöglichen die Skalierung der _Anwendung_, indem sie das _Frontend_ und das _Backend_ entkoppeln und es dem _Backend_ ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten.Unabhängig davon wie viele Clients das _Frontend_ der Party Time _Anwendung_ verwenden, kann das _Backend_ die Anfragen verarbeiten."
+        },
+        {
+          "type": "Einfachheit",
+          "reason": "_RESTful - Webservices_ sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren."
+        }
+      ]
+    },
+    {
+      "title": "PlantUML",
+      "description": "Das Projekt verwendet _PlantUML_ als Werkzeug für die Erstellung von UML - Diagrammen.",
+      "reasons": [
+        {
+          "type": "Einfache Syntax",
+          "reason": "_PlantUML_ verwendet eine einfache, textbasierte Syntax, um UML - Diagramme zu erstellen."
+        },
+        {
+          "type": "Flexibilität",
+          "reason": "_PlantUML_ unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen.In diesem Projekt wird mit _PlantUML_ das Datenbankschema der _Anwendung_ modelliert, sowie mit Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
+        },
+        {
+          "type": "Integration",
+          "reason": "_PlantUML_ kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs, CI / CD - Pipelines oder Dokumentationsprozesse."
+        },
+        {
+          "type": "Export",
+          "reason": "_PlantUML_ bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei.In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
+        }
+      ]
+    },
+    {
+      "title": "GitHub",
+      "description": "Das Projekt verwendet _GitHub_ als Code - Repository und Kollaborationsplattform für _Issue_ - Tracking.",
+      "reasons": [
+        {
+          "type": "Kollaboration",
+          "reason": "_GitHub_ bietet eine benutzerfreundliche und intuitive Plattform für die Zusammenarbeit zwischen Entwicklern, die es einfach macht, Code zu teilen, zu kommentieren und zusammenzuarbeiten."
+        },
+        {
+          "type": "Versionskontrolle",
+          "reason": "_GitHub_ bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen."
+        },
+        {
+          "type": "Code - Review",
+          "reason": "_GitHub_ bietet eine integrierte Code - Review - Funktion, die es Entwicklern ermöglicht, den Code zu überprüfen und Feedback zu geben."
+        },
+        {
+          "type": "Issue - Tracking",
+          "reason": "_GitHub_ bietet eine integrierte _Issue_ - Tracking - Funktion, die es Entwicklern ermöglicht, _Issues_ zu erstellen, zu kommentieren und zu verfolgen."
+        }
+      ]
+    },
+    {
+      "title": "Tailwind CSS",
+      "description": "Das Projekt verwendet das _Tailwind CSS_ Framework für die Gestaltung des Frontends._Tailwind CSS_ ist ein Utility - First CSS - Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.",
+      "reasons": [
+        {
+          "type": "Effizienz",
+          "reason": "_Tailwind CSS_ bietet eine Vielzahl von vordefinierten Utility - Klassen."
+        },
+        {
+          "type": "Flexibilität",
+          "reason": "_Tailwind CSS_ ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS - Regeln schreiben zu müssen."
+        },
+        {
+          "type": "Responsivität",
+          "reason": "_Tailwind CSS_ verfolgt den Mobile - First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte."
+        },
+        {
+          "type": "Design",
+          "reason": "Einheitliches Design für alle _Frontend_ - Komponenten der Party Time Plattform."
+        }
+      ]
+    },
+    {
+      "title": "Cypress",
+      "description": "Das Projekt verwendet das _Cypress_ - Testing - Framework für die Automatisierung von _E2E - Tests_ im _Frontend_.",
+      "reasons": [
+        {
+          "type": "Integration",
+          "reason": " _Cypress_ lässt sich nahtlos in die Continuous - Integration / Continuous - Delivery - Pipeline des Projekts integrieren und ermöglicht es dem Team, automatisierte Tests zu erstellen und auszuführen, bevor Code übernommen wird."
+        },
+        {
+          "type": "Dokumentation",
+          "reason": "Im Verlauf von _Cypress_ Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen.Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens im Bezug auf die in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht."
+        }
+      ]
+    },
+    {
+      "title": "Single - Page - Anwendung",
+      "description": "Das Projekt implementiert eine Single - Page - Anwendungen(_SPA_) - Architektur für das Frontend.",
+      "reasons": [
+        {
+          "type": "Trennung des _Frontend_ vom _Backend_",
+          "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert.Die _SPA_ kann unabhängig vom _Backend_ entwickelt werden, solange die Schnittstellen zwischen _Frontend_ und _Backend_ definiert sind.In diesem Projekt werden die Schnittstellen mit _Swagger_ definiert."
+        },
+        {
+          "type": "Verbesserte Benutzererfahrung",
+          "reason": "Laden und Navigieren zwischen den Seiten nicht zu vollständigen Neuladungen führt, ist die _Anwendung_ reaktionsschneller und bietet eine flüssige Benutzererfahrung."
+        }
+      ]
+    },
+    {
+      "title": "",
+      "description": "",
+      "reasons": [
+        {
+          "type": "",
+          "reason": ""
+        },
+        {
+          "type": "",
+          "reason": ""
+        },
+        {
+          "type": "",
+          "reason": ""
         }
       ]
     }

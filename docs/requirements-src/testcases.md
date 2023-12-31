@@ -1,0 +1,19 @@
+- nach dem laden der game seite sollte ein cookie mit der aktuellen game id gespeichert sein
+- nach einem rateversuch sollte der state im local storage gespeichert sein
+- nach dem öffnen der game seite sollte der state aus dem local storage geladen werden
+  - falls alt verwerfen
+  - ansonsten laden
+- der local storage sollte nach spiel ende geleert werden
+- die farbe des input felde sollte sich an den state anpassen
+  - grün falls richtig
+  - rot falls falsch
+  - weiß falls noch nicht geraten
+  - orange falls vorhanden aber falsche position
+- falls der input der felder invalide ist, ist der raten button disabled
+- wenn die lösung nicht in 6 versuchen gefunden wurde, kann das spiel neu gestartet werden
+  - das löscht auch den local storage
+- wenn die lösung gefunden wurde, wird der state auf gewonnen gesetzt
+- wenn die lösung gefunden wurde, erscheint eine nachricht
+- falls eine alte gameid gefunden wurde, sollte die lösung von diesem tag geladen werden
+- die anzahl der rateversuche sollte sich bei jedem versuch erhöhen
+- die anzahl der rateversuche kann 6 nicht überschreiten
