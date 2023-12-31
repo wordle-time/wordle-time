@@ -7,7 +7,7 @@
 - die farbe des input felde sollte sich an den state anpassen
   - grün falls richtig
   - rot falls falsch
-  - weiß falls noch nicht geraten
+  - grau falls noch nicht geraten
   - orange falls vorhanden aber falsche position
 - falls der input der felder invalide ist, ist der raten button disabled
 - wenn die lösung nicht in 6 versuchen gefunden wurde, kann das spiel neu gestartet werden
