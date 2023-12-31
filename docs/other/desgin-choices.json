@@ -2,171 +2,339 @@
   "designEntscheidungen": [
     {
       "title": "NX",
-      "description": "Das Projekt verwendet das _NX_-Entwicklungs-Framework für die Verwaltung des _Monorepo_, der Codegenerierung und der Build- und Test-Workflows.",
+      "description": "Das Projekt verwendet das NX-Entwicklungs-Framework für die Verwaltung des Monorepo, der Codegenerierung und der Build- und Test-Workflows.",
       "reasons": [
         {
           "type": "Monorepo-Verwaltung",
-          "reason": "_NX_ erleichtert die Verwaltung von Code in einem _Monorepo_, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des _Monorepo_ verwaltet."
+          "reason": "NX erleichtert die Verwaltung von Code in einem Monorepo, da es eine konsistente Struktur von Code bietet und Abhängigkeiten zwischen Projekten innerhalb des Monorepo verwaltet."
         },
         {
           "type": "Codegenerierung",
-          "reason": "_NX_ bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von _Scaffold_ für neue _Komponenten_, _Services_ und _Libraries_."
+          "reason": "NX bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von Scaffold für neue Komponenten, Services und Libraries."
         },
         {
           "type": "Build- und Test-Workflows",
-          "reason": "_NX_ vereinfacht die Konfiguration von Build- und Test-Workflows für das gesamte _Monorepo_, einschließlich der Integration von _Cypress_ für Tests für die Verwendung in einer Continuous-Integration/Continuous-Delivery-Pipeline (_CI/CD_)."
+          "reason": "NX vereinfacht die Konfiguration von Build- und Test-Workflows für das gesamte Monorepo, einschließlich der Integration von Cypress für Tests für die Verwendung in einer Continuous-Integration/Continuous-Delivery-Pipeline (CI/CD)."
         },
         {
           "type": "Skalierbarkeit",
-          "reason": "_NX_ ermöglicht es eine _monolithische Architektur_ für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das _Monorepo_ sowohl das _Frontend_ als auch das _Backend_ der _Anwendung_, sowie _E2E-Tests_."
+          "reason": "NX ermöglicht es eine monolithische Architektur für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das Monorepo sowohl das Frontend als auch das Backend der Anwendung, sowie E2E-Tests."
         }
       ]
     },
     {
       "title": "Client Server",
-      "description": "Die _Client - Server - Architektur_ wird für die Implementierung der _Anwendung_ verwendet.",
+      "description": "Die Client - Server - Architektur wird für die Implementierung der Anwendung verwendet.",
       "reasons": [
         {
           "type": "Skalierbarkeit",
-          "reason": "Durch die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ kann jeder Teil der _Anwendung_ unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen."
+          "reason": "Durch die Trennung der Anwendung in Frontend - und Backend - Komponenten kann jeder Teil der Anwendung unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen."
         },
         {
           "type": "Sicherheit",
-          "reason": "Die Verwendung einer _Client - Server - Architektur_ ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der _Backend_ - Seite zu implementieren, um die _Anwendung_ vor Angriffen zu schützen.Wir können somit beispielsweise dem _Veranstalter_eines Events mehr Rechte geben als einem Teilnehmer."
+          "reason": "Die Verwendung einer Client - Server - Architektur ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der Backend - Seite zu implementieren, um die Anwendung vor Angriffen zu schützen.Wir können somit beispielsweise dem Veranstaltereines Events mehr Rechte geben als einem Teilnehmer."
         },
         {
           "type": "Wiederverwendbarkeit",
-          "reason": "Die Trennung der _Anwendung_ in _Frontend_ - und _Backend_ - _Komponenten_ ermöglicht es, die Wiederverwendung von _Komponenten_ besser zu organisieren.In unserem Projekt werden _Frontend_ - _Komponenten_ nur im _Frontend_ wiederverwendet und _Backend_ - Komponenten nur im _Backend_ wiederverwendet."
+          "reason": "Die Trennung der Anwendung in Frontend - und Backend - Komponenten ermöglicht es, die Wiederverwendung von Komponenten besser zu organisieren.In unserem Projekt werden Frontend - Komponenten nur im Frontend wiederverwendet und Backend - Komponenten nur im Backend wiederverwendet."
         }
       ]
     },
     {
       "title": "RESTful - Webservices",
-      "description": "Die _Anwendung_ verwendet _RESTful - Webservices_ zur Kommunikation zwischen dem _Frontend_ und dem _Backend_.",
+      "description": "Die Anwendung verwendet RESTful - Webservices zur Kommunikation zwischen dem Frontend und dem Backend.",
       "reasons": [
         {
           "type": "Interoperabilität",
-          "reason": "_RESTful - Webservices_ verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein _Angular_ _Frontend_(geschrieben _TypeScript_) mit einem _Java_ _Backend_ kommunizieren."
+          "reason": "RESTful - Webservices verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein Angular Frontend(geschrieben TypeScript) mit einem Java Backend kommunizieren."
         },
         {
           "type": "Skalierbarkeit",
-          "reason": " _RESTful - Webservices_ ermöglichen die Skalierung der _Anwendung_, indem sie das _Frontend_ und das _Backend_ entkoppeln und es dem _Backend_ ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten.Unabhängig davon wie viele Clients das _Frontend_ der Party Time _Anwendung_ verwenden, kann das _Backend_ die Anfragen verarbeiten."
+          "reason": " RESTful - Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten.Unabhängig davon wie viele Clients das Frontend der Party Time Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
         },
         {
           "type": "Einfachheit",
-          "reason": "_RESTful - Webservices_ sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren."
+          "reason": "RESTful - Webservices sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren."
         }
       ]
     },
     {
       "title": "PlantUML",
-      "description": "Das Projekt verwendet _PlantUML_ als Werkzeug für die Erstellung von UML - Diagrammen.",
+      "description": "Das Projekt verwendet PlantUML als Werkzeug für die Erstellung von UML - Diagrammen.",
       "reasons": [
         {
           "type": "Einfache Syntax",
-          "reason": "_PlantUML_ verwendet eine einfache, textbasierte Syntax, um UML - Diagramme zu erstellen."
+          "reason": "PlantUML verwendet eine einfache, textbasierte Syntax, um UML - Diagramme zu erstellen."
         },
         {
           "type": "Flexibilität",
-          "reason": "_PlantUML_ unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen.In diesem Projekt wird mit _PlantUML_ das Datenbankschema der _Anwendung_ modelliert, sowie mit Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
+          "reason": "PlantUML unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen.In diesem Projekt wird mit PlantUML das Datenbankschema der Anwendung modelliert, sowie mit Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
         },
         {
           "type": "Integration",
-          "reason": "_PlantUML_ kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs, CI / CD - Pipelines oder Dokumentationsprozesse."
+          "reason": "PlantUML kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs, CI / CD - Pipelines oder Dokumentationsprozesse."
         },
         {
           "type": "Export",
-          "reason": "_PlantUML_ bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei.In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
+          "reason": "PlantUML bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei.In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
         }
       ]
     },
     {
       "title": "GitHub",
-      "description": "Das Projekt verwendet _GitHub_ als Code - Repository und Kollaborationsplattform für _Issue_ - Tracking.",
+      "description": "Das Projekt verwendet GitHub als Code - Repository und Kollaborationsplattform für Issue - Tracking.",
       "reasons": [
         {
           "type": "Kollaboration",
-          "reason": "_GitHub_ bietet eine benutzerfreundliche und intuitive Plattform für die Zusammenarbeit zwischen Entwicklern, die es einfach macht, Code zu teilen, zu kommentieren und zusammenzuarbeiten."
+          "reason": "GitHub bietet eine benutzerfreundliche und intuitive Plattform für die Zusammenarbeit zwischen Entwicklern, die es einfach macht, Code zu teilen, zu kommentieren und zusammenzuarbeiten."
         },
         {
           "type": "Versionskontrolle",
-          "reason": "_GitHub_ bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen."
+          "reason": "GitHub bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen."
         },
         {
           "type": "Code - Review",
-          "reason": "_GitHub_ bietet eine integrierte Code - Review - Funktion, die es Entwicklern ermöglicht, den Code zu überprüfen und Feedback zu geben."
+          "reason": "GitHub bietet eine integrierte Code - Review - Funktion, die es Entwicklern ermöglicht, den Code zu überprüfen und Feedback zu geben."
         },
         {
           "type": "Issue - Tracking",
-          "reason": "_GitHub_ bietet eine integrierte _Issue_ - Tracking - Funktion, die es Entwicklern ermöglicht, _Issues_ zu erstellen, zu kommentieren und zu verfolgen."
+          "reason": "GitHub bietet eine integrierte Issue - Tracking - Funktion, die es Entwicklern ermöglicht, Issues zu erstellen, zu kommentieren und zu verfolgen."
         }
       ]
     },
     {
       "title": "Tailwind CSS",
-      "description": "Das Projekt verwendet das _Tailwind CSS_ Framework für die Gestaltung des Frontends._Tailwind CSS_ ist ein Utility - First CSS - Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.",
+      "description": "Das Projekt verwendet das Tailwind CSS Framework für die Gestaltung des Frontends.Tailwind CSS ist ein Utility - First CSS - Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.",
       "reasons": [
         {
           "type": "Effizienz",
-          "reason": "_Tailwind CSS_ bietet eine Vielzahl von vordefinierten Utility - Klassen."
+          "reason": "Tailwind CSS bietet eine Vielzahl von vordefinierten Utility - Klassen."
         },
         {
           "type": "Flexibilität",
-          "reason": "_Tailwind CSS_ ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS - Regeln schreiben zu müssen."
+          "reason": "Tailwind CSS ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS - Regeln schreiben zu müssen."
         },
         {
           "type": "Responsivität",
-          "reason": "_Tailwind CSS_ verfolgt den Mobile - First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte."
+          "reason": "Tailwind CSS verfolgt den Mobile - First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte."
         },
         {
           "type": "Design",
-          "reason": "Einheitliches Design für alle _Frontend_ - Komponenten der Party Time Plattform."
+          "reason": "Einheitliches Design für alle Frontend - Komponenten der Party Time Plattform."
         }
       ]
     },
     {
       "title": "Cypress",
-      "description": "Das Projekt verwendet das _Cypress_ - Testing - Framework für die Automatisierung von _E2E - Tests_ im _Frontend_.",
+      "description": "Das Projekt verwendet das Cypress - Testing - Framework für die Automatisierung von E2E - Tests im Frontend.",
       "reasons": [
         {
           "type": "Integration",
-          "reason": " _Cypress_ lässt sich nahtlos in die Continuous - Integration / Continuous - Delivery - Pipeline des Projekts integrieren und ermöglicht es dem Team, automatisierte Tests zu erstellen und auszuführen, bevor Code übernommen wird."
+          "reason": " Cypress lässt sich nahtlos in die Continuous - Integration / Continuous - Delivery - Pipeline des Projekts integrieren und ermöglicht es dem Team, automatisierte Tests zu erstellen und auszuführen, bevor Code übernommen wird."
         },
         {
           "type": "Dokumentation",
-          "reason": "Im Verlauf von _Cypress_ Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen.Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens im Bezug auf die in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht."
+          "reason": "Im Verlauf von Cypress Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen.Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens im Bezug auf die in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht."
         }
       ]
     },
     {
       "title": "Single - Page - Anwendung",
-      "description": "Das Projekt implementiert eine Single - Page - Anwendungen(_SPA_) - Architektur für das Frontend.",
+      "description": "Das Projekt implementiert eine Single - Page - Anwendungen(SPA) - Architektur für das Frontend.",
       "reasons": [
         {
-          "type": "Trennung des _Frontend_ vom _Backend_",
-          "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert.Die _SPA_ kann unabhängig vom _Backend_ entwickelt werden, solange die Schnittstellen zwischen _Frontend_ und _Backend_ definiert sind.In diesem Projekt werden die Schnittstellen mit _Swagger_ definiert."
+          "type": "Trennung des Frontend vom Backend",
+          "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert.Die SPA kann unabhängig vom Backend entwickelt werden, solange die Schnittstellen zwischen Frontend und Backend definiert sind.In diesem Projekt werden die Schnittstellen mit Swagger definiert."
         },
         {
           "type": "Verbesserte Benutzererfahrung",
-          "reason": "Laden und Navigieren zwischen den Seiten nicht zu vollständigen Neuladungen führt, ist die _Anwendung_ reaktionsschneller und bietet eine flüssige Benutzererfahrung."
+          "reason": "Laden und Navigieren zwischen den Seiten nicht zu vollständigen Neuladungen führt, ist die Anwendung reaktionsschneller und bietet eine flüssige Benutzererfahrung."
         }
       ]
     },
     {
-      "title": "",
-      "description": "",
+      "title": "Kotlin",
+      "description": "Das Projekt verwendet Kotlin als die Hauptprogrammiersprache für die Entwicklung von Code. Kotlin ist eine moderne, statisch typisierte Programmiersprache, die auf der JVM (Java Virtual Machine) ausgeführt wird und vollständig interoperabel mit Java ist.",
       "reasons": [
         {
-          "type": "",
-          "reason": ""
+          "type": "Verbesserte Lesbarkeit und Produktivität",
+          "reason": "Kotlin bietet eine klare und präzise Syntax, die die Lesbarkeit des Codes verbessert und die Produktivität der Entwickler steigert. Dies führt zu kürzerem und wartbarem Code."
         },
         {
-          "type": "",
-          "reason": ""
+          "type": "Sicherheit und Stabilität",
+          "reason": "Kotlin bietet Funktionen wie Typinferenz und Nullsicherheit, die dazu beitragen, Laufzeitfehler zu reduzieren und die Stabilität der Anwendung zu verbessern."
         },
         {
-          "type": "",
-          "reason": ""
+          "type": "Plattformunabhängigkeit",
+          "reason": "Kotlin kann nicht nur auf der JVM, sondern auch auf anderen Plattformen wie Android und nativer Entwicklung verwendet werden, was die Wiederverwendbarkeit von Code und das Schreiben von plattformübergreifenden Anwendungen erleichtert."
+        },
+        {
+          "type": "Moderne Sprachmerkmale",
+          "reason": "Kotlin bietet moderne Sprachmerkmale wie Funktionen höherer Ordnung, Datenklassen und Erweiterungsfunktionen, die die Entwicklung erleichtern und den Code eleganter gestalten."
+        }
+      ]
+    },
+    {
+      "title": "Gradle",
+      "description": "Das Projekt verwendet das Build-Management-Tool Gradle zur Automatisierung des Build-Prozesses, zur Verwaltung von Abhängigkeiten und zur Konfiguration der Projektabläufe. Gradle ist ein leistungsstarkes, flexibles und plattformunabhängiges Build-Tool, das auf der Groovy- und Kotlin-Programmiersprache basiert und sowohl für Java- als auch für andere JVM-basierte Sprachen eingesetzt werden kann.",
+      "reasons": [
+        {
+          "type": "Flexibilität",
+          "reason": "Gradle ist äußerst flexibel und erlaubt die Definition von benutzerdefinierten Build-Skripten und Aufgaben. Dies ermöglicht es, den Build-Prozess genau an die Anforderungen des Projekts anzupassen."
+        },
+        {
+          "type": "Erweiterbarkeit",
+          "reason": "Gradle bietet eine Vielzahl von Plugins und Erweiterungen, die den Build-Prozess um zusätzliche Funktionen erweitern können. Dies erleichtert die Integration von Tools für Tests, statische Code-Analyse, Berichterstellung und mehr."
+        },
+        {
+          "type": "Plattformunabhängigkeit",
+          "reason": "Gradle ist plattformunabhängig und kann auf verschiedenen Betriebssystemen eingesetzt werden, einschließlich Windows, macOS und Linux."
+        }
+      ]
+    },
+    {
+      "title": "Qwik",
+      "description": "Das Projekt verwendet Qwik als Webframework für die Entwicklung des Frontends. Qwik ist ein modernes, komponentenbasiertes Webframework, das auf dem Server-Side Rendering (SSR) Ansatz basiert und JavaScript erst auf dem Client lädt, wenn es benötigt wird.",
+      "reasons": [
+        {
+          "type": "Performance",
+          "reason": "Qwik bietet eine schnellere initiale Seitendarstellung, da der Client sofort vollständig gerenderte HTML-Seiten erhält. Dies verbessert die Benutzererfahrung, insbesondere auf langsamen oder instabilen Internetverbindungen."
+        },
+        {
+          "type": "Wiederverwendbarkeit",
+          "reason": "Qwik ermöglicht die Wiederverwendung von Komponenten, was die Entwicklung beschleunigt und die Wartbarkeit des Codes verbessert."
+        },
+        {
+          "type": "Resumability",
+          "reason": "Qwik bietet eine Resumability-Funktion, die es ermöglicht, den Zustand der Anwendung zwischen den Seitenaufrufen beizubehalten. Dies verbessert die Benutzererfahrung, da die Anwendung nicht jedes Mal neu geladen werden muss."
+        }
+      ]
+    },
+    {
+      "title": "PNPM",
+      "description": "Das Projekt verwendet PNPM als Paketmanager für die Verwaltung von Abhängigkeiten und Paketen. PNPM ist ein alternatives Paketverwaltungstool, das speziell für die effiziente Verwaltung von JavaScript-Paketen und -Abhängigkeiten entwickelt wurde. Im Gegensatz zu herkömmlichen Paketmanagern wie npm und yarn verwendet PNPM einen link-basierten Ansatz, der Speicherplatz spart und die Installation von Paketen beschleunigt.",
+      "reasons": [
+        {
+          "type": "Effizienz",
+          "reason": "PNPM verwendet einen symbolischen Link-Ansatz, bei dem gemeinsame Abhängigkeiten zwischen Projekten nicht mehrfach heruntergeladen werden müssen. Dies spart Speicherplatz und beschleunigt die Installation von Paketen erheblich."
+        },
+        {
+          "type": "Plattformunabhängigkeit",
+          "reason": "PNPM ist plattformunabhängig und kann in verschiedenen Betriebssystemen und Entwicklungsumgebungen eingesetzt werden, was die Entwicklungsarbeit erleichtert."
+        },
+        {
+          "type": "Konsistenz",
+          "reason": " PNPM sorgt für konsistente Paketversionen und eine saubere Projektstruktur, da es alle Abhängigkeiten in einem zentralen Speicherort verwaltet."
+        }
+      ]
+    },
+    {
+      "title": "Swagger",
+      "description": "Das Projekt verwendet Swagger, ein Open-Source-Toolset, um API-Dokumentation zu erstellen, zu veröffentlichen und zu verwalten. Swagger bietet eine automatisierte Möglichkeit, API-Endpunkte, Parameter, Anfragen, Antworten und Authentifizierungsinformationen in einem einheitlichen und interaktiven Format zu dokumentieren.",
+      "reasons": [
+        {
+          "type": "Automatisierte Dokumentation",
+          "reason": "Swagger ermöglicht es, API-Dokumentation direkt aus dem Quellcode zu generieren, was Zeit spart und die Genauigkeit der Dokumentation erhöht. Entwickler müssen die Dokumentation nicht manuell pflegen, da sie automatisch mit Änderungen am Code aktualisiert wird."
+        },
+        {
+          "type": "Interaktive Dokumentation",
+          "reason": "Swagger generiert eine interaktive API-Dokumentationsseite, auf der Entwickler API-Endpunkte erkunden, Testanfragen senden und Beispiele für Anfragen und Antworten anzeigen können. Dies erleichtert die Nutzung der API und verkürzt die Einarbeitungszeit für Entwickler."
+        },
+        {
+          "type": "Konsistenz",
+          "reason": "Swagger stellt sicher, dass die API-Dokumentation konsistent und gut strukturiert ist, da sie automatisch aus dem Quellcode generiert wird. Dies trägt dazu bei, Verwirrung und Missverständnisse zu vermeiden."
+        }
+      ]
+    },
+    {
+      "title": "JSON",
+      "description": "Die Anwendung verwendet JSON (JavaScript Object Notation) als das bevorzugte Datenformat für die Kommunikation zwischen Client und Server sowie für die Speicherung und den Austausch von Daten. JSON ist ein leichtgewichtiges und einfach zu lesendes Datenformat, das auf Schlüssel-Wert-Paaren und Hierarchien von Objekten und Arrays basiert.",
+      "reasons": [
+        {
+          "type": "Lesbarkeit und Verständlichkeit",
+          "reason": "JSON ist leicht lesbar und verständlich, sowohl für Menschen als auch für Maschinen. Dies erleichtert die Fehlersuche und das Debugging während der Entwicklung."
+        },
+        {
+          "type": "Plattformunabhängigkeit",
+          "reason": "JSON ist plattformunabhängig und kann von verschiedenen Programmiersprachen und Plattformen verarbeitet werden. Dies ermöglicht die Interoperabilität zwischen verschiedenen Teilen der Anwendung und erleichtert die Integration mit Drittanbieterdiensten."
+        },
+        {
+          "type": "Breite Unterstützung",
+          "reason": "JSON wird von den meisten Programmiersprachen und Entwicklungstools unterstützt. Es stehen zahlreiche Bibliotheken und Parser zur Verfügung, um die Verarbeitung von JSON-Daten zu erleichtern."
+        }
+      ]
+    },
+    {
+      "title": "Devcontaoner",
+      "description": "Devcontainer ermöglicht die nahtlose Einrichtung von Entwicklungscontainern für Entwickler innerhalb eines Projekts. Ein Devcontainer ist im Wesentlichen eine vorkonfigurierte Entwicklungsumgebung, die in einem Container läuft und alle Tools, Abhängigkeiten und Einstellungen enthält, die ein Entwickler benötigt, um effizient am Projekt zu arbeiten. Dieser Container kann von den Entwicklern lokal auf ihren Rechnern oder in einer integrierten Entwicklungsumgebung (IDE) ausgeführt werden.",
+      "reasons": [
+        {
+          "type": "Konsistente Umgebungen",
+          "reason": "Devcontainer stellt sicher, dass alle Entwickler in einem Projekt in derselben Umgebung arbeiten."
+        },
+        {
+          "type": "Isolation",
+          "reason": "Devcontainer verwendet Containerisierungstechnologie, um die Entwicklungsumgebung vom Hostsystem zu isolieren. Dies ermöglicht eine saubere Trennung von Abhängigkeiten und verhindert Konflikte mit anderen Projekten oder Anwendungen auf dem Entwicklercomputer."
+        },
+        {
+          "type": "Versionskontrolle",
+          "reason": "Die Konfiguration eines Devcontainers kann in das Versionskontrollsystem des Projekts aufgenommen werden, was die Reproduzierbarkeit der Entwicklungsumgebung und die Zusammenarbeit erleichtert."
+        }
+      ]
+    },
+    {
+      "title": "SCSS",
+      "description": "Das Projekt verwendet SCSS (Sass) als Präprozessor für die CSS-Entwicklung. SCSS ist eine CSS-Erweiterungssprache, die zusätzliche Funktionen und Möglichkeiten zur CSS-Entwicklung bietet. Sie ermöglicht die Verwendung von Variablen, verschachtelten Regeln, Mixins und vielem mehr, um die Effizienz und Wartbarkeit des CSS-Codes zu verbessern.",
+      "reasons": [
+        {
+          "type": "Effizientere Entwicklung",
+          "reason": "Die Verwendung von Mixins ermöglicht es, Codeblöcke wiederzuverwenden und vorgefertigte Stile auf einfache Weise in verschiedenen Teilen der Anwendung anzuwenden, was die Entwicklung beschleunigt."
+        },
+        {
+          "type": "Anpassungsfähigkeit",
+          "reason": "SCSS ist sehr anpassbar und ermöglicht es Entwicklern, ihre eigenen Funktionen und Mixins zu erstellen, um den spezifischen Anforderungen des Projekts gerecht zu werden."
+        },
+        {
+          "type": "Bessere Fehlererkennung",
+          "reason": "SCSS bietet eine klarere und konsistentere Syntax, die die Wahrscheinlichkeit von Fehlern bei der CSS-Entwicklung reduziert. Außerdem können Entwickler auf eingebaute Funktionen und Prüfungen zurückgreifen, um Fehler frühzeitig zu erkennen."
+        }
+      ]
+    },
+    {
+      "title": "LocalStorage",
+      "description": "Die Anwendung verwendet das LocalStorage-API, um Daten lokal im Webbrowser des Benutzers zu speichern und abzurufen. LocalStorage ist eine Web-Storage-Technologie, die es ermöglicht, Daten in Form von Schlüssel-Wert-Paaren clientseitig zu speichern, so dass sie zwischen den Sitzungen erhalten bleiben.",
+      "reasons": [
+        {
+          "type": "Persistenz",
+          "reason": " Mit LocalStorage können Daten dauerhaft im Browser des Benutzers gespeichert werden. Dies ermöglicht es, Informationen zwischen verschiedenen Sitzungen und Seiten beizubehalten, ohne sie auf dem Server speichern zu müssen."
+        },
+        {
+          "type": "Einfache Implementierung",
+          "reason": "Die Verwendung von LocalStorage ist einfach und erfordert nur JavaScript-Kenntnisse. Es gibt keine Notwendigkeit für komplexes Server-Setup oder Datenbank-Management."
+        },
+        {
+          "type": "Clientseitige Daten",
+          "reason": "LocalStorage ist clientseitig, was bedeutet, dass die Daten nicht über das Netzwerk übertragen werden müssen. Dies trägt zur Reduzierung des Datenverkehrs bei und kann die Ladezeiten der Anwendung verbessern."
+        }
+      ]
+    },
+    {
+      "title": "Cookie",
+      "description": "In diesem Projekt werden Cookies verwendet, um Benutzerinformationen auf dem Client-Gerät zu speichern. Cookies sind kleine Textdateien, die vom Webserver auf dem Client-Gerät des Benutzers gespeichert werden und Informationen über die Benutzersitzung oder Präferenzen enthalten können.",
+      "reasons": [
+        {
+          "type": "Sitzungsverwaltung",
+          "reason": "Cookies können verwendet werden, um Sitzungsinformationen zu speichern, sodass Benutzerdaten während einer Sitzung auf einer Website aufrechterhalten werden können."
+        }
+      ]
+    },
+    {
+      "title": "SSR",
+      "description": "Die Webanwendung wird Server-Side Rendering (SSR) als Methode zur Bereitstellung von Inhalten für den Client verwenden. SSR ist ein Ansatz, bei dem HTML-Seiten auf dem Server generiert werden und vollständig gerenderte Seiten an den Client gesendet werden, anstatt nur JavaScript-Code und Daten.",
+      "reasons": [
+        {
+          "type": "Schnellere initiale Seitendarstellung",
+          "reason": "SSR bietet eine schnellere initiale Seitendarstellung, da der Client sofort vollständig gerenderte HTML-Seiten erhält. Dies verbessert die Benutzererfahrung, insbesondere auf langsamen oder instabilen Internetverbindungen."
         }
       ]
     }
