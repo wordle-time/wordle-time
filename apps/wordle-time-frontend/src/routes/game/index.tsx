@@ -144,7 +144,7 @@ export default component$(() => {
         console.log('Apply state from local storage');
         store.tryCount = state.tryCount;
         store.isComplete = state.isComplete;
-        store.isLoading = state.isLoading;
+        store.isGameWon = state.isGameWon;
         store.CurrentGuess = state.CurrentGuess;
         store.GuessResult = state.GuessResult;
         store.LocaleDateString = state.LocaleDateString;
