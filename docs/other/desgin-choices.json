@@ -13,10 +13,6 @@
           "reason": "NX bietet Tools für die automatisierte Generierung von Code, einschließlich der Generierung von Scaffold für neue Komponenten, Services und Libraries."
         },
         {
-          "type": "Build- und Test-Workflows",
-          "reason": "NX vereinfacht die Konfiguration von Build- und Test-Workflows für das gesamte Monorepo, einschließlich der Integration von Cypress für Tests für die Verwendung in einer Continuous-Integration/Continuous-Delivery-Pipeline (CI/CD)."
-        },
-        {
           "type": "Skalierbarkeit",
           "reason": "NX ermöglicht es eine monolithische Architektur für das Projekt zu verwenden, indem es eine klare Struktur für Code und Abhängigkeiten bietet. Im Rahmen unseres Projekts beinhaltet das Monorepo sowohl das Frontend als auch das Backend der Anwendung, sowie E2E-Tests."
         }
@@ -46,11 +42,11 @@
       "reasons": [
         {
           "type": "Interoperabilität",
-          "reason": "RESTful - Webservices verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein Angular Frontend(geschrieben TypeScript) mit einem Java Backend kommunizieren."
+          "reason": "RESTful - Webservices verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein Qwik Frontend (geschrieben in TypeScript) mit einem Kotlin Backend kommunizieren."
         },
         {
           "type": "Skalierbarkeit",
-          "reason": " RESTful - Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten.Unabhängig davon wie viele Clients das Frontend der Party Time Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
+          "reason": " RESTful - Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten. Unabhängig davon wie viele Clients das Frontend der Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
         },
         {
           "type": "Einfachheit",
@@ -68,15 +64,15 @@
         },
         {
           "type": "Flexibilität",
-          "reason": "PlantUML unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen.In diesem Projekt wird mit PlantUML das Datenbankschema der Anwendung modelliert, sowie mit Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
+          "reason": "PlantUML unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen. In diesem Projekt wird mit PlantUML die Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
         },
         {
           "type": "Integration",
-          "reason": "PlantUML kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs, CI / CD - Pipelines oder Dokumentationsprozesse."
+          "reason": "PlantUML kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs oder Dokumentationsprozesse."
         },
         {
           "type": "Export",
-          "reason": "PlantUML bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei.In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
+          "reason": "PlantUML bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei. In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
         }
       ]
     },
@@ -91,10 +87,6 @@
         {
           "type": "Versionskontrolle",
           "reason": "GitHub bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen."
-        },
-        {
-          "type": "Code - Review",
-          "reason": "GitHub bietet eine integrierte Code - Review - Funktion, die es Entwicklern ermöglicht, den Code zu überprüfen und Feedback zu geben."
         },
         {
           "type": "Issue - Tracking",
@@ -120,7 +112,7 @@
         },
         {
           "type": "Design",
-          "reason": "Einheitliches Design für alle Frontend - Komponenten der Party Time Plattform."
+          "reason": "Einheitliches Design für alle Frontend - Komponenten der Wordle Time Plattform."
         }
       ]
     },
@@ -129,8 +121,8 @@
       "description": "Das Projekt verwendet das Cypress - Testing - Framework für die Automatisierung von E2E - Tests im Frontend.",
       "reasons": [
         {
-          "type": "Integration",
-          "reason": " Cypress lässt sich nahtlos in die Continuous - Integration / Continuous - Delivery - Pipeline des Projekts integrieren und ermöglicht es dem Team, automatisierte Tests zu erstellen und auszuführen, bevor Code übernommen wird."
+          "type": "Einfache Einrichtung",
+          "reason": "Cypress ist einfach einzurichten und zu verwenden, da es kaum zusätzlichen Abhängigkeiten oder Konfigurationen erfordert."
         },
         {
           "type": "Dokumentation",
@@ -140,11 +132,11 @@
     },
     {
       "title": "Single - Page - Anwendung",
-      "description": "Das Projekt implementiert eine Single - Page - Anwendungen(SPA) - Architektur für das Frontend.",
+      "description": "Das Projekt implementiert eine Single - Page - Anwendungen (SPA) - Architektur für das Frontend.",
       "reasons": [
         {
           "type": "Trennung des Frontend vom Backend",
-          "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert.Die SPA kann unabhängig vom Backend entwickelt werden, solange die Schnittstellen zwischen Frontend und Backend definiert sind.In diesem Projekt werden die Schnittstellen mit Swagger definiert."
+          "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert. Die SPA kann unabhängig vom Backend entwickelt werden, solange die Schnittstellen zwischen Frontend und Backend definiert sind. In diesem Projekt werden die Schnittstellen mit Swagger definiert."
         },
         {
           "type": "Verbesserte Benutzererfahrung",
@@ -154,7 +146,7 @@
     },
     {
       "title": "Kotlin",
-      "description": "Das Projekt verwendet Kotlin als die Hauptprogrammiersprache für die Entwicklung von Code. Kotlin ist eine moderne, statisch typisierte Programmiersprache, die auf der JVM (Java Virtual Machine) ausgeführt wird und vollständig interoperabel mit Java ist.",
+      "description": "Das Projekt verwendet Kotlin als die Programmiersprache für die Entwicklung von dem Backend. Kotlin ist eine moderne, statisch typisierte Programmiersprache, die auf der JVM (Java Virtual Machine) ausgeführt wird und vollständig interoperabel mit Java ist.",
       "reasons": [
         {
           "type": "Verbesserte Lesbarkeit und Produktivität",
@@ -166,7 +158,7 @@
         },
         {
           "type": "Plattformunabhängigkeit",
-          "reason": "Kotlin kann nicht nur auf der JVM, sondern auch auf anderen Plattformen wie Android und nativer Entwicklung verwendet werden, was die Wiederverwendbarkeit von Code und das Schreiben von plattformübergreifenden Anwendungen erleichtert."
+          "reason": "Kotlin kann nicht nur auf der JVM, sondern auch auf anderen Plattformen, was die Wiederverwendbarkeit von Code und das Schreiben von plattformübergreifenden Anwendungen erleichtert."
         },
         {
           "type": "Moderne Sprachmerkmale",
@@ -212,7 +204,7 @@
     },
     {
       "title": "PNPM",
-      "description": "Das Projekt verwendet PNPM als Paketmanager für die Verwaltung von Abhängigkeiten und Paketen. PNPM ist ein alternatives Paketverwaltungstool, das speziell für die effiziente Verwaltung von JavaScript-Paketen und -Abhängigkeiten entwickelt wurde. Im Gegensatz zu herkömmlichen Paketmanagern wie npm und yarn verwendet PNPM einen link-basierten Ansatz, der Speicherplatz spart und die Installation von Paketen beschleunigt.",
+      "description": "Das Projekt verwendet PNPM als Paketmanager für die Verwaltung von Abhängigkeiten und Paketen. PNPM ist ein alternatives Paketverwaltungstool, das speziell für die effiziente Verwaltung von JavaScript-Paketen und -Abhängigkeiten entwickelt wurde. Im Gegensatz zu andeen Paketmanagern verwendet PNPM einen link-basierten Ansatz, der Speicherplatz spart und die Installation von Paketen beschleunigt.",
       "reasons": [
         {
           "type": "Effizienz",

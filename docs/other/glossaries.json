@@ -2,12 +2,207 @@
   "glossaries": [
     {
       "name": "Anwendung",
-      "description": "Eine _Anwendung_ ist eine Software, die eine bestimmte Funktionalität bereitstellt. Eine _Anwendung_ kann aus mehreren _Komponenten_ bestehen, z. B. einem _Frontend_, einem _Backend_ und einer _Datenbank_."
+      "description": "Eine Anwendung ist eine Software, die eine bestimmte Funktionalität bereitstellt. Eine Anwendung kann aus mehreren Komponenten bestehen, z. B. einem Frontend, einem Backend und einer Datenbank."
     },
     {
       "name": "NX",
-      "description": "_NX_ ist eine flexible _Anwendung_, das die Entwicklung von _Frontend_ und _Backend_ in einer bestimmen Struktur (z. B. _monolithische Architektur_) erleichtert.",
+      "description": "NX ist eine flexible Anwendung, das die Entwicklung von Frontend und Backend in einer bestimmen Struktur (z. B. monolithische Architektur) erleichtert.",
       "url": "https://nx.dev"
+    },
+    {
+      "name": "Monorepo",
+      "description": "Ein Monorepo ist ein Repository, das mehrere Anwendungen enthält.",
+      "url": ""
+    },
+    {
+      "name": "Frontend",
+      "description": "Das Frontend ist ein Teil einer Anwendung, mit dem der Nutzer interagiert, und ist die Schnittstelle zum Backend."
+    },
+    {
+      "name": "Backend",
+      "description": "Das Backend ist ein Teil einer Anwendung, welche Daten verarbeitet und persistiert. Das Backend kommuniziert mit dem Frontend über eine API."
+    },
+    {
+      "name": "API",
+      "description": "Eine API ist eine Schnittstelle, die verwendet wird, um mit einer Anwendung zu kommunizieren. Eine API kann verwendet werden, um Daten von einer Anwendung abzurufen oder Daten in einer Anwendung zu speichern."
+    },
+    {
+      "name": "Framework",
+      "description": "Ein Framework stellt eine Reihe von Funktionen bereit, die verwendet werden können, um eine Anwendung zu entwickeln."
+    },
+    {
+      "name": "Tailwind CSS",
+      "description": ""
+    },
+    {
+      "name": "GitHub",
+      "description": ""
+    },
+    {
+      "name": "Issue",
+      "description": ""
+    },
+    {
+      "name": "",
+      "description": ""
+    },
+    {
+      "name": "",
+      "description": ""
+    },
+    {
+      "name": "",
+      "description": ""
+    },
+    {
+      "name": "Scaffold",
+      "description": "Ein Scaffold ist eine Vorlage, die die Struktur und den Code für ein bestimmtes Feature oder eine bestimmte Funktion bereitstellt. Es ist ein generischer Code, der von einem Generator erstellt wird.",
+      "url": ""
+    },
+    {
+      "name": "Services",
+      "description": "Services sind Klassen mit einem spezifischen Zweck. Sie werden verwendet, um die Logik einer Anwendung zu kapseln und die Wiederverwendbarkeit von Code zu ermöglichen.",
+      "url": ""
+    },
+    {
+      "name": "Libraries",
+      "description": "Libraries sind wiederverwendbare Code-Bibliotheken, die in einer Anwendung verwendet werden können. Libraries können aus Komponenten, Services bestehen und bilden einen Use Case ab.",
+      "url": ""
+    },
+    {
+      "name": "Client",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Server",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "REST",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "HTTP",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "PlantUML",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Syntax",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "UML",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Repository",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Issue",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "CSS",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Responsivität",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Cypress",
+      "description": "Swagger ist ein Framework, das verwendet wird, um RESTful-Webservices zu dokumentieren. Es wird verwendet, um die API einer Anwendung zu dokumentieren, damit andere Entwickler (Beispielsweise Frontend-Entwickler) die API verwenden können.",
+      "url": "https://swagger.io/"
+    },
+    {
+      "name": "E2E",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Swagger",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Kotlin",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "JVM",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Gradle",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Build",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Qwik",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "PNPM",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "JSON",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Devcontaoner",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "SCSS",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "LocalStorage",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Cookie",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "SSR",
+      "description": "",
+      "url": ""
+    },
+    {
+      "name": "Rendering",
+      "description": "",
+      "url": ""
     }
   ]
 }
