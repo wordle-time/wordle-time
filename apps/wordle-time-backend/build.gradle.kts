@@ -83,6 +83,11 @@ tasks.processResources {
     exclude("**/*.md")
     exclude("**/*.pdf")
   }
+  from("../../docs/other") {
+    into("other")
+    exclude("**/*.md")
+    exclude("**/*.pdf")
+  }
 }
 
 idea {

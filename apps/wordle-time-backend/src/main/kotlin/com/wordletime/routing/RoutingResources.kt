@@ -16,12 +16,20 @@ class API {
     class CurrentGameID(val parent: Guess = Guess())
   }
 
-  @Resource("requirements")
-  class Requirements(val parent: API = API()) {
-    @Resource("{id}")
-    class Requirement(val parent: Requirements = Requirements(), val id: String) {
-      @Resource("{fileName}")
-      class Pic(val parent: Requirement, val fileName: String)
+  @Resource("documentation")
+  class Documentation(val parent: API = API()) {
+    @Resource("requirements")
+    class Requirements(val parent: Documentation = Documentation()) {
+      @Resource("{id}")
+      class Requirement(val parent: Requirements = Requirements(), val id: String) {
+        @Resource("{fileName}")
+        class Pic(val parent: Requirement, val fileName: String)
+      }
     }
+
+    @Resource("glossaries")
+    class Glossaries(val parent: Documentation = Documentation())
   }
+
+
 }
