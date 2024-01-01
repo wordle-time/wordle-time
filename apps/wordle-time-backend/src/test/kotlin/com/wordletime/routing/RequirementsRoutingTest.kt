@@ -2,7 +2,7 @@ package com.wordletime.routing
 
 import com.wordletime.dto.Requirement
 import com.wordletime.dto.RequirementsContainer
-import com.wordletime.requirements.RequirementsProvider
+import com.wordletime.documentationProvider.RequirementsProvider
 import com.wordletime.server.WordleTimeServerTest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -33,7 +33,7 @@ internal class RequirementsRoutingTest {
       WordleTimeServerTest.testApplicationWithSetup(
         WordleTimeServerTest.generateTestConfig(WordleTimeServerTest.STATIC_WORD_PROVIDER_CONFIG),
         diOverrideModule,
-        { requirementsRouting() },
+        { documentationRouting() },
         handler
       )
 
@@ -86,7 +86,7 @@ internal class RequirementsRoutingTest {
     }
 
     testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
-      val receivedRequirements: RequirementsContainer = client.get(API.Requirements()).body()
+      val receivedRequirements: RequirementsContainer = client.get(API.Documentation.Requirements()).body()
 
       assertEquals(expectedRequirementsContainer, receivedRequirements)
     }
@@ -96,7 +96,7 @@ internal class RequirementsRoutingTest {
   @MethodSource("testRequirement")
   fun testRequirementsRequirement(requirementsProviderDIModule: DI.Module, testForRequirement: Requirement) =
     testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
-      val receivedRequirement: Requirement = client.get(API.Requirements.Requirement(id = testForRequirement.id)).body()
+      val receivedRequirement: Requirement = client.get(API.Documentation.Requirements.Requirement(id = testForRequirement.id)).body()
 
       assertEquals(testForRequirement, receivedRequirement)
 
@@ -112,17 +112,16 @@ internal class RequirementsRoutingTest {
   ) = testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
 
     val picResponse = client.get(
-      API.Requirements.Requirement.Pic(
-        API.Requirements.Requirement(id = requirementID),
+      API.Documentation.Requirements.Requirement.Pic(
+        API.Documentation.Requirements.Requirement(id = requirementID),
         fileName = picName
       )
     )
-    assertEquals(HttpStatusCode.OK, picResponse.status)
+    assertEquals(HttpStatusCode.OK, picResponse.status, "$requirementID - $picName")
     val responseByteArray = picResponse.readBytes()
 
     val expectedBytes = this::class.java.getResourceAsStream(resourceLocation)!!.readBytes()
 
     assertIterableEquals(expectedBytes.asIterable(), responseByteArray.asIterable())
   }
-
 }

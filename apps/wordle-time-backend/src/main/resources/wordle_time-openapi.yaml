@@ -96,12 +96,12 @@ paths:
                 word: ''
                 gameID: 6
                 date: '2023-09-23'
-  /api/requirements:
+  /api/documentation/requirements:
     get:
       summary: 'Get requirements of the project'
       description: 'Get all requirements of the project.'
       tags:
-        - requirements
+        - documentation
       responses:
         '200':
           description: 'OK <br> A file response'
@@ -109,12 +109,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RequirementsContainer'
-  /api/requirements/{id}:
+  /api/documentation/requirements/{id}:
     get:
       summary: 'Get a specific requirement of the project'
       description: 'Get a specific requirement of the project by id.'
       tags:
-        - requirements
+        - documentation
       parameters:
         - name: 'id'
           in: 'path'
@@ -139,12 +139,12 @@ paths:
               examples:
                 Example#1:
                   value: "Requirement with id 'F009' not found."
-  /api/requirements/{id}/{fileName}:
+  /api/documentation/requirements/{id}/{fileName}:
     get:
       summary: 'Get picture of requirement'
       description: 'Retrieve a picture of a requirement by file name'
       tags:
-        - requirements
+        - documentation
       parameters:
         - name: 'id'
           in: 'path'
@@ -186,6 +186,19 @@ paths:
               examples:
                 Example#1:
                   value: "Requirement with id 'F009' not found."
+  /api/documentation/glossaries:
+    get:
+      summary: 'Get glossary entries'
+      description: "Get the entries of the glossary"
+      tags:
+        - documentation
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/GlossaryContainer"
 
 components:
   schemas:
@@ -283,3 +296,24 @@ components:
           type: 'array'
           items:
             $ref: '#/components/schemas/Requirement'
+    GlossaryEntry:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        url:
+          type: "string"
+      required:
+        - "name"
+        - "description"
+    GlossaryContainer:
+      type: "object"
+      properties:
+        glossaries:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/GlossaryEntry"
+      required:
+        - "glossaries"

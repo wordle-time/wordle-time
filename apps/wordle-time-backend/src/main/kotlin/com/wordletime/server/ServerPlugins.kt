@@ -13,13 +13,16 @@ import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.request.httpMethod
 import io.ktor.server.request.path
 import io.ktor.server.resources.Resources
+import kotlinx.serialization.json.Json
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
 
 fun Application.installPlugins() {
   install(Resources)
   install(ContentNegotiation) {
-    json()
+    json(Json {
+      encodeDefaults = false
+    })
   }
   /*
   install(RequestValidation) {

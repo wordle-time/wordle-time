@@ -11,7 +11,7 @@ import org.kodein.di.ktor.closestDI
 fun Routing.apiRouting() {
   swaggerOpenAPI()
   guessRouting()
-  requirementsRouting()
+  documentationRouting()
 }
 
 private fun Routing.swaggerOpenAPI() {

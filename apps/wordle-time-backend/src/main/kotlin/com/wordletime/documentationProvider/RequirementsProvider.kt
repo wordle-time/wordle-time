@@ -1,4 +1,4 @@
-package com.wordletime.requirements
+package com.wordletime.documentationProvider
 
 import com.sksamuel.hoplite.ConfigLoaderBuilder
 import com.sksamuel.hoplite.addMapSource
