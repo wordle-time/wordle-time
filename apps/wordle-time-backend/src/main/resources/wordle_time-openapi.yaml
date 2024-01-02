@@ -189,17 +189,29 @@ paths:
   /api/documentation/glossaries:
     get:
       summary: 'Get glossary entries'
-      description: "Get the entries of the glossary"
+      description: 'Get the entries of the glossary'
       tags:
         - documentation
       responses:
-        "200":
-          description: "OK"
+        '200':
+          description: 'OK'
           content:
             '*/*':
               schema:
-                $ref: "#/components/schemas/GlossaryContainer"
-
+                $ref: '#/components/schemas/GlossaryContainer'
+  /api/documentation/designChoices:
+    get:
+      summary: 'Get design choices'
+      description: 'Get the entries of the design choices'
+      tags:
+        - documentation
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DesignChoicesContainer'
 components:
   schemas:
     WordContainer:
@@ -297,23 +309,57 @@ components:
           items:
             $ref: '#/components/schemas/Requirement'
     GlossaryEntry:
-      type: "object"
+      type: 'object'
       properties:
         name:
-          type: "string"
+          type: 'string'
         description:
-          type: "string"
+          type: 'string'
         url:
-          type: "string"
+          type: 'string'
       required:
-        - "name"
-        - "description"
+        - 'name'
+        - 'description'
     GlossaryContainer:
-      type: "object"
+      type: 'object'
       properties:
         glossaries:
-          type: "array"
+          type: 'array'
           items:
-            $ref: "#/components/schemas/GlossaryEntry"
+            $ref: '#/components/schemas/GlossaryEntry'
       required:
-        - "glossaries"
+        - 'glossaries'
+    Reason:
+      type: 'object'
+      properties:
+        type:
+          type: 'string'
+        reason:
+          type: 'string'
+      required:
+        - 'type'
+        - 'reason'
+    DesignDecision:
+      type: 'object'
+      properties:
+        title:
+          type: 'string'
+        description:
+          type: 'string'
+        reasons:
+          type: 'array'
+          items:
+            $ref: '#/components/schemas/Reason'
+      required:
+        - 'title'
+        - 'description'
+        - 'reasons'
+    DesignChoicesContainer:
+      type: 'object'
+      properties:
+        designEntscheidungen:
+          type: 'array'
+          items:
+            $ref: '#/components/schemas/DesignDecision'
+      required:
+        - 'designEntscheidungen'

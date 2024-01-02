@@ -29,6 +29,9 @@ class API {
 
     @Resource("glossaries")
     class Glossaries(val parent: Documentation = Documentation())
+
+    @Resource("designChoices")
+    class DesignChoices(val parent: Documentation = Documentation())
   }
 
 

@@ -1,8 +1,12 @@
 package com.wordletime.routing
 
+import com.wordletime.documentationProvider.DesignChoicesProvider
+import com.wordletime.documentationProvider.GlossaryProvider
 import com.wordletime.dto.Requirement
 import com.wordletime.dto.RequirementsContainer
 import com.wordletime.documentationProvider.RequirementsProvider
+import com.wordletime.dto.DesignChoicesContainer
+import com.wordletime.dto.GlossaryContainer
 import com.wordletime.server.WordleTimeServerTest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -24,9 +28,9 @@ import java.nio.file.Path
 import java.util.stream.Stream
 import kotlin.io.path.pathString
 
-internal class RequirementsRoutingTest {
+internal class DocumentationRoutingTest {
   companion object {
-    private fun testApplicationWithRequirementsSetup(
+    private fun testApplicationWithDocumentationSetup(
       diOverrideModule: DI.Module? = null,
       handler: suspend (HttpClient) -> Unit
     ) =
@@ -85,7 +89,7 @@ internal class RequirementsRoutingTest {
       bind(overrides = true) { instance(requirementsProvider) }
     }
 
-    testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
+    testApplicationWithDocumentationSetup(requirementsProviderDIModule) { client ->
       val receivedRequirements: RequirementsContainer = client.get(API.Documentation.Requirements()).body()
 
       assertEquals(expectedRequirementsContainer, receivedRequirements)
@@ -95,7 +99,7 @@ internal class RequirementsRoutingTest {
   @ParameterizedTest
   @MethodSource("testRequirement")
   fun testRequirementsRequirement(requirementsProviderDIModule: DI.Module, testForRequirement: Requirement) =
-    testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
+    testApplicationWithDocumentationSetup(requirementsProviderDIModule) { client ->
       val receivedRequirement: Requirement = client.get(API.Documentation.Requirements.Requirement(id = testForRequirement.id)).body()
 
       assertEquals(testForRequirement, receivedRequirement)
@@ -109,7 +113,7 @@ internal class RequirementsRoutingTest {
     requirementID: String,
     picName: String,
     resourceLocation: String
-  ) = testApplicationWithRequirementsSetup(requirementsProviderDIModule) { client ->
+  ) = testApplicationWithDocumentationSetup(requirementsProviderDIModule) { client ->
 
     val picResponse = client.get(
       API.Documentation.Requirements.Requirement.Pic(
@@ -123,5 +127,41 @@ internal class RequirementsRoutingTest {
     val expectedBytes = this::class.java.getResourceAsStream(resourceLocation)!!.readBytes()
 
     assertIterableEquals(expectedBytes.asIterable(), responseByteArray.asIterable())
+  }
+
+  @Test
+  fun testGlossaries() {
+    val glossaryProvider = GlossaryProvider()
+
+    val expectedJson = Json.encodeToString(glossaryProvider.glossaryContainer)
+    val expectedGlossaryContainer: GlossaryContainer = Json.decodeFromString(expectedJson)
+
+    val glossaryProviderDIModule by DI.Module {
+      bind(overrides = true) { instance(glossaryProvider) }
+    }
+
+    testApplicationWithDocumentationSetup(glossaryProviderDIModule) { client ->
+      val receivedGlossary: GlossaryContainer = client.get(API.Documentation.Glossaries()).body()
+
+      assertEquals(expectedGlossaryContainer, receivedGlossary)
+    }
+  }
+
+  @Test
+  fun testDesignChoices() {
+    val designChoicesProvider = DesignChoicesProvider()
+
+    val expectedJson = Json.encodeToString(designChoicesProvider.designChoicesContainer)
+    val expectedDesignChoicesContainer: DesignChoicesContainer = Json.decodeFromString(expectedJson)
+
+    val designChoicesProviderDIModule by DI.Module {
+      bind(overrides = true) { instance(designChoicesProvider) }
+    }
+
+    testApplicationWithDocumentationSetup(designChoicesProviderDIModule) { client ->
+      val receivedDesignChoices: DesignChoicesContainer = client.get(API.Documentation.DesignChoices()).body()
+
+      assertEquals(expectedDesignChoicesContainer, receivedDesignChoices)
+    }
   }
 }

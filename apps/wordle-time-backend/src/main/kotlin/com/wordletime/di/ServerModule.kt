@@ -6,6 +6,7 @@ import com.wordletime.config.Config
 import com.wordletime.config.ServerConfig
 import com.wordletime.config.WordList
 import com.wordletime.config.WordProviderConfig
+import com.wordletime.documentationProvider.DesignChoicesProvider
 import com.wordletime.documentationProvider.GlossaryProvider
 import com.wordletime.documentationProvider.RequirementsProvider
 import com.wordletime.wordProvider.ListWordProvider
@@ -54,4 +55,5 @@ internal fun serverModule(config: Config) = DI.Module("serverConfig") {
   bind<WordState> { singleton { WordState(instance<WordProvider>(), instance<ServerConfig>().demo) } }
   bind<RequirementsProvider> { singleton { RequirementsProvider() } }
   bind<GlossaryProvider> { singleton { GlossaryProvider() } }
+  bind<DesignChoicesProvider> { singleton { DesignChoicesProvider() } }
 }

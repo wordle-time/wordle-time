@@ -1,5 +1,6 @@
 package com.wordletime.routing
 
+import com.wordletime.documentationProvider.DesignChoicesProvider
 import com.wordletime.documentationProvider.GlossaryProvider
 import com.wordletime.documentationProvider.RequirementsProvider
 import com.wordletime.dto.Requirement
@@ -20,6 +21,7 @@ fun Route.documentationRouting() {
   apiRequirementsRequirement()
   apiRequirementsRequirementPic()
   apiGlossaries()
+  apiDesignChoices()
 }
 
 private fun Route.apiRequirements() {
@@ -75,5 +77,12 @@ private fun Route.apiGlossaries() {
   get<API.Documentation.Glossaries> {
     val glossariesProvider: GlossaryProvider by closestDI().instance()
     call.respond(HttpStatusCode.OK, glossariesProvider.glossaryContainer)
+  }
+}
+
+private fun Route.apiDesignChoices() {
+  get<API.Documentation.DesignChoices> {
+    val designChoicesProvider: DesignChoicesProvider by closestDI().instance()
+    call.respond(HttpStatusCode.OK, designChoicesProvider.designChoicesContainer)
   }
 }
