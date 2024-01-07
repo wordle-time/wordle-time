@@ -15,7 +15,7 @@
     },
     "ghcr.io/devcontainers-contrib/features/gradle-sdkman": {
       "version": "latest",
-      "jdkVersion": "17"
+      "jdkVersion": "21"
     },
     "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
       "version": "latest"
