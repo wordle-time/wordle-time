@@ -41,7 +41,7 @@ export default component$(() => {
         );
     }
     );
-    return <section >
+    return <>
         <Resource
             value={designChoices}
             onPending={() => <div>Loading...</div>}
@@ -69,6 +69,6 @@ export default component$(() => {
                 </div>
             )}
         />
-    </section>;
+    </>;
 }
 );
