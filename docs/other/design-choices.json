@@ -257,42 +257,6 @@
       ]
     },
     {
-      "title": "Devcontaoner",
-      "description": "Devcontainer ermöglicht die nahtlose Einrichtung von Entwicklungscontainern für Entwickler innerhalb eines Projekts. Ein Devcontainer ist im Wesentlichen eine vorkonfigurierte Entwicklungsumgebung, die in einem Container läuft und alle Tools, Abhängigkeiten und Einstellungen enthält, die ein Entwickler benötigt, um effizient am Projekt zu arbeiten. Dieser Container kann von den Entwicklern lokal auf ihren Rechnern oder in einer integrierten Entwicklungsumgebung (IDE) ausgeführt werden.",
-      "reasons": [
-        {
-          "type": "Konsistente Umgebungen",
-          "reason": "Devcontainer stellt sicher, dass alle Entwickler in einem Projekt in derselben Umgebung arbeiten."
-        },
-        {
-          "type": "Isolation",
-          "reason": "Devcontainer verwendet Containerisierungstechnologie, um die Entwicklungsumgebung vom Hostsystem zu isolieren. Dies ermöglicht eine saubere Trennung von Abhängigkeiten und verhindert Konflikte mit anderen Projekten oder Anwendungen auf dem Entwicklercomputer."
-        },
-        {
-          "type": "Versionskontrolle",
-          "reason": "Die Konfiguration eines Devcontainers kann in das Versionskontrollsystem des Projekts aufgenommen werden, was die Reproduzierbarkeit der Entwicklungsumgebung und die Zusammenarbeit erleichtert."
-        }
-      ]
-    },
-    {
-      "title": "SCSS",
-      "description": "Das Projekt verwendet SCSS (Sass) als Präprozessor für die CSS-Entwicklung. SCSS ist eine CSS-Erweiterungssprache, die zusätzliche Funktionen und Möglichkeiten zur CSS-Entwicklung bietet. Sie ermöglicht die Verwendung von Variablen, verschachtelten Regeln, Mixins und vielem mehr, um die Effizienz und Wartbarkeit des CSS-Codes zu verbessern.",
-      "reasons": [
-        {
-          "type": "Effizientere Entwicklung",
-          "reason": "Die Verwendung von Mixins ermöglicht es, Codeblöcke wiederzuverwenden und vorgefertigte Stile auf einfache Weise in verschiedenen Teilen der Anwendung anzuwenden, was die Entwicklung beschleunigt."
-        },
-        {
-          "type": "Anpassungsfähigkeit",
-          "reason": "SCSS ist sehr anpassbar und ermöglicht es Entwicklern, ihre eigenen Funktionen und Mixins zu erstellen, um den spezifischen Anforderungen des Projekts gerecht zu werden."
-        },
-        {
-          "type": "Bessere Fehlererkennung",
-          "reason": "SCSS bietet eine klarere und konsistentere Syntax, die die Wahrscheinlichkeit von Fehlern bei der CSS-Entwicklung reduziert. Außerdem können Entwickler auf eingebaute Funktionen und Prüfungen zurückgreifen, um Fehler frühzeitig zu erkennen."
-        }
-      ]
-    },
-    {
       "title": "LocalStorage",
       "description": "Die Anwendung verwendet das LocalStorage-API, um Daten lokal im Webbrowser des Benutzers zu speichern und abzurufen. LocalStorage ist eine Web-Storage-Technologie, die es ermöglicht, Daten in Form von Schlüssel-Wert-Paaren clientseitig zu speichern, so dass sie zwischen den Sitzungen erhalten bleiben.",
       "reasons": [
@@ -317,16 +281,6 @@
         {
           "type": "Sitzungsverwaltung",
           "reason": "Cookies können verwendet werden, um Sitzungsinformationen zu speichern, sodass Benutzerdaten während einer Sitzung auf einer Website aufrechterhalten werden können."
-        }
-      ]
-    },
-    {
-      "title": "SSR",
-      "description": "Die Webanwendung wird Server-Side Rendering (SSR) als Methode zur Bereitstellung von Inhalten für den Client verwenden. SSR ist ein Ansatz, bei dem HTML-Seiten auf dem Server generiert werden und vollständig gerenderte Seiten an den Client gesendet werden, anstatt nur JavaScript-Code und Daten.",
-      "reasons": [
-        {
-          "type": "Schnellere initiale Seitendarstellung",
-          "reason": "SSR bietet eine schnellere initiale Seitendarstellung, da der Client sofort vollständig gerenderte HTML-Seiten erhält. Dies verbessert die Benutzererfahrung, insbesondere auf langsamen oder instabilen Internetverbindungen."
         }
       ]
     }
