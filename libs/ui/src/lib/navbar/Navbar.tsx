@@ -1,6 +1,7 @@
 import { $, component$, useSignal } from '@builder.io/qwik';
 import Icon from '../icon/Icon';
 import NavigationItem from './Navigation-item';
+import DropDown from './DropDown';
 
 export default component$(() => {
   const isHamburgerOpen = useSignal(false);
@@ -61,9 +62,7 @@ export default component$(() => {
               <div class="hidden sm:ml-6 sm:block">
                 <NavigationItem href="/" text="Home" closePanel$={closePanel$} />
                 <NavigationItem href="/game" text="Game" closePanel$={closePanel$} />
-                <NavigationItem href="/docs/glossary" text="Glossary" closePanel$={closePanel$} />
-                <NavigationItem href="/docs/design" text="Designchoises" closePanel$={closePanel$} />
-                <NavigationItem href="/docs/requirements" text="Requirements" closePanel$={closePanel$} />
+                <DropDown closePanel$={closePanel$} />
               </div>
             </div>
           </div>
