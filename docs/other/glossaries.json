@@ -5,14 +5,8 @@
       "description": "Eine Anwendung ist eine Software, die eine bestimmte Funktionalität bereitstellt. Eine Anwendung kann aus mehreren Komponenten bestehen, z. B. einem Frontend, einem Backend und einer Datenbank."
     },
     {
-      "name": "NX",
-      "description": "NX ist eine flexible Anwendung, das die Entwicklung von Frontend und Backend in einer bestimmen Struktur (z. B. monolithische Architektur) erleichtert.",
-      "url": "https://nx.dev"
-    },
-    {
-      "name": "Monorepo",
-      "description": "Ein Monorepo ist ein Repository, das mehrere Anwendungen enthält.",
-      "url": ""
+      "name": "Framework",
+      "description": "Ein Framework stellt eine Reihe von Funktionen bereit, die verwendet werden können, um eine Anwendung zu entwickeln."
     },
     {
       "name": "Frontend",
@@ -23,36 +17,30 @@
       "description": "Das Backend ist ein Teil einer Anwendung, welche Daten verarbeitet und persistiert. Das Backend kommuniziert mit dem Frontend über eine API."
     },
     {
-      "name": "API",
-      "description": "Eine API ist eine Schnittstelle, die verwendet wird, um mit einer Anwendung zu kommunizieren. Eine API kann verwendet werden, um Daten von einer Anwendung abzurufen oder Daten in einer Anwendung zu speichern."
+      "name": "Architektur",
+      "description": "Eine Architektur ist eine Struktur, die verwendet wird, um eine Anwendung zu entwickeln. Eine Architektur definiert, wie die Anwendung entwickelt wird und wie die Komponenten der Anwendung zusammenarbeiten."
     },
     {
-      "name": "Framework",
-      "description": "Ein Framework stellt eine Reihe von Funktionen bereit, die verwendet werden können, um eine Anwendung zu entwickeln."
+      "name": "Client-Server-Architektur",
+      "description": "Eine Client-Server-Architektur ist eine Software-Architektur, bei der die Anwendung in zwei Teile aufgeteilt ist: ein Frontend und ein Backend."
     },
     {
-      "name": "Tailwind CSS",
-      "description": ""
+      "name": "NX",
+      "description": "NX ist eine flexible Anwendung, das die Entwicklung von Frontend und Backend in einer bestimmen Struktur (z. B. monolithische Architektur) erleichtert.",
+      "url": "https://nx.dev"
     },
     {
-      "name": "GitHub",
-      "description": ""
+      "name": "Monolithische Architektur",
+      "description": "Eine monolithische Architektur ist eine Software-Architektur, bei der alle Komponenten einer Anwendung gemeinsam verwaltet werden."
     },
     {
-      "name": "Issue",
-      "description": ""
+      "name": "Monorepo",
+      "description": "Ein Monorepo ist ein Repository, das mehrere Anwendungen enthält."
     },
     {
-      "name": "",
-      "description": ""
-    },
-    {
-      "name": "",
-      "description": ""
-    },
-    {
-      "name": "",
-      "description": ""
+      "name": "Generator",
+      "description": "Ein Generator ist ein Werkzeug, das verwendet wird, um Code-Abschnitte (Scaffold) zu erstellen.",
+      "url": "https://nx.dev/core-features/plugin-features/use-code-generators"
     },
     {
       "name": "Scaffold",
@@ -60,69 +48,18 @@
       "url": ""
     },
     {
-      "name": "Services",
-      "description": "Services sind Klassen mit einem spezifischen Zweck. Sie werden verwendet, um die Logik einer Anwendung zu kapseln und die Wiederverwendbarkeit von Code zu ermöglichen.",
-      "url": ""
+      "name": "Feature",
+      "description": "Ein Feature ist eine Funktion, die in einer Anwendung implementiert ist. Ein Feature kann aus mehreren Komponenten bestehen."
+    },
+    {
+      "name": "Qwik",
+      "description": "QWIK ist ein Framework für die Entwicklung von SPA-Webanwendungen. Es wird verwendet, um Frontend-Anwendungen zu entwickeln, die in einem Browser ausgeführt werden.",
+      "url": "https://qwik.builder.io/"
     },
     {
       "name": "Libraries",
-      "description": "Libraries sind wiederverwendbare Code-Bibliotheken, die in einer Anwendung verwendet werden können. Libraries können aus Komponenten, Services bestehen und bilden einen Use Case ab.",
-      "url": ""
-    },
-    {
-      "name": "Client",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Server",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "REST",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "HTTP",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "PlantUML",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Syntax",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "UML",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Repository",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Issue",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "CSS",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Responsivität",
-      "description": "",
-      "url": ""
+      "description": "Cypress ist eine Anwendung für E2E-Tests des Frontend. Es wird verwendet, um die Funktionalität der zu entwickelnden Anwendung zu testen, indem es definierte E2E-Tests in einem Browser simuliert, API abfängt und beantwortet.",
+      "url": "https://www.cypress.io/"
     },
     {
       "name": "Cypress",
@@ -130,79 +67,84 @@
       "url": "https://swagger.io/"
     },
     {
-      "name": "E2E",
-      "description": "",
-      "url": ""
+      "name": "E2E-Tests",
+      "description": "E2E-Tests sind Tests, welche die Funktionalität der Anwendung testen. Sie simulieren die Verwendung der Anwendung durch einen Nutzer für vollständige Anwendungsfälle (Beispiel: Erraten eines Wortes)."
+    },
+    {
+      "name": "API",
+      "description": "Eine API ist eine Schnittstelle, die verwendet wird, um mit einer Anwendung zu kommunizieren. Eine API kann verwendet werden, um Daten von einer Anwendung abzurufen oder Daten in einer Anwendung zu speichern."
+    },
+    {
+      "name": "RESTful-Webservices",
+      "description": "RESTful-Webservices sind Webservices, welche HTTP-Methoden verwenden um Ressourcen zu erstellen, zu lesen, zu aktualisieren oder zu löschen."
+    },
+    {
+      "name": "TypeScript",
+      "description": "TypeScript ist eine typisierte Programmiersprache, die von Microsoft angeboten wird. Sie ist eine objektorientierte Programmiersprache, die auf JavaScript aufbaut. TypeScript wird in Angular-Anwendungen verwendet.",
+      "url": "https://www.typescriptlang.org/"
+    },
+    {
+      "name": "SPA",
+      "description": "SPA ist die Abkürzung für Single Page Application. Eine SPA ist eine Anwendung, die nur eine einzige HTML-Seite lädt und die Inhalte der Seite dynamisch aktualisiert, wenn der Nutzer mit der Anwendung interagiert. Die Inhalte werden über eine API vom Backend abgerufen."
     },
     {
       "name": "Swagger",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Kotlin",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "JVM",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Gradle",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Build",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Qwik",
-      "description": "",
-      "url": ""
+      "description": "Swagger ist ein Framework, das verwendet wird, um RESTful-Webservices zu dokumentieren. Es wird verwendet, um die API einer Anwendung zu dokumentieren, damit andere Entwickler (Beispielsweise Frontend-Entwickler) die API verwenden können.",
+      "url": "https://swagger.io/"
     },
     {
       "name": "PNPM",
-      "description": "",
-      "url": ""
+      "description": "Es ist ein Paketmanager für JavaScript, der verwendet wird, um Abhängigkeiten zu verwalten und JavaScript-Anwendungen zu bauen.",
+      "url": "https://pnpm.io/"
     },
     {
-      "name": "JSON",
-      "description": "",
-      "url": ""
+      "name": "Tailwind CSS",
+      "description": "Tailwind CSS ist ein CSS-Framework, das verwendet wird, um das Frontend einer Anwendung zu stylen. Die Styles werden über Klassen angewendet, die in HTML-Elementen verwendet werden.",
+      "url": "https://tailwindcss.com/"
     },
     {
-      "name": "Devcontaoner",
-      "description": "",
-      "url": ""
+      "name": "GitHub",
+      "description": "GitHub ist ein Online-Dienst, der verwendet wird, um Quellcode zu verwalten. Es wird verwendet, um den Quellcode einer Anwendung zu speichern und zu verwalten.",
+      "url": "https://github.com/"
     },
     {
-      "name": "SCSS",
-      "description": "",
-      "url": ""
+      "name": "Issue",
+      "description": "Ein Issue ist ein Problem, das in einem Repository auf GitHub gemeldet wird. Es wird verwendet, um Probleme mit dem Quellcode einer Anwendung zu melden. Problem ist hierbei etwas freier zu verstehen als ein Fehler, es kann sich auch um eine Verbesserung handeln."
+    },
+    {
+      "name": "PlantUML",
+      "description": "PlantUML ist eine Anwendung, das verwendet wird, um UML-Diagramme zu erstellen. Es wird verwendet, um die Architektur einer Anwendung zu dokumentieren.",
+      "url": "https://plantuml.com/"
+    },
+    {
+      "name": "Client",
+      "description": "Eine Anwendung die auf einem Endgerät ausgeführt wird, z. B. einem Browser."
+    },
+    {
+      "name": "Server",
+      "description": "Ein Programm welches Ressourcen für einen Client bereitstellt."
+    },
+    {
+      "name": "HTTP",
+      "description": "Ein zustandsloses application-layer Protokoll, welches verwendet wird, um Daten zwischen einem Client und einem Server auszutauschen."
+    },
+    {
+      "name": "Kotlin",
+      "description": "Eine high-level Programmiersprache, die auf der JVM (Java Virtual Machine) ausgeführt wird. Sie wird verwendet, um das Backend einer Anwendung zu entwickeln.",
+      "url": "https://kotlinlang.org/"
+    },
+    {
+      "name": "Gradle",
+      "description": "Gradle  ist ein Build-Management-Tool für Java-Anwendungen. Es wird verwendet, um die Abhängigkeiten einer Anwendung zu verwalten und die Anwendung zu bauen.",
+      "url": "https://gradle.org/"
     },
     {
       "name": "LocalStorage",
-      "description": "",
-      "url": ""
+      "description": "LocalStorage ist ein Speicher, der im Browser verwendet wird, um Daten zu speichern. Er wird verwendet, um Daten im Browser zu speichern, damit sie beim nächsten Besuch der Anwendung wiederhergestellt werden können (Beispielsweise Spielzustand)."
     },
     {
       "name": "Cookie",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "SSR",
-      "description": "",
-      "url": ""
-    },
-    {
-      "name": "Rendering",
-      "description": "",
-      "url": ""
+      "description": "Cookies sind kleine Textdateien, die im Browser gespeichert werden. Sie werden verwendet, um Daten im Browser zu speichern, damit sie beim nächsten Besuch der Anwendung wiederhergestellt werden können (Beispielsweise Lösungswort)."
     }
   ]
 }
