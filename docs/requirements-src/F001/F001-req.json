@@ -23,13 +23,5 @@
       "expectation": "Die Eingabe in das erste Buchstaben-Feld wird abgelehnt, das Feld ist leer, und die Schaltfläche zum absenden ist gesperrt.",
       "testPic": "worteingabe-error -- should show non_letter_input.png"
     }
-//    Ist nicht möglich
-//    {
-//      "name": "Testfall 3",
-//      "requirement": "Das Spiel wurde gestartet.",
-//      "action": "Ich gebe 6 Buchstaben ein.",
-//      "expectation": "5 Buchstaben werden eingegeben, der 6. Buchstabe wird ignoriert.",
-//      "testPic": "worteingabe-error -- should show too_many_letters.png"
-//    }
   ]
 }
