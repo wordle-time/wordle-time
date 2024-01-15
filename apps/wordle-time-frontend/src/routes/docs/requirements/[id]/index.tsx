@@ -40,7 +40,7 @@ export default component$(() => {
             <p class="text-xl py-6">Sequenzdiagramm:</p>
             <img
               src={
-                'http://localhost:8090/api/requirements/' +
+                'http://localhost:8090/api/documentation/requirements/' +
                 requirement.id +
                 '/' +
                 requirement.seqPic
@@ -52,7 +52,7 @@ export default component$(() => {
             <p class="text-xl py-6">Aktivitätsdiagramm:</p>
             <img
               src={
-                'http://localhost:8090/api/requirements/' +
+                'http://localhost:8090/api/documentation/requirements/' +
                 requirement.id +
                 '/' +
                 requirement.actPic
@@ -74,7 +74,7 @@ export default component$(() => {
 
                   <img
                     src={
-                      'http://localhost:8090/api/requirements/' +
+                      'http://localhost:8090/api/documentation/requirements/' +
                       requirement.id +
                       '/' +
                       t.testPic
