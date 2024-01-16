@@ -5,7 +5,10 @@ import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.OldGameIDError
+import com.wordletime.dto.TimeContainer
 import com.wordletime.dto.WordContainer
+import com.wordletime.extensions.minusDays
+import com.wordletime.extensions.now
 import com.wordletime.server.WordleTimeServerTest
 import com.wordletime.server.WordleTimeServerTest.Companion.STATIC_WORD_PROVIDER_CONFIG
 import com.wordletime.server.WordleTimeServerTest.Companion.generateTestConfig
@@ -23,6 +26,9 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import io.mockk.InternalPlatformDsl.toStr
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.toKotlinInstant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -35,7 +41,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
-import java.time.LocalDate
+import java.time.ZoneId
 import java.util.stream.Stream
 
 internal class GuessRoutingTest {
@@ -195,4 +201,41 @@ internal class GuessRoutingTest {
     val apiGameIDWordContainer: WordContainer = client.get(API.Guess.CurrentGameID()).body()
     assertEquals(currentWordContainer?.stripWord(), apiGameIDWordContainer)
   }
+
+  @Test
+  @DisplayName("Test getting timestamp for next word")
+  fun testAPINextWordAt() = testApplication {
+    val staticWordConfig = generateTestConfig(WordleTimeServerTest.RANDOM_WORD_PROVIDER_CONFIG)
+    var currentWordContainer: WordContainer? = null
+    application {
+      setupDI(staticWordConfig)
+      installPlugins()
+      routing {
+        apiRouting()
+      }
+
+      val wordState: WordState by closestDI().instance()
+      currentWordContainer = wordState.currentWordContainer()
+    }
+
+    val client = createClient {
+      install(ContentNegotiation) {
+        json()
+      }
+      install(Resources)
+    }
+
+    val apiNextWordAtTimeContainer: TimeContainer = client.get(API.Guess.NextWordAt()).body()
+
+    val currentZoneId = ZoneId.systemDefault()
+    val zoneOffset = currentZoneId.rules.getOffset(java.time.Instant.now())
+
+    val expectedInstant = currentWordContainer!!.date.toJavaLocalDate()
+      .plusDays(1).atStartOfDay()
+      .toInstant(zoneOffset)
+      .toKotlinInstant()
+
+    assertEquals(expectedInstant, apiNextWordAtTimeContainer.time)
+  }
+
 }
