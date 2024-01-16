@@ -6,7 +6,8 @@
   "impact": "Schließt einen Spielzyklus ab und gibt dem Spieler Feedback über sein Ergebnis.",
   "criteria": [
     "Ich erhalte eine klare Nachricht über das Ergebnis nach meinen sechs Versuchen.",
-    "Ich habe die Möglichkeit, das Spiel erneut zu starten."
+    "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
+    "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann."
   ],
   "testCases": []
 }
