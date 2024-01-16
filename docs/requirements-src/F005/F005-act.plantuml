@@ -21,7 +21,7 @@ while (Spieler will Spiel spielen) is (Ja)
         end note
         :Button für erneut spielen sehen;
         note right
-            try_again: Come back tomorrow to reveal the solution or <button>try again<button>
+            try_again: Come back tomorrow to reveal the solution or <button>try again</button>
         end note
     endif
 endwhile (Nein)

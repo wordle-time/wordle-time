@@ -9,5 +9,34 @@
     "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
     "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann."
   ],
-  "testCases": []
+  "testCases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Spiel wurde gewonnen",
+      "action": "Bildschirm beobachten.",
+      "expectation": "Spieler wird über Erfolg informiert.",
+      "testPic": "success -- should show You made it.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Spiel wurde gewonnen",
+      "action": "Bildschirm beobachten.",
+      "expectation": "Countdown für nächstes Wort wird angezeigt.",
+      "testPic": "success -- should show countdown.png"
+    },
+    {
+      "name": "Testfall 3",
+      "requirement": "Spiel wurde verloren",
+      "action": "Bildschirm beobachten.",
+      "expectation": "Spieler wird über Misserfolg informiert.",
+      "testPic": "failure -- should show You lost.png"
+    },
+    {
+      "name": "Testfall 4",
+      "requirement": "Spiel wurde verloren",
+      "action": "Bildschirm beobachten.",
+      "expectation": "'Come back tomorrow to reveal the solution or <button>try again</button>' wird angezeigt.",
+      "testPic": "try_again -- Try again.png"
+    }
+  ]
 }
