@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, $, Resource, useSignal } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useSignal } from "@builder.io/qwik";
 import { animate } from "motion";
 
 const nextGameAtRoute = 'http://127.0.0.1:8090/api/guess/nextWordAt';
@@ -25,7 +25,6 @@ export default component$(() => {
 
     useVisibleTask$(() => {
         nextGameAt.then((nextGameAtResolved) => {
-            console.log(nextGameAtResolved);
             setInterval(() => {
 
                 // get difference between now and nextGameAt
@@ -34,15 +33,13 @@ export default component$(() => {
                 const diff = next.getTime() - now.getTime();
 
 
-                let seconds = Math.floor((diff / 1000) % 60);
-                let minutes = Math.floor((diff / (1000 * 60)) % 60);
-                let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                let seconds: string | number = Math.floor((diff / 1000) % 60);
+                let minutes: string | number = Math.floor((diff / (1000 * 60)) % 60);
+                let hours: string | number = Math.floor((diff / (1000 * 60 * 60)) % 24);
 
                 hours = (hours < 10) ? "0" + hours : hours;
                 minutes = (minutes < 10) ? "0" + minutes : minutes;
                 seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-                console.log(hours + ":" + minutes + ":" + seconds);
 
                 remainingTime.value = hours + ":" + minutes + ":" + seconds;
 
