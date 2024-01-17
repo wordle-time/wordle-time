@@ -1,10 +1,12 @@
 package com.wordletime.wordProvider
 
+import com.wordletime.extensions.minusDays
+import com.wordletime.extensions.now
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.datetime.LocalDate
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
 internal class WordStateTest {
   private val demoWord = "apple"

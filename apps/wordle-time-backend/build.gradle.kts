@@ -19,6 +19,9 @@ dependencies {
     exclude("ch.qos.logback", "logback-classic")
     exclude("ch.qos.logback", "logback-core")
   }
+
+  implementation(libs.kotlinxDateTime)
+
   implementation(libs.swagger) {
     exclude("ch.qos.logback", "logback-classic")
     exclude("ch.qos.logback", "logback-core")

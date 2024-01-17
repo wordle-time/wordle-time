@@ -14,6 +14,9 @@ class API {
 
     @Resource("currentGameID")
     class CurrentGameID(val parent: Guess = Guess())
+
+    @Resource("nextWordAt")
+    class NextWordAt(val parent: Guess = Guess())
   }
 
   @Resource("documentation")

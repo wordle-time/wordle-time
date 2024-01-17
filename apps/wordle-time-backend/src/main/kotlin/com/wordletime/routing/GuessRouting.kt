@@ -6,21 +6,28 @@ import com.wordletime.dto.GuessLengthError
 import com.wordletime.dto.GuessResult
 import com.wordletime.dto.LetterState
 import com.wordletime.dto.OldGameIDError
+import com.wordletime.dto.TimeContainer
 import com.wordletime.dto.WrongGameIDError
+import com.wordletime.extensions.now
 import com.wordletime.wordProvider.WordState
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.resources.get
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.toKotlinInstant
 import org.kodein.di.instance
 import org.kodein.di.ktor.closestDI
-import java.time.LocalDate
+import java.time.Instant
+import java.time.ZoneId
 
 fun Route.guessRouting() {
   apiGuessWord()
   apiGuessWordForGameID()
   apiGuessCurrentGameID()
+  apiNextWordAt()
 }
 
 private fun Route.apiGuessWord() {
@@ -66,7 +73,7 @@ private fun Route.apiGuessWordForGameID() {
     when {
       wordContainerForGameID == null -> call.respond(HttpStatusCode.NotFound, GameIDNotFoundError(it.gameID))
 
-      wordContainerForGameID.date == LocalDate.now() -> call.respond(
+      wordContainerForGameID.date == LocalDate.now()-> call.respond(
         HttpStatusCode.Forbidden,
         CurrentDayWordRequestError(it.gameID)
       )
@@ -80,5 +87,23 @@ private fun Route.apiGuessCurrentGameID() {
   get<API.Guess.CurrentGameID> {
     val wordState: WordState by closestDI().instance()
     call.respond(wordState.currentWordContainer().stripWord())
+  }
+}
+
+private fun Route.apiNextWordAt() {
+  get<API.Guess.NextWordAt> {
+    val wordState: WordState by closestDI().instance()
+    val currentWordContainer = wordState.currentWordContainer()
+
+    val currentZoneId = ZoneId.systemDefault()
+    val zoneOffset = currentZoneId.rules.getOffset(Instant.now())
+
+
+    val nextWordAt = currentWordContainer.date.toJavaLocalDate()
+      .plusDays(1).atStartOfDay()
+      .toInstant(zoneOffset)
+      .toKotlinInstant()
+
+    call.respond(TimeContainer(nextWordAt))
   }
 }

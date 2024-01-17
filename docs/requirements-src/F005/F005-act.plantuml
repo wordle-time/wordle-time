@@ -2,5 +2,29 @@
 <style file=plantStyle.css>
 title "Ende des Spiels"
 
-Bob -> Alice : hello
+while (Spieler will Spiel spielen) is (Ja)
+    :Spiel spielen;
+    if (Ergebnis) then (Erfolg)
+        :Information über Erfolg lesen;
+        note right
+            success: You made it
+        end note
+        :"Nächstes Wort" Countdown sehen;
+        note right
+            countdown: <is visible>
+        end note
+        end
+    else (Misserfolg)
+        :Information über Misserfolg lesen;
+        note right
+            failure: You lost
+        end note
+        :Button für erneut spielen sehen;
+        note right
+            try_again: Come back tomorrow to reveal the solution or <button>try again</button>
+        end note
+    endif
+endwhile (Nein)
+end
+
 @enduml

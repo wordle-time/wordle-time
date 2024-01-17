@@ -44,6 +44,10 @@ dependencyResolutionManagement {
         )
       )
 
+      //Time operations - kotlinx-datetime
+      val kotlinxDateTime = version("kotlinxDateTime", "0.5.0")
+      library(kotlinxDateTime, "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef(kotlinxDateTime)
+
       //Swagger Codegen
       val swagger = version("swagger", "1.0.45")
       library(swagger, "io.swagger.codegen.v3", "swagger-codegen-generators").versionRef(swagger)

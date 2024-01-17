@@ -96,6 +96,21 @@ paths:
                 word: ''
                 gameID: 6
                 date: '2023-09-23'
+  /api/guess/nextWordAt:
+    get:
+      summary: 'Get timestamp for next new word to guess'
+      description: 'Get the timestamp (ISO 8601) at which point the next new word can be guessed.'
+      tags:
+        - guess
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TimeContainer'
+              example:
+                time: '2024-01-16T23:00:00Z'
   /api/documentation/requirements:
     get:
       summary: 'Get requirements of the project'
@@ -196,7 +211,7 @@ paths:
         '200':
           description: 'OK'
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: '#/components/schemas/GlossaryContainer'
   /api/documentation/designChoices:
@@ -209,7 +224,7 @@ paths:
         '200':
           description: 'OK'
           content:
-            '*/*':
+            'application/json':
               schema:
                 $ref: '#/components/schemas/DesignChoicesContainer'
 components:
@@ -363,3 +378,13 @@ components:
             $ref: '#/components/schemas/DesignDecision'
       required:
         - 'designEntscheidungen'
+    Instant:
+      type: "object"
+      properties: { }
+    TimeContainer:
+      type: "object"
+      properties:
+        time:
+          $ref: "#/components/schemas/Instant"
+      required:
+        - "time"
