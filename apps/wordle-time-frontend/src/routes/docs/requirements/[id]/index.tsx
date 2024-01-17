@@ -102,7 +102,7 @@ export default component$(() => {
       <div class="mt-12">
 
         <Link
-          href="/requirements"
+          href="docs/requirements"
           class="bg-ctp-crust text-ctp-blue hover:underline rounded-md px-3 py-2 text-sm font-medium"
         >
           Alle Anforderungen
