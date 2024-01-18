@@ -13,20 +13,13 @@ interface TimeInterface {
     time: string;
 }
 
-// return remaining time until next word
-
-
-
 export default component$(() => {
-    const nextGameAt = getNextWordAt();
-    const remainingTime = useSignal("")
-
-
+    const remainingTime = useSignal("");
 
     useVisibleTask$(() => {
+        const nextGameAt = getNextWordAt();
         nextGameAt.then((nextGameAtResolved) => {
             setInterval(() => {
-
                 // get difference between now and nextGameAt
                 const now = new Date();
                 const next = new Date(nextGameAtResolved.time);

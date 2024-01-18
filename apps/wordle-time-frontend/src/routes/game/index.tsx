@@ -57,15 +57,12 @@ export const useGuessResult = routeAction$(async (data, { cookie }) => {
 export const getGameID = async () => {
   const response = await fetch(currentIdRoute);
   const result = await response.json();
-  return result;
+  return (result as IWordFromId).gameID;
 };
 
 export const useWordForId = routeAction$(async (data, { cookie }) => {
-  const gameID = cookie.get('gameID')?.value;
-  if (!gameID) {
-    getGameID;
-  }
-  const response = await fetch(wordForIdRoute + cookie.get('gameID')?.value);
+  const gameID = cookie.get('gameID')?.value || (await getGameID())?.toString();
+  const response = await fetch(wordForIdRoute + gameID);
   const result = await response.json();
   if (result.word) {
     cookie.delete('gameID');
@@ -220,6 +217,8 @@ export default component$(() => {
                 disabled={store.CurrentGuess.letter.join('').length < 5}
                 class="rounded-lg disabled:hover:cursor-not-allowed disabled:border-ctp-red disabled:bg-ctp-red disabled:text-ctp-crust border-4 p-2 px-4 border-ctp-blue hover:bg-ctp-blue hover:text-ctp-base"
                 onClick$={async () => {
+                  store.wordFromId = {}
+
                   const result = await guessResult.submit({
                     word: store.CurrentGuess.letter
                       .join('')
