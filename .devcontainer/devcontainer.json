@@ -77,5 +77,8 @@
       }
     }
   },
+  "mounts": [
+    "source=/etc/localtime,target=/etc/localtime,type=bind,readonly"
+  ],
   "remoteUser": "vscode"
 }
