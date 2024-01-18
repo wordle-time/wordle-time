@@ -11,11 +11,18 @@
         "command": "gradle build"
       }
     },
-    "serve": {
+    "serve.debug": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/wordle-time-backend",
-        "command": "gradle run -Dconfig.override.wordProviderConfig.staticWord=apple -Dconfig.override.server.demo=true"
+        "command": "gradle run -Dconfig.override.wordProviderConfig.staticWord=apple -Dconfig.override.server.demo=true -Dconfig.override.server.frontendPort=5173"
+      }
+    },
+    "serve.production": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle run"
       }
     },
     "clean": {
