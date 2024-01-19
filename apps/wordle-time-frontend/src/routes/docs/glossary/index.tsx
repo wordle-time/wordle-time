@@ -1,5 +1,5 @@
 import { Resource, component$ } from "@builder.io/qwik"
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { type DocumentHead, routeLoader$ } from '@builder.io/qwik-city';
 import { s } from "vitest/dist/reporters-5f784f42";
 
 interface IGlossaries {
@@ -51,3 +51,13 @@ export default component$(() => {
         />
     </>
 })
+
+export const head: DocumentHead = {
+  title: 'Glossary - Wordle Time',
+  meta: [
+    {
+      name: 'description',
+      content: 'Glossary for Wordle Time',
+    },
+  ],
+};

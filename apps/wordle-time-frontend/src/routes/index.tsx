@@ -47,7 +47,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Wordle Time',
+  title: 'Rules - Wordle Time',
   meta: [
     {
       name: 'description',

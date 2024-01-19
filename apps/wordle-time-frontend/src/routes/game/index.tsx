@@ -1,5 +1,5 @@
 import { $, QRL, component$, useStore, useVisibleTask$ } from '@builder.io/qwik';
-import { routeAction$ } from '@builder.io/qwik-city';
+import { type DocumentHead, routeAction$ } from '@builder.io/qwik-city';
 import {
   ICurrentGuess,
   IGuessResult,
@@ -251,3 +251,13 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Game - Wordle Time',
+  meta: [
+    {
+      name: 'description',
+      content: 'Can you guess the word of the day?',
+    },
+  ],
+};

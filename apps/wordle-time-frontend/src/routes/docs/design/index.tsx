@@ -1,5 +1,5 @@
 import { Resource, component$, useVisibleTask$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { type DocumentHead, routeLoader$ } from '@builder.io/qwik-city';
 import { animate, stagger } from 'motion';
 
 
@@ -72,3 +72,14 @@ export default component$(() => {
     </>;
 }
 );
+
+
+export const head: DocumentHead = {
+  title: 'Design Choices - Wordle Time',
+  meta: [
+    {
+      name: 'description',
+      content: 'Design Choices for Wordle Time',
+    },
+  ],
+};

@@ -1,5 +1,5 @@
 import { Resource, component$ } from '@builder.io/qwik';
-import { Link, routeLoader$ } from '@builder.io/qwik-city';
+import { type DocumentHead, Link, routeLoader$ } from '@builder.io/qwik-city';
 import { IRequirement } from '@wordle-time/models';
 
 export const useRequirement = routeLoader$<IRequirement>(
@@ -111,3 +111,13 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Requirement - Wordle Time',
+  meta: [
+    {
+      name: 'description',
+      content: 'Wordle Time - Requirement for Wordle Time',
+    },
+  ],
+};

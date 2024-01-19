@@ -1,5 +1,5 @@
 import { Resource, component$ } from '@builder.io/qwik';
-import { routeLoader$, Link } from '@builder.io/qwik-city';
+import { routeLoader$, Link, type DocumentHead } from '@builder.io/qwik-city';
 import {
   IRequirement,
   Requirements as IRequirements,
@@ -40,3 +40,13 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'Requirements - Wordle Time',
+  meta: [
+    {
+      name: 'description',
+      content: 'Wordle Time - Requirements for Wordle Time',
+    },
+  ],
+};
