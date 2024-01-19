@@ -8,5 +8,27 @@
     "Ein neues Wort wird täglich ausgewählt.",
     "Das Wort ist für das Spiel geeignet und hat die vorgegebene Länge."
   ],
-  "testCases": []
+  "testCases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Ich erhalte eine klare Nachricht über das Ergebnis nach meinen sechs Versuchen.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach sechs Versuchen wird eine Nachricht angezeigt, dass das Wort nicht erraten wurde.",
+      "testPic": "endgame -- should show not_guessed.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Falls das Wort nicht erraten wurde, wird mir die Möglichkeit gegeben, das Spiel erneut zu starten.",
+      "testPic": "endgame -- should show restart_game.png"
+    },
+    {
+      "name": "Testfall 3",
+      "requirement": "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach einem Erfolg wird mir angezeigt, wann das nächste Wort erraten werden kann.",
+      "testPic": "endgame -- should show remaining_time.png"
+    }
+  ]
 }
