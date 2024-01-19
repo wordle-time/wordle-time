@@ -45,9 +45,7 @@ export default component$(() => {
                 '/' +
                 requirement.seqPic
               }
-              width="400"
-              height="400"
-              class="mx-auto"
+              class="mx-auto object-fill"
             />
             <p class="text-xl py-6">Aktivitätsdiagramm:</p>
             <img
@@ -57,9 +55,7 @@ export default component$(() => {
                 '/' +
                 requirement.actPic
               }
-              width="400"
-              height="400"
-              class="mx-auto"
+              class="mx-auto object-fill"
             />
             <p class="text-xl py-6">Testfälle:</p>
             <ul class="list-disc pl-5 divide-y divide-dashed">
@@ -79,9 +75,7 @@ export default component$(() => {
                       '/' +
                       t.testPic
                     }
-                    width="200"
-                    height="200"
-                    class="py-2 "
+                    class="mx-auto object-fill border-4 border-ctp-pink"
                   />
                 </li>
               ))}
