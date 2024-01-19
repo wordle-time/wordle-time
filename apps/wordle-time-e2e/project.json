@@ -23,6 +23,12 @@
           "devServerTarget": "wordle-time-frontend:serve",
           "watch": true,
           "testingType": "e2e"
+        },
+        "watch:production": {
+          "cypressConfig": "apps/wordle-time-e2e/cypress.config.ts",
+          "devServerTarget": "wordle-time-frontend:preview",
+          "watch": true,
+          "testingType": "e2e"
         }
       }
     },
