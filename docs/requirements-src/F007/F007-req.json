@@ -8,5 +8,20 @@
     "Das Spiel passt sich an verschiedene Bildschirmgrößen an.",
     "Die Bedienung auf dem Mobilgerät ist flüssig und ohne Probleme."
   ],
-  "testCases": []
+  "testCases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Die Seite '/' passt sich an verschiedene Bildschirmgrößen an.",
+      "action": "Navigation auf die '/' Seite.",
+      "expectation": "Alles Elemente sind auf dem Bildschirm sichtbar und überlagern sich nicht.",
+      "testPic": "mobile -- should show rules.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Die Seite 'game' passt sich an verschiedene Bildschirmgrößen an.",
+      "action": "Navigation auf die 'game' Seite.",
+      "expectation": "Alles Elemente sind auf dem Bildschirm sichtbar und überlagern sich nicht.",
+      "testPic": "endgame -- should show game.png"
+    }
+  ]
 }
