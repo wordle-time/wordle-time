@@ -12,31 +12,24 @@
   "testCases": [
     {
       "name": "Testfall 1",
-      "requirement": "Spiel wurde gewonnen",
-      "action": "Bildschirm beobachten.",
-      "expectation": "Spieler wird über Erfolg informiert.",
-      "testPic": "success -- should show You made it.png"
+      "requirement": "Ich erhalte eine klare Nachricht über das Ergebnis nach meinen sechs Versuchen.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach sechs Versuchen wird eine Nachricht angezeigt, dass das Wort nicht erraten wurde.",
+      "testPic": "endgame -- should show not_guessed.png"
     },
     {
       "name": "Testfall 2",
-      "requirement": "Spiel wurde gewonnen",
-      "action": "Bildschirm beobachten.",
-      "expectation": "Countdown für nächstes Wort wird angezeigt.",
-      "testPic": "success -- should show countdown.png"
+      "requirement": "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Falls das Wort nicht erraten wurde, wird mir die Möglichkeit gegeben, das Spiel erneut zu starten.",
+      "testPic": "endgame -- should show restart_game.png"
     },
     {
       "name": "Testfall 3",
-      "requirement": "Spiel wurde verloren",
-      "action": "Bildschirm beobachten.",
-      "expectation": "Spieler wird über Misserfolg informiert.",
-      "testPic": "failure -- should show You lost.png"
-    },
-    {
-      "name": "Testfall 4",
-      "requirement": "Spiel wurde verloren",
-      "action": "Bildschirm beobachten.",
-      "expectation": "'Come back tomorrow to reveal the solution or <button>try again</button>' wird angezeigt.",
-      "testPic": "try_again -- Try again.png"
+      "requirement": "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach einem Erfolg wird mir angezeigt, wann das nächste Wort erraten werden kann.",
+      "testPic": "endgame -- should show remaining_time.png"
     }
   ]
 }
