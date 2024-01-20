@@ -1,6 +1,6 @@
 import { getScreenshotPath } from '../support/utils';
 
-const requirement_id = 'F006';
+const requirement_id = 'F007';
 const mobile_group = 'mobile';
 describe(mobile_group, () => {
   beforeEach(() => {
