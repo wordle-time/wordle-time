@@ -18,7 +18,7 @@
         "production": {
           "devServerTarget": "wordle-time-frontend:serve"
         },
-        "watch": {
+        "watch:development": {
           "cypressConfig": "apps/wordle-time-e2e/cypress.config.ts",
           "devServerTarget": "wordle-time-frontend:serve",
           "watch": true,
