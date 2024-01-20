@@ -1,6 +1,6 @@
 import { getScreenshotPath } from '../support/utils';
 
-const requirement_id = 'F004';
+const requirement_id = 'F005';
 const endgame_group = 'endgame';
 describe(endgame_group, () => {
   beforeEach(() => {
@@ -16,14 +16,6 @@ describe(endgame_group, () => {
 
   const not_guessed_test = 'should show not_guessed';
   it(not_guessed_test, () => {
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="guess-button"]').click();
-
     cy.get('[data-cy="guess-fail"]', { timeout: 5_000 }).should('exist');
 
     cy.screenshot(
