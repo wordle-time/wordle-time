@@ -5,6 +5,7 @@ import com.sksamuel.hoplite.addMapSource
 import com.sksamuel.hoplite.addResourceSource
 import com.wordletime.dto.Requirement
 import com.wordletime.dto.RequirementsContainer
+import com.wordletime.extensions.addIfFileExists
 import java.io.File
 
 class RequirementsProvider {
@@ -20,15 +21,14 @@ class RequirementsProvider {
         val resourceJsonString = "/$resourcePath"
         ConfigLoaderBuilder.default()
           .addResourceSource(resourceJsonString)
-          .addMapSource(mapOf(
-            "resourcePath" to "/${resourcePath.parent}",
-            /*
-            "actPic" to "http://${serverConfig.host}:${serverConfig.port}/api/requirements/${requirementDir.name}/${requirementDir.name}_act.png",
-            "seqPic" to "http://${serverConfig.host}:${serverConfig.port}/api/requirements/${requirementDir.name}/${requirementDir.name}_seq.png"
-             */
-            "actPic" to "${requirementDir.name}_act.png",
-            "seqPic" to "${requirementDir.name}_seq.png"
-            ))
+          .addMapSource(
+            buildMap<String, String> {
+              put("resourcePath", "/${resourcePath.parent}")
+
+              addIfFileExists(requirementDir, "actPic", "${requirementDir.name}_act.png")
+              addIfFileExists(requirementDir, "seqPic", "${requirementDir.name}_seq.png")
+            }
+          )
           .build()
           .loadConfigOrThrow<Requirement>()
       }.sortedBy { it.id }
@@ -37,4 +37,6 @@ class RequirementsProvider {
 
   val requirementsByID = requirementsContainer.requirements.associateBy { it.id }
 }
+
+
 

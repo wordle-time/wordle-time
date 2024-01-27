@@ -20,8 +20,6 @@ internal class RequirementsProviderTest {
         .loadConfigOrThrow<RequirementWrapper>()
 
       assertEquals(parsedJsonObject, RequirementWrapper(requirement))
-      assertEquals("${requirement.id}_act.png", requirement.actPic)
-      assertEquals("${requirement.id}_seq.png", requirement.seqPic)
     }
   }
 

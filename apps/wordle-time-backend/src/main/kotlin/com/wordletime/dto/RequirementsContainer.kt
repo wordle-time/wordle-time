@@ -16,8 +16,8 @@ data class Requirement(
   val criteria: List<String>,
   val testCases: List<TestCase>,
   @Transient val resourcePath: String = "",
-  val actPic: String,
-  val seqPic: String
+  val actPic: String? = null,
+  val seqPic: String? = null
 ) {
   override fun toString(): String = id
 }

@@ -18,7 +18,14 @@
         "command": "gradle run -Dconfig.override.wordProviderConfig.staticWord=apple -Dconfig.override.server.demo=true -Dconfig.override.server.frontendPort=5173"
       }
     },
-    "serve.production": {
+    "serve.production.static-word": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/wordle-time-backend",
+        "command": "gradle run -Dconfig.override.wordProviderConfig.staticWord=apple"
+      }
+    },
+    "serve.production.random-word": {
       "executor": "nx:run-commands",
       "options": {
         "cwd": "apps/wordle-time-backend",
