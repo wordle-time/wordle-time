@@ -229,155 +229,141 @@ paths:
                 $ref: '#/components/schemas/DesignChoicesContainer'
 components:
   schemas:
-    WordContainer:
-      type: 'object'
-      properties:
-        word:
-          type: 'string'
-        gameID:
-          type: 'integer'
-          format: 'int32'
-        date:
-          type: 'string'
-          format: 'date'
-    OldGameIDError:
-      type: 'object'
-      properties:
-        oldWord:
-          type: 'string'
-        message:
-          type: 'string'
-    WrongGameIDError:
-      type: 'object'
-      properties:
-        message:
-          type: 'string'
-    GuessLengthError:
-      type: 'object'
-      properties:
-        message:
-          type: 'string'
-    GuessResult:
-      type: 'object'
-      properties:
-        letterStates:
-          type: 'array'
-          items:
-            type: 'string'
-            enum:
-              - 'CorrectSpot'
-              - 'WrongSpot'
-              - 'WrongLetter'
-    GameIDNotFoundError:
-      type: 'object'
-      properties:
-        message:
-          type: 'string'
-    CurrentDayWordRequestError:
-      type: 'object'
-      properties:
-        message:
-          type: 'string'
-    TestCase:
-      type: 'object'
-      properties:
-        name:
-          type: 'string'
-        requirement:
-          type: 'string'
-        action:
-          type: 'string'
-        expectation:
-          type: 'string'
-        testPic:
-          type: 'string'
-    Requirement:
-      type: 'object'
-      properties:
-        id:
-          type: 'string'
-        title:
-          type: 'string'
-        reference:
-          type: 'string'
-        description:
-          type: 'string'
-        impact:
-          type: 'string'
-        criteria:
-          type: 'array'
-          items:
-            type: 'string'
-        testCases:
-          type: 'array'
-          items:
-            $ref: '#/components/schemas/TestCase'
-        actPic:
-          type: 'string'
-        seqPic:
-          type: 'string'
-    RequirementsContainer:
-      type: 'object'
-      properties:
-        requirements:
-          type: 'array'
-          items:
-            $ref: '#/components/schemas/Requirement'
-    GlossaryEntry:
-      type: 'object'
-      properties:
-        name:
-          type: 'string'
-        description:
-          type: 'string'
-        url:
-          type: 'string'
-      required:
-        - 'name'
-        - 'description'
-    GlossaryContainer:
-      type: 'object'
-      properties:
-        glossaries:
-          type: 'array'
-          items:
-            $ref: '#/components/schemas/GlossaryEntry'
-      required:
-        - 'glossaries'
     Reason:
-      type: 'object'
+      type: "object"
       properties:
         type:
-          type: 'string'
+          type: "string"
         reason:
-          type: 'string'
+          type: "string"
       required:
-        - 'type'
-        - 'reason'
+        - "type"
+        - "reason"
     DesignDecision:
-      type: 'object'
+      type: "object"
       properties:
         title:
-          type: 'string'
+          type: "string"
         description:
-          type: 'string'
+          type: "string"
         reasons:
-          type: 'array'
+          type: "array"
           items:
-            $ref: '#/components/schemas/Reason'
+            $ref: "#/components/schemas/Reason"
       required:
-        - 'title'
-        - 'description'
-        - 'reasons'
+        - "title"
+        - "description"
+        - "reasons"
     DesignChoicesContainer:
-      type: 'object'
+      type: "object"
       properties:
         designEntscheidungen:
-          type: 'array'
+          type: "array"
           items:
-            $ref: '#/components/schemas/DesignDecision'
+            $ref: "#/components/schemas/DesignDecision"
       required:
-        - 'designEntscheidungen'
+        - "designEntscheidungen"
+    GlossaryEntry:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        url:
+          type: "string"
+      required:
+        - "name"
+        - "description"
+    GlossaryContainer:
+      type: "object"
+      properties:
+        glossaries:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/GlossaryEntry"
+      required:
+        - "glossaries"
+    TestCase:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        requirement:
+          type: "string"
+        action:
+          type: "string"
+        expectation:
+          type: "string"
+        testPic:
+          type: "string"
+      required:
+        - "name"
+        - "requirement"
+        - "action"
+        - "expectation"
+        - "testPic"
+    Requirement:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        title:
+          type: "string"
+        reference:
+          type: "string"
+        description:
+          type: "string"
+        impact:
+          type: "string"
+        criteria:
+          type: "array"
+          items:
+            type: "string"
+        testCases:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TestCase"
+        resourcePath:
+          type: "string"
+        actPic:
+          type: "string"
+        seqPic:
+          type: "string"
+      required:
+        - "id"
+        - "title"
+        - "reference"
+        - "description"
+        - "impact"
+        - "criteria"
+        - "testCases"
+        - "resourcePath"
+    RequirementsContainer:
+      type: "object"
+      properties:
+        requirements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Requirement"
+      required:
+        - "requirements"
+    LocalDate:
+      type: "object"
+      properties: { }
+    WordContainer:
+      type: "object"
+      properties:
+        word:
+          type: "string"
+        gameID:
+          type: "integer"
+          format: "int32"
+        date:
+          $ref: "#/components/schemas/LocalDate"
+      required:
+        - "word"
+        - "date"
     Instant:
       type: "object"
       properties: { }
@@ -388,3 +374,69 @@ components:
           $ref: "#/components/schemas/Instant"
       required:
         - "time"
+    OldGameIDError:
+      type: "object"
+      properties:
+        oldGameID:
+          type: "integer"
+          format: "int32"
+        oldWord:
+          type: "string"
+        message:
+          type: "string"
+      required:
+        - "oldWord"
+        - "message"
+    WrongGameIDError:
+      type: "object"
+      properties:
+        oldGameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+      required:
+        - "message"
+    GuessLengthError:
+      type: "object"
+      properties:
+        guessedWord:
+          type: "string"
+        message:
+          type: "string"
+      required:
+        - "guessedWord"
+        - "message"
+    GuessResult:
+      type: "object"
+      properties:
+        letterStates:
+          type: "array"
+          items:
+            type: "string"
+            enum:
+              - "CorrectSpot"
+              - "WrongSpot"
+              - "WrongLetter"
+      required:
+        - "letterStates"
+    GameIDNotFoundError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+      required:
+        - "message"
+    CurrentDayWordRequestError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+      required:
+        - "message"
