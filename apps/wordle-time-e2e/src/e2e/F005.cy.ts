@@ -16,6 +16,13 @@ describe(endgame_group, () => {
 
   const not_guessed_test = 'should show not_guessed';
   it(not_guessed_test, () => {
+    cy.get('[data-cy="guess-button"]').click();
+    cy.get('[data-cy="guess-button"]').click();
+    cy.get('[data-cy="guess-button"]').click();
+    cy.get('[data-cy="guess-button"]').click();
+    cy.get('[data-cy="guess-button"]').click();
+    cy.get('[data-cy="guess-button"]').click();
+
     cy.get('[data-cy="guess-fail"]', { timeout: 5_000 }).should('exist');
 
     cy.screenshot(
@@ -28,7 +35,6 @@ describe(endgame_group, () => {
 
   const restart_game_test = 'should show restart_game';
   it(restart_game_test, () => {
-    cy.get('[data-cy="guess-button"]').click();
     cy.get('[data-cy="guess-button"]').click();
     cy.get('[data-cy="guess-button"]').click();
     cy.get('[data-cy="guess-button"]').click();
