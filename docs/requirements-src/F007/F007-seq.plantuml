@@ -1,5 +1,0 @@
-@startuml F007_seq
-title "Mobilfreundlichkeit"
-
-Bob -> Alice : hello
-@enduml
