@@ -157,12 +157,26 @@
           "reason": "Kotlin bietet Funktionen wie Typinferenz und Nullsicherheit, die dazu beitragen, Laufzeitfehler zu reduzieren und die Stabilität der Anwendung zu verbessern."
         },
         {
-          "type": "Plattformunabhängigkeit",
-          "reason": "Kotlin kann nicht nur auf der JVM, sondern auch auf anderen Plattformen, was die Wiederverwendbarkeit von Code und das Schreiben von plattformübergreifenden Anwendungen erleichtert."
-        },
-        {
           "type": "Moderne Sprachmerkmale",
           "reason": "Kotlin bietet moderne Sprachmerkmale wie Funktionen höherer Ordnung, Datenklassen und Erweiterungsfunktionen, die die Entwicklung erleichtern und den Code eleganter gestalten."
+        }
+      ]
+    },
+    {
+      "title": "Ktor Server",
+      "description": "Ktor ist Framework für die Entwicklung asynchroner Server- und Client Anwendungen. Im Projekt wir das Framework für die Backend-Entwicklung verwendet.",
+      "reasons": [
+        {
+          "type": "Asynchronität",
+          "reason": "Ktor nutzt die Vorteile der asynchronen Programmierung mit Kotlin-Coroutines, um eine hohe Leistung und Skalierbarkeit zu gewährleisten."
+        },
+        {
+          "type": "Fokus auf Server-Framework",
+          "reason": "Ktor bietet in diesem Projekt nur das Framework für einen Web-Server und konzentriert sich dabei auf seine Stärken. Freiheiten in anderen Bereichen der Backend-Entwicklung werden nicht eingeschränkt."
+        },
+        {
+          "type": "Nach Bedarf Erweiterbar mit Plug-Ins",
+          "reason": "Der geringe Memory-Footprint des Ktor Kern-Frameworks wird u. A. dadurch ermöglicht, das viele Funktionen bei Bedarf via Plugins nachgerüstet werden. So werden im Rahmen dieses Projekts beispielsweise CORS-Funktionalität, Serialisierung und die Netty-Server-Engine via Plugins ins Backend integriert."
         }
       ]
     },
