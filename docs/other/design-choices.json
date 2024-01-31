@@ -46,7 +46,7 @@
         },
         {
           "type": "Skalierbarkeit",
-          "reason": " RESTful-Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten. Unabhängig davon wie viele Clients das Frontend der Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
+          "reason": "RESTful-Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten. Unabhängig davon wie viele Clients das Frontend der Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
         },
         {
           "type": "Einfachheit",
