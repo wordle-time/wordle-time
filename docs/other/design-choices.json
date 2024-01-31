@@ -20,65 +20,65 @@
     },
     {
       "title": "Client Server",
-      "description": "Die Client - Server - Architektur wird für die Implementierung der Anwendung verwendet.",
+      "description": "Die Client-Server-Architektur wird für die Implementierung der Anwendung verwendet.",
       "reasons": [
         {
           "type": "Skalierbarkeit",
-          "reason": "Durch die Trennung der Anwendung in Frontend - und Backend - Komponenten kann jeder Teil der Anwendung unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen."
+          "reason": "Durch die Trennung der Anwendung in Frontend- und Backend-Komponenten kann jeder Teil der Anwendung unabhängig skaliert werden, um eine höhere Last zu bewältigen, ohne die Leistung des anderen Teils zu beeinträchtigen."
         },
         {
           "type": "Sicherheit",
-          "reason": "Die Verwendung einer Client - Server - Architektur ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der Backend - Seite zu implementieren, um die Anwendung vor Angriffen zu schützen.Wir können somit beispielsweise dem Veranstaltereines Events mehr Rechte geben als einem Teilnehmer."
+          "reason": "Die Verwendung einer Client-Server-Architektur ermöglicht es, Sicherheitsmaßnahmen wie Zugriffskontrolle und Verschlüsselung an der Backend-Seite zu implementieren, um die Anwendung vor Angriffen zu schützen. Wir können somit beispielsweise verhindern, das der Nutzer das zu erratende Wort aus dem Client-Source-Code ausließt."
         },
         {
           "type": "Wiederverwendbarkeit",
-          "reason": "Die Trennung der Anwendung in Frontend - und Backend - Komponenten ermöglicht es, die Wiederverwendung von Komponenten besser zu organisieren.In unserem Projekt werden Frontend - Komponenten nur im Frontend wiederverwendet und Backend - Komponenten nur im Backend wiederverwendet."
+          "reason": "Die Trennung der Anwendung in Frontend- und Backend-Komponenten ermöglicht es, die Wiederverwendung von Komponenten besser zu organisieren. In unserem Projekt werden Frontend-Komponenten nur im Frontend wiederverwendet und Backend-Komponenten nur im Backend wiederverwendet."
         }
       ]
     },
     {
-      "title": "RESTful - Webservices",
-      "description": "Die Anwendung verwendet RESTful - Webservices zur Kommunikation zwischen dem Frontend und dem Backend.",
+      "title": "RESTful-Webservices",
+      "description": "Die Anwendung verwendet RESTful-Webservices zur Kommunikation zwischen dem Frontend und dem Backend.",
       "reasons": [
         {
           "type": "Interoperabilität",
-          "reason": "RESTful - Webservices verwenden standardisierte HTTP - Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren.In unserem Projekt muss ein Qwik Frontend (geschrieben in TypeScript) mit einem Kotlin Backend kommunizieren."
+          "reason": "RESTful-Webservices verwenden standardisierte HTTP-Methoden und Datenformate, was es verschiedenen Systemen und Programmiersprachen ermöglicht, miteinander zu kommunizieren. In unserem Projekt muss ein Qwik Frontend (geschrieben in TypeScript) mit einem Kotlin Backend kommunizieren."
         },
         {
           "type": "Skalierbarkeit",
-          "reason": " RESTful - Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten. Unabhängig davon wie viele Clients das Frontend der Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
+          "reason": " RESTful-Webservices ermöglichen die Skalierung der Anwendung, indem sie das Frontend und das Backend entkoppeln und es dem Backend ermöglichen, mehrere Anfragen gleichzeitig zu verarbeiten. Unabhängig davon wie viele Clients das Frontend der Anwendung verwenden, kann das Backend die Anfragen verarbeiten."
         },
         {
           "type": "Einfachheit",
-          "reason": "RESTful - Webservices sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren."
+          "reason": "RESTful-Webservices sind einfach zu implementieren und zu nutzen, da sie auf standardisierten Methoden und Datenformaten basieren."
         }
       ]
     },
     {
       "title": "PlantUML",
-      "description": "Das Projekt verwendet PlantUML als Werkzeug für die Erstellung von UML - Diagrammen.",
+      "description": "Das Projekt verwendet PlantUML als Werkzeug für die Erstellung von UML-Diagrammen.",
       "reasons": [
         {
           "type": "Einfache Syntax",
-          "reason": "PlantUML verwendet eine einfache, textbasierte Syntax, um UML - Diagramme zu erstellen."
+          "reason": "PlantUML verwendet eine einfache, textbasierte Syntax, um UML-Diagramme zu erstellen."
         },
         {
           "type": "Flexibilität",
-          "reason": "PlantUML unterstützt verschiedene Arten von UML - Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen. In diesem Projekt wird mit PlantUML die Sequenz - und Ablaufdiagrammen der Ablauf von Programm - Abschnitten beschrieben."
+          "reason": "PlantUML unterstützt verschiedene Arten von UML-Diagrammen, einschließlich Klassendiagrammen, Sequenzdiagrammen und Zustandsdiagrammen, sowie benutzerdefinierte Diagrammtypen. In diesem Projekt wird mit PlantUML die Sequenz- und Ablaufdiagrammen der Ablauf von Programm-Abschnitten beschrieben."
         },
         {
           "type": "Integration",
-          "reason": "PlantUML kann leicht in andere Tools und Workflows integriert werden, z.B.in IDEs oder Dokumentationsprozesse."
+          "reason": "PlantUML kann leicht in andere Tools und Workflows integriert werden, z.B. in IDEs oder Dokumentationsprozesse."
         },
         {
           "type": "Export",
-          "reason": "PlantUML bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B.als Bild -, PDF - oder ASCII - Art - Datei. In diesem Projekt werden die Diagramme als PNG - Bilder exportiert, welche in der Bibliotheken - Dokumentation referenziert werden."
+          "reason": "PlantUML bietet eine Vielzahl von Exportoptionen, um die erstellten Diagramme in verschiedenen Formaten zu exportieren, z.B. als Bild- oder PDF-Datei. In diesem Projekt werden die Diagramme als PNG-Bilder exportiert, welche in der Bibliotheken-Dokumentation referenziert werden."
         }
       ]
     },
     {
       "title": "GitHub",
-      "description": "Das Projekt verwendet GitHub als Code - Repository und Kollaborationsplattform für Issue - Tracking.",
+      "description": "Das Projekt verwendet GitHub als Code-Repository und Kollaborationsplattform für Issue-Tracking.",
       "reasons": [
         {
           "type": "Kollaboration",
@@ -89,36 +89,36 @@
           "reason": "GitHub bietet eine leistungsfähige Versionskontrollfunktion, die es ermöglicht, verschiedene Versionen des Codes zu speichern und bei Bedarf wiederherzustellen."
         },
         {
-          "type": "Issue - Tracking",
-          "reason": "GitHub bietet eine integrierte Issue - Tracking - Funktion, die es Entwicklern ermöglicht, Issues zu erstellen, zu kommentieren und zu verfolgen."
+          "type": "Issue-Tracking",
+          "reason": "GitHub bietet eine integrierte Issue-Tracking-Funktion, die es Entwicklern ermöglicht, Issues zu erstellen, zu kommentieren und zu verfolgen."
         }
       ]
     },
     {
       "title": "Tailwind CSS",
-      "description": "Das Projekt verwendet das Tailwind CSS Framework für die Gestaltung des Frontends.Tailwind CSS ist ein Utility - First CSS - Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.",
+      "description": "Das Projekt verwendet das Tailwind CSS Framework für die Gestaltung des Frontends. Tailwind CSS ist ein Utility-First CSS-Framework, das es Entwicklern ermöglicht, responsive Benutzeroberflächen zu erstellen.",
       "reasons": [
         {
           "type": "Effizienz",
-          "reason": "Tailwind CSS bietet eine Vielzahl von vordefinierten Utility - Klassen."
+          "reason": "Tailwind CSS bietet eine Vielzahl von vordefinierten Utility-Klassen."
         },
         {
           "type": "Flexibilität",
-          "reason": "Tailwind CSS ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS - Regeln schreiben zu müssen."
+          "reason": "Tailwind CSS ist sehr flexibel und erlaubt es Designs zu erstellen, ohne aufwendige CSS-Regeln schreiben zu müssen."
         },
         {
           "type": "Responsivität",
-          "reason": "Tailwind CSS verfolgt den Mobile - First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte."
+          "reason": "Tailwind CSS verfolgt den Mobile-First Ansatz und erleichtert die Erstellung von responsiven Designs für verschiedene Geräte."
         },
         {
           "type": "Design",
-          "reason": "Einheitliches Design für alle Frontend - Komponenten der Wordle Time Plattform."
+          "reason": "Einheitliches Design für alle Frontend-Komponenten der Wordle Time Plattform."
         }
       ]
     },
     {
       "title": "Cypress",
-      "description": "Das Projekt verwendet das Cypress - Testing - Framework für die Automatisierung von E2E - Tests im Frontend.",
+      "description": "Das Projekt verwendet das Cypress-Testing-Framework für die Automatisierung von E2E-Tests im Frontend.",
       "reasons": [
         {
           "type": "Einfache Einrichtung",
@@ -126,16 +126,16 @@
         },
         {
           "type": "Dokumentation",
-          "reason": "Im Verlauf von Cypress Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen.Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens im Bezug auf die in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht."
+          "reason": "Im Verlauf von Cypress Tests kann das Framework Screenshots und Videos erstellen, die der Dokumentation der Tests dienen. Außerdem wird eine bessere Nachvollziehbarkeit des Anwendungsverhaltens bezüglich der in UML Aktivitätsdiagramm beschriebenen Abläufen ermöglicht."
         }
       ]
     },
     {
-      "title": "Single - Page - Anwendung",
-      "description": "Das Projekt implementiert eine Single - Page - Anwendungen (SPA) - Architektur für das Frontend.",
+      "title": "Single-Page-Anwendung",
+      "description": "Das Projekt implementiert eine Single-Page-Anwendungen (SPA) - Architektur für das Frontend.",
       "reasons": [
         {
-          "type": "Trennung des Frontend vom Backend",
+          "type": "Trennung des Frontends vom Backend",
           "reason": "Wartbarkeit erhöht und die Entwicklung erleichtert. Die SPA kann unabhängig vom Backend entwickelt werden, solange die Schnittstellen zwischen Frontend und Backend definiert sind. In diesem Projekt werden die Schnittstellen mit Swagger definiert."
         },
         {
@@ -175,7 +175,7 @@
           "reason": "Ktor bietet in diesem Projekt nur das Framework für einen Web-Server und konzentriert sich dabei auf seine Stärken. Freiheiten in anderen Bereichen der Backend-Entwicklung werden nicht eingeschränkt."
         },
         {
-          "type": "Nach Bedarf Erweiterbar mit Plug-Ins",
+          "type": "Nach Bedarf erweiterbar mit Plug-Ins",
           "reason": "Der geringe Memory-Footprint des Ktor Kern-Frameworks wird u. A. dadurch ermöglicht, das viele Funktionen bei Bedarf via Plugins nachgerüstet werden. So werden im Rahmen dieses Projekts beispielsweise CORS-Funktionalität, Serialisierung und die Netty-Server-Engine via Plugins ins Backend integriert."
         }
       ]
@@ -218,7 +218,7 @@
     },
     {
       "title": "PNPM",
-      "description": "Das Projekt verwendet PNPM als Paketmanager für die Verwaltung von Abhängigkeiten und Paketen. PNPM ist ein alternatives Paketverwaltungstool, das speziell für die effiziente Verwaltung von JavaScript-Paketen und -Abhängigkeiten entwickelt wurde. Im Gegensatz zu andeen Paketmanagern verwendet PNPM einen link-basierten Ansatz, der Speicherplatz spart und die Installation von Paketen beschleunigt.",
+      "description": "Das Projekt verwendet PNPM als Paketmanager für die Verwaltung von Abhängigkeiten und Paketen. PNPM ist ein alternatives Paketverwaltungstool, das speziell für die effiziente Verwaltung von JavaScript-Paketen und -Abhängigkeiten entwickelt wurde. Im Gegensatz zu anderen Paketmanagern verwendet PNPM einen link-basierten Ansatz, der Speicherplatz spart und die Installation von Paketen beschleunigt.",
       "reasons": [
         {
           "type": "Effizienz",
@@ -262,7 +262,7 @@
         },
         {
           "type": "Plattformunabhängigkeit",
-          "reason": "JSON ist plattformunabhängig und kann von verschiedenen Programmiersprachen und Plattformen verarbeitet werden. Dies ermöglicht die Interoperabilität zwischen verschiedenen Teilen der Anwendung und erleichtert die Integration mit Drittanbieterdiensten."
+          "reason": "JSON ist plattformunabhängig und kann von verschiedenen Programmiersprachen und Plattformen verarbeitet werden. Dies ermöglicht die Interoperabilität zwischen verschiedenen Teilen der Anwendung (Backend und Frontend)."
         },
         {
           "type": "Breite Unterstützung",
@@ -272,7 +272,7 @@
     },
     {
       "title": "LocalStorage",
-      "description": "Die Anwendung verwendet das LocalStorage-API, um Daten lokal im Webbrowser des Benutzers zu speichern und abzurufen. LocalStorage ist eine Web-Storage-Technologie, die es ermöglicht, Daten in Form von Schlüssel-Wert-Paaren clientseitig zu speichern, so dass sie zwischen den Sitzungen erhalten bleiben.",
+      "description": "Die Anwendung verwendet die LocalStorage-API, um Daten lokal im Webbrowser des Benutzers zu speichern und abzurufen. LocalStorage ist eine Web-Storage-Technologie, die es ermöglicht, Daten in Form von Schlüssel-Wert-Paaren clientseitig zu speichern, sodass sie zwischen den Sitzungen erhalten bleiben.",
       "reasons": [
         {
           "type": "Persistenz",
