@@ -135,7 +135,7 @@
     },
     {
       "name": "Gradle",
-      "description": "Gradle  ist ein Build-Management-Tool für Java-Anwendungen. Es wird verwendet, um die Abhängigkeiten einer Anwendung zu verwalten und die Anwendung zu bauen.",
+      "description": "Gradle ist ein Build-Management-Tool für Java-Anwendungen. Es wird verwendet, um die Abhängigkeiten einer Anwendung zu verwalten und die Anwendung zu bauen.",
       "url": "https://gradle.org/"
     },
     {

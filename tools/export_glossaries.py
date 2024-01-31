@@ -14,6 +14,7 @@ def export_glossaries():
     def export_glossary(glossary_dict: dict[str, str]) -> str:
         design_choice_lines = [
             f"## {glossary_dict['name']}",
+            "",
             glossary_dict["description"]
         ]
 
@@ -25,7 +26,6 @@ def export_glossaries():
 
         md_file_blocks = [
             "# Glossar",
-            "",
             "\n***\n\n".join(export_glossary(glossary) for glossary in glossaries)
         ]
 

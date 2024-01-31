@@ -13,7 +13,9 @@ def export_design_choices():
 
     def export_reason(reason_dict: dict[str, str]) -> str:
         reason_lines = [
+            "",
             f"### Grund: {reason_dict['type']}",
+            "",
             reason_dict["reason"]
         ]
         return "\n".join(reason_lines)
@@ -21,8 +23,8 @@ def export_design_choices():
     def export_design_choice(design_choice_dict: dict[str, any]) -> str:
         design_choice_lines = [
             f"## Entscheidung: {design_choice_dict['title']}",
-            design_choice_dict["description"],
             "",
+            design_choice_dict["description"],
             *(export_reason(x) for x in design_choice_dict["reasons"])
         ]
 
