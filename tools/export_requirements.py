@@ -11,7 +11,7 @@ def export_requirements():
 
     requirements_src_path = docs_path.joinpath("requirements-src")
 
-    def testcase_dict_to_md(testcase_dict):
+    def testcase_dict_to_md(testcase_dict: dict[str, str]) -> str:
         test_case_lines = [
             "",
             f"### {testcase_dict['name']}",
@@ -27,7 +27,7 @@ def export_requirements():
 
         return "\n".join(test_case_lines)
 
-    def requirement_to_md(json_dict: dict[str, str], add_act_diagram: bool, add_seq_diagram: bool):
+    def requirement_to_md(json_dict: dict[str, any], add_act_diagram: bool, add_seq_diagram: bool) -> str:
         desc_lines = [
             f"# {json_dict['id']} - {json_dict['title']}",
             "",
