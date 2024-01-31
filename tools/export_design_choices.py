@@ -40,9 +40,6 @@ def export_design_choices():
             "\n***\n\n".join(export_design_choice(design_choice) for design_choice in design_entscheidungen)
         ]
 
-        for design_choice in design_entscheidungen:
-            md_file_blocks.append(export_design_choice(design_choice))
-
         with open(design_choices_output_path, "w") as req_json_md_file:
             req_json_md_file.write("\n".join(md_file_blocks))
 
