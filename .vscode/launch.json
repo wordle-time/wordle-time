@@ -42,6 +42,22 @@
       "program": "${workspaceFolder}/tools/export_requirements.py",
       "console": "integratedTerminal",
       "justMyCode": true
+    },
+    {
+      "name": "Python: Export Design-Entscheidungen",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_design_choices.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Export Glossar",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_glossaries.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
     }
   ]
 }
