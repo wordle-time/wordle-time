@@ -26,7 +26,9 @@ def export_glossaries():
 
         md_file_blocks = [
             "# Glossar",
-            "\n***\n\n".join(export_glossary(glossary) for glossary in glossaries)
+            "",
+            "\n***\n\n".join(export_glossary(glossary) for glossary in glossaries),
+            ""
         ]
 
         with open(glossaries_output_path, "w") as req_json_md_file:

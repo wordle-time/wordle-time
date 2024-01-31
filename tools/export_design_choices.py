@@ -37,7 +37,8 @@ def export_design_choices():
         md_file_blocks = [
             "# Design Entscheidungen",
             "",
-            "\n***\n\n".join(export_design_choice(design_choice) for design_choice in design_entscheidungen)
+            "\n***\n\n".join(export_design_choice(design_choice) for design_choice in design_entscheidungen),
+            ""
         ]
 
         with open(design_choices_output_path, "w") as req_json_md_file:
