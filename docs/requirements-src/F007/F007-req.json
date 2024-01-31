@@ -21,7 +21,7 @@
       "requirement": "Die Seite 'game' passt sich an verschiedene Bildschirmgrößen an.",
       "action": "Navigation auf die 'game' Seite.",
       "expectation": "Alles Elemente sind auf dem Bildschirm sichtbar und überlagern sich nicht.",
-      "testPic": "endgame -- should show game.png"
+      "testPic": "mobile -- should show game.png"
     }
   ]
 }
