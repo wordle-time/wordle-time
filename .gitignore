@@ -51,3 +51,4 @@ apps/wordle-time-backend/docs/.swagger-codegen/VERSION
 .nx/cache
 
 /docs/.requirements
+/docs/.other
