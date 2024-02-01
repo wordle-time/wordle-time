@@ -37,7 +37,7 @@ def export_design_choices():
         md_file_blocks = [
             "# Design Entscheidungen",
             "",
-            "\n***\n\n".join(export_design_choice(design_choice) for design_choice in design_entscheidungen),
+            "\n\n***\n\n".join(export_design_choice(design_choice) for design_choice in design_entscheidungen),
             ""
         ]
 

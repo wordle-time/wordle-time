@@ -27,7 +27,7 @@ def export_glossaries():
         md_file_blocks = [
             "# Glossar",
             "",
-            "\n***\n\n".join(export_glossary(glossary) for glossary in glossaries),
+            "\n\n***\n\n".join(export_glossary(glossary) for glossary in glossaries),
             ""
         ]
 
