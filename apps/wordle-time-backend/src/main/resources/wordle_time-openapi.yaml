@@ -1,71 +1,402 @@
-openapi: "3.0.3"
+openapi: '3.0.3'
 info:
-  title: "wordle_time API"
-  description: "wordle_time API"
-  version: "1.0.0"
+  title: 'wordle_time API'
+  description: 'wordle_time API'
+  version: '1.0.0'
 servers:
-  - url: "http://localhost:8090"
+  - url: 'http://localhost:8090'
 paths:
-  /api/guess:
+  /api/guess/word:
     get:
-      description: "Guess the current wordl of the day."
+      summary: 'Guess the current wordl of the day'
+      tags:
+        - guess
       parameters:
-        - name: "gameID"
-          in: "cookie"
+        - name: 'gameID'
+          in: 'cookie'
           required: false
           schema:
-            type: "string"
-        - name: "word"
-          in: "query"
+            type: 'string'
+        - name: 'word'
+          in: 'query'
           required: true
           schema:
-            type: "string"
+            type: 'string'
       responses:
-        "400":
-          description: "Bad Request"
+        '200':
+          description: 'OK'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GuessLengthError"
-              examples:
-                Example#1:
-                  description: "Example for GuessLengthError"
-                  value:
-                    word: "app"
-        "403":
-          description: "Not Found"
+                $ref: '#/components/schemas/GuessResult'
+        '400':
+          description: 'Bad Request'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/GuessLengthError'
+        '404':
+          description: 'Not Found'
           content:
             'application/json':
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/OldGameIDError"
-                  - $ref: "#/components/schemas/WrongGameIDError"
-              examples:
-                Example#1:
-                  description: "Example for WrongGameIDError"
-                  value:
-                    gameID: "aaaaaaaaaaaaaaa"
-                    word: "applu"
-        "200":
-          description: "OK"
+                  - $ref: '#/components/schemas/OldGameIDError'
+                  - $ref: '#/components/schemas/WrongGameIDError'
+  /api/guess/wordForGameID:
+    get:
+      summary: 'Get word for gameID'
+      description: 'Get a past word by gameID'
+      tags:
+        - guess
+      parameters:
+        - name: 'gameID'
+          in: 'query'
+          required: true
+          schema:
+            type: 'integer'
+            example: 1
+      responses:
+        '404':
+          description: 'Not Found'
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/GuessResult"
+                $ref: '#/components/schemas/GameIDNotFoundError'
+        '403':
+          description: 'Forbidden'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/CurrentDayWordRequestError'
+        '200':
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/WordContainer'
+              example:
+                word: 'apple'
+                gameID: 5
+                date: '2023-09-22'
+  /api/guess/currentGameID:
+    get:
+      summary: 'Get current gameID.'
+      description: 'Get the gameID of the current day. word will always be empty.'
+      tags:
+        - guess
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/WordContainer'
+              example:
+                word: ''
+                gameID: 6
+                date: '2023-09-23'
+  /api/guess/nextWordAt:
+    get:
+      summary: 'Get timestamp for next new word to guess'
+      description: 'Get the timestamp (ISO 8601) at which point the next new word can be guessed.'
+      tags:
+        - guess
+      responses:
+        "200":
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/TimeContainer'
+              example:
+                time: '2024-01-16T23:00:00Z'
+  /api/documentation/requirements:
+    get:
+      summary: 'Get requirements of the project'
+      description: 'Get all requirements of the project.'
+      tags:
+        - documentation
+      responses:
+        '200':
+          description: 'OK <br> A file response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequirementsContainer'
+  /api/documentation/requirements/{id}:
+    get:
+      summary: 'Get a specific requirement of the project'
+      description: 'Get a specific requirement of the project by id.'
+      tags:
+        - documentation
+      parameters:
+        - name: 'id'
+          in: 'path'
+          required: true
+          schema:
+            type: 'string'
+            example: 'F001'
+          description: 'id of the requirement (case-sensitive)'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Requirement'
+        '404':
+          description: 'Not Found'
+          content:
+            'text/plain':
+              schema:
+                type: 'string'
+              examples:
+                Example#1:
+                  value: "Requirement with id 'F009' not found."
+  /api/documentation/requirements/{id}/{fileName}:
+    get:
+      summary: 'Get picture of requirement'
+      description: 'Retrieve a picture of a requirement by file name'
+      tags:
+        - documentation
+      parameters:
+        - name: 'id'
+          in: 'path'
+          required: true
+          schema:
+            type: 'string'
+            example: 'F001'
+          description: 'id of the requirement (case-sensitive)'
+        - name: 'fileName'
+          in: 'path'
+          required: true
+          schema:
+            type: 'string'
+            example: 'F001_act.png'
+          description: 'file name of the picture (case-sensitive)'
+      responses:
+        '200':
+          description: 'OK <br> A file response'
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: 'Bad Request'
+          content:
+            'text/plain':
+              schema:
+                type: 'string'
+              examples:
+                Example#1:
+                  value: 'Selected file not child of F01 dir'
+        '404':
+          description: 'Not Found'
+          content:
+            'text/plain':
+              schema:
+                type: 'string'
+              examples:
+                Example#1:
+                  value: "Requirement with id 'F009' not found."
+  /api/documentation/glossaries:
+    get:
+      summary: 'Get glossary entries'
+      description: 'Get the entries of the glossary'
+      tags:
+        - documentation
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/GlossaryContainer'
+  /api/documentation/designChoices:
+    get:
+      summary: 'Get design choices'
+      description: 'Get the entries of the design choices'
+      tags:
+        - documentation
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/DesignChoicesContainer'
 components:
   schemas:
+    Reason:
+      type: "object"
+      properties:
+        type:
+          type: "string"
+        reason:
+          type: "string"
+      required:
+        - "type"
+        - "reason"
+    DesignDecision:
+      type: "object"
+      properties:
+        title:
+          type: "string"
+        description:
+          type: "string"
+        reasons:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Reason"
+      required:
+        - "title"
+        - "description"
+        - "reasons"
+    DesignChoicesContainer:
+      type: "object"
+      properties:
+        designEntscheidungen:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DesignDecision"
+      required:
+        - "designEntscheidungen"
+    GlossaryEntry:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        description:
+          type: "string"
+        url:
+          type: "string"
+      required:
+        - "name"
+        - "description"
+    GlossaryContainer:
+      type: "object"
+      properties:
+        glossaries:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/GlossaryEntry"
+      required:
+        - "glossaries"
+    TestCase:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        requirement:
+          type: "string"
+        action:
+          type: "string"
+        expectation:
+          type: "string"
+        testPic:
+          type: "string"
+      required:
+        - "name"
+        - "requirement"
+        - "action"
+        - "expectation"
+        - "testPic"
+    Requirement:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        title:
+          type: "string"
+        reference:
+          type: "string"
+        description:
+          type: "string"
+        impact:
+          type: "string"
+        criteria:
+          type: "array"
+          items:
+            type: "string"
+        testCases:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TestCase"
+        resourcePath:
+          type: "string"
+        actPic:
+          type: "string"
+        seqPic:
+          type: "string"
+      required:
+        - "id"
+        - "title"
+        - "reference"
+        - "description"
+        - "impact"
+        - "criteria"
+        - "testCases"
+        - "resourcePath"
+    RequirementsContainer:
+      type: "object"
+      properties:
+        requirements:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Requirement"
+      required:
+        - "requirements"
+    LocalDate:
+      type: "object"
+      properties: { }
+    WordContainer:
+      type: "object"
+      properties:
+        word:
+          type: "string"
+        gameID:
+          type: "integer"
+          format: "int32"
+        date:
+          $ref: "#/components/schemas/LocalDate"
+      required:
+        - "word"
+        - "date"
+    Instant:
+      type: "object"
+      properties: { }
+    TimeContainer:
+      type: "object"
+      properties:
+        time:
+          $ref: "#/components/schemas/Instant"
+      required:
+        - "time"
     OldGameIDError:
       type: "object"
       properties:
+        oldGameID:
+          type: "integer"
+          format: "int32"
         oldWord:
           type: "string"
         message:
           type: "string"
+      required:
+        - "oldWord"
+        - "message"
     WrongGameIDError:
       type: "object"
       properties:
+        oldGameID:
+          type: "integer"
+          format: "int32"
         message:
           type: "string"
+      required:
+        - "message"
     GuessLengthError:
       type: "object"
       properties:
@@ -73,6 +404,9 @@ components:
           type: "string"
         message:
           type: "string"
+      required:
+        - "guessedWord"
+        - "message"
     GuessResult:
       type: "object"
       properties:
@@ -84,3 +418,25 @@ components:
               - "CorrectSpot"
               - "WrongSpot"
               - "WrongLetter"
+      required:
+        - "letterStates"
+    GameIDNotFoundError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+      required:
+        - "message"
+    CurrentDayWordRequestError:
+      type: "object"
+      properties:
+        gameID:
+          type: "integer"
+          format: "int32"
+        message:
+          type: "string"
+      required:
+        - "message"

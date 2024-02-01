@@ -1,0 +1,23 @@
+@startuml F005_seq
+title "Ende des Spiels"
+
+actor "Spieler" as user
+boundary "Frontend" as frontend
+boundary "Backend" as backend
+
+user -> frontend: Spiel spielen
+
+
+alt Erfolg Fall
+user <-- frontend: Erfolg Ergebnis
+user -> frontend: erwartet countdown
+frontend -> backend: nextGameAt Timestamp anfragen
+frontend <-- backend: nextGameAt Timestamp
+user <-- backend: Countdown anzeigen
+
+else Misserfolg Fall
+user <- frontend: Misserfolg Ergebnis
+user -> frontend: "try again" Button anklicken
+user <-- frontend: Neues Spiel anzeigen
+end
+@enduml

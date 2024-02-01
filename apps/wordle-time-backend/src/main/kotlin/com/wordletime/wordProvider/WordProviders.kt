@@ -1,19 +1,13 @@
 package com.wordletime.wordProvider
 
-import com.sksamuel.hoplite.ConfigLoaderBuilder
-import com.sksamuel.hoplite.addResourceSource
 import com.wordletime.config.WordList
 
 interface WordProvider {
   fun getWord(): String
 }
 
-class ListWordProvider: WordProvider {
-  private val wordList = ConfigLoaderBuilder.default()
-    .addResourceSource("/words.json")
-    .build()
-    .loadConfigOrThrow<WordList>()
 
+class ListWordProvider(private val wordList: WordList): WordProvider {
   override fun getWord(): String = wordList.words.random()
 }
 

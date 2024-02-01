@@ -1,0 +1,18 @@
+@startuml F003_act
+<style file=plantStyle.css>
+title "Zählmechanismus"
+
+|Frontend|
+|Spieler|
+
+|Frontend|
+start
+:Nach Rateversuch-Validierung anzeigen Rateversuch Zähler inkrementieren;
+|Spieler|
+:Erhöhten Rateversuch Zähler lesen und verstehen;
+note right
+    incremented: Zähler wurde um 1 inkrementiert
+end note
+end
+
+@enduml

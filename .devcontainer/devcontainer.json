@@ -1,86 +1,84 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-    "name": "Wordle-Time",
-    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "build": {
-        // Path is relataive to the devcontainer.json file.
-        "dockerfile": "Dockerfile",
-        "args": {}
+  "name": "Wordle-Time",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "build": {
+    // Path is relataive to the devcontainer.json file.
+    "dockerfile": "Dockerfile",
+    "args": {}
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "nodeGypDependencies": true,
+      "version": "lts"
     },
-    "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "installMaven": true,
-            "version": "latest",
-            "jdkDistro": "ms",
-            "gradleVersion": "latest",
-            "mavenVersion": "latest",
-            "antVersion": "latest"
-        },
-        "ghcr.io/devcontainers/features/node:1": {
-            "nodeGypDependencies": true,
-            "version": "lts"
-        },
-        "ghcr.io/devcontainers-contrib/features/gradle-sdkman:2": {
-            "version": "latest"
-        },
-        "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
-            "version": "latest"
-        },
-        "ghcr.io/rocker-org/devcontainer-features/pandoc:latest": {
-            "version": "latest"
-        }
+    "ghcr.io/devcontainers-contrib/features/gradle-sdkman": {
+      "version": "latest",
+      "jdkVersion": "21"
     },
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [
-        3000,
-        4173,
-        5173,
-        5174,
-        5175,
-    ],
-    // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "sh /workspaces/wordle-time/.devcontainer/postCreateCommand.sh",
-    // Configure tool-specific properties.
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "esbenp.prettier-vscode",
-                "jebbs.plantuml",
-                "davidanson.vscode-markdownlint",
-                "oderwat.indent-rainbow",
-                "aaron-bond.better-comments",
-                "eamodio.gitlens",
-                "ms-vsliveshare.vsliveshare",
-                "bradlc.vscode-tailwindcss",
-                "github.vscode-pull-request-github",
-                "tomoki1207.pdf",
-                "ms-python.python",
-                "njpwerner.autodocstring",
-                "nrwl.angular-console"
-            ],
-            "settings": {
-                "prettier.configPath": ".prettierrc",
-                "prettier.resolveGlobalModules": true,
-                "remote.restoreForwardedPorts": true,
-                "plantuml.diagramsRoot": "docs",
-                "plantuml.exportFormat": "png",
-                "plantuml.exportOutDir": "docs/PNG",
-                "plantuml.exportIncludeFolderHeirarchy": true,
-                "plantuml.exportSubFolder": false,
-                "plantuml.jarArgs": [
-                    "-DPLANTUML_LIMIT_SIZE=8192"
-                ],
-                "prettier.prettierPath": "./node_modules/prettier",
-                "markdownlint.config": {
-                    "MD013": false,
-                    "MD049": {
-                        "style": "underscore"
-                    }
-                },
-                "scss.lint.unknownAtRules": "ignore"
-            }
-        }
+    "ghcr.io/devcontainers-contrib/features/nx-npm:1": {
+      "version": "latest"
     },
-    "remoteUser": "vscode"
+    "ghcr.io/rocker-org/devcontainer-features/pandoc:latest": {
+      "version": "latest"
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [
+  //     3000,
+  //     4173,
+  //     5173,
+  //     5174,
+  //     5175,
+  //     8090
+  // ],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "sh /workspaces/wordle-time/.devcontainer/postCreateCommand.sh",
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "jebbs.plantuml",
+        "davidanson.vscode-markdownlint",
+        "oderwat.indent-rainbow",
+        "aaron-bond.better-comments",
+        "eamodio.gitlens",
+        "ms-vsliveshare.vsliveshare",
+        "bradlc.vscode-tailwindcss",
+        "github.vscode-pull-request-github",
+        "tomoki1207.pdf",
+        "ms-python.python",
+        "njpwerner.autodocstring",
+        "nrwl.angular-console"
+      ],
+      "settings": {
+        "prettier.configPath": ".prettierrc",
+        "prettier.resolveGlobalModules": true,
+        "remote.restoreForwardedPorts": true,
+        "plantuml.diagramsRoot": "docs/requirements-src",
+        "plantuml.exportFormat": "png",
+        "plantuml.exportOutDir": "docs/.requirements",
+        "plantuml.exportIncludeFolderHeirarchy": true,
+        "plantuml.exportSubFolder": false,
+        "plantuml.jarArgs": [
+          "-DPLANTUML_LIMIT_SIZE=8192"
+        ],
+        "plantuml.jar": "plantuml-release.jar",
+        "prettier.prettierPath": "./node_modules/prettier",
+        "markdownlint.config": {
+          "MD013": false,
+          "MD049": {
+            "style": "underscore"
+          }
+        },
+        "scss.lint.unknownAtRules": "ignore"
+      }
+    }
+  },
+  "mounts": [
+    "source=/etc/localtime,target=/etc/localtime,type=bind,readonly"
+  ],
+  "remoteUser": "vscode"
 }

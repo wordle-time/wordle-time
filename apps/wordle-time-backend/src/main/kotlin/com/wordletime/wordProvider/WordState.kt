@@ -1,39 +1,40 @@
 package com.wordletime.wordProvider
 
-import com.wordletime.words.WordGameID
+import com.wordletime.dto.WordContainer
+import com.wordletime.extensions.minusDays
+import com.wordletime.extensions.now
 import io.github.oshai.kotlinlogging.KotlinLogging
-import kotlin.random.Random
-import kotlin.random.nextInt
+import kotlinx.datetime.LocalDate
+import java.util.TreeMap
 
 private val logger = KotlinLogging.logger {}
-class WordState(private val wordProvider: WordProvider) {
-  private companion object {
-    private val charPool = ('a'..'z').toList()
+class WordState(private val wordProvider: WordProvider, private val demoMode: Boolean) {
+  private var nextGameID = 1
 
-    private fun randomGameID(): String =
-      CharArray(15) { charPool[Random.nextInt(charPool.indices)] }.joinToString("")
-  }
-
-  private fun generateWordGameID() = WordGameID(wordProvider.getWord(), randomGameID())
-
-  var previousWordGameID: WordGameID = generateWordGameID()
-    set(value) {
-      logger.info { "previousWordGameID: $value" }
-      field = value
-    }
-  var currentWordGameID: WordGameID = generateWordGameID()
-    set(value) {
-      logger.info { "currentWordGameID: $value" }
-      field = value
+  private val wordContainers = TreeMap<Int, WordContainer>().apply {
+    if (demoMode) {
+      for (pastDays in 5L downTo 1L) {
+        WordContainer(wordProvider.getWord(), nextGameID++, LocalDate.now().minusDays(pastDays))
+          .let { firstWordContainer ->
+            this[firstWordContainer.gameID] = firstWordContainer
+          }
+      }
     }
 
-  init {
-    logger.info { "previousWordGameID: $previousWordGameID" }
-    logger.info { "currentWordGameID: $currentWordGameID" }
+    WordContainer(wordProvider.getWord(), nextGameID++, LocalDate.now()).let { firstWordContainer ->
+      this[firstWordContainer.gameID] = firstWordContainer
+      logger.info { "Current wordContainer: $firstWordContainer" }
+    }
   }
 
-  fun regenerateWordGameID() {
-    previousWordGameID = currentWordGameID
-    currentWordGameID = generateWordGameID()
+  fun existingWordContainerByID(gameID: Int) = wordContainers[gameID]
+
+  fun currentWordContainer(): WordContainer = wordContainers.lastEntry().value.let {
+    when (it.date) {
+      LocalDate.now() -> it
+      else -> WordContainer(wordProvider.getWord(), nextGameID++, LocalDate.now()).also { newWordContainer ->
+        wordContainers[newWordContainer.gameID] = newWordContainer
+      }
+    }
   }
 }

@@ -1,51 +1,71 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Launch Backend",
-            "request": "launch",
-            "mainClass": "com.partytime.PartyTimeBackendApplication",
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch Swagger",
-            "type": "chrome",
-            "request": "launch",
-            "url": "http://localhost:8090/swagger",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch OpenApi",
-            "type": "chrome",
-            "request": "launch",
-            "url": "http://localhost:8090/openapi",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:5173",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "Python: Export work",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tools/export.py",
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "Python: Check glossary",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tools/export.py",
-            "args": [
-                "-c"
-            ],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Backend",
+      "request": "launch",
+      "mainClass": "com.partytime.PartyTimeBackendApplication",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Swagger",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8090/swagger",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome and open OpenApi",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8090/openapi",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Chrome and open Frontend",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Launch Firefox and open Frontend",
+      "request": "launch",
+      "type": "firefox",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Export Anforderungen",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_requirements.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Export Design-Entscheidungen",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_design_choices.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Export Glossar",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/export_glossaries.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Print md to pdf",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/print_md_to_pdf.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
 }

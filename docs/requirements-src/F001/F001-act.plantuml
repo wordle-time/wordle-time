@@ -1,0 +1,43 @@
+@startuml F001_act
+<style file=plantStyle.css>
+title "Worteingabe"
+
+|Backend|
+|Frontend|
+|Spieler|
+
+|Spieler|
+start
+:Spiel öffnen;
+repeat
+    :Zeichen eingeben;
+    |Frontend|
+    if(Eingabe == Buchstabe) then (Ja)
+        if(Buchstaben-Anzahl < 5) then (Ja)
+            :Buchstabe akzeptieren und anzeigen;
+            note right
+                letter_input: [Buchstabe wird in Eingabefeld angezeigt]
+            end note
+        else (Nein)
+            :Buchstaben nicht akzeptieren;
+            note right
+                too_many_letters: Es sind maximal 5 Buchtaben zu raten.
+            end note
+        endif
+    else (Nein)
+        :Zeichen nicht akzeptieren;
+        note right
+            non_letter_input: Nur Buchstaben werden akzeptiert.
+        end note
+    endif
+    |Spieler|
+repeat while(Spieler möchte weiteren Buchstaben eingeben) is (Ja) not (Nein)
+:"Guess"-Knopf anklicken;
+|Frontend|
+:Rateversuch an Backend senden;
+|Backend|
+:Rateversuch empfangen;
+:Rateversuch validieren;
+end
+
+@enduml

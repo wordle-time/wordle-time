@@ -1,0 +1,20 @@
+{
+  "id": "F003",
+  "title": "Zählmechanismus",
+  "reference": "https://github.com/wordle-time/wordle-time/issues/3",
+  "description": "Als Spieler möchte ich sehen, wie viele Versuche ich bereits gemacht habe, damit ich meine Strategie entsprechend anpassen kann.",
+  "impact": "Begrenzt die Anzahl der Versuche und erhöht den Schwierigkeitsgrad.",
+  "criteria": [
+    "Die Anzahl der Versuche wird korrekt gezählt.",
+    "Ich sehe deutlich, wie viele Versuche mir noch bleiben."
+  ],
+  "testCases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Ergebnis einer Rateversuch-Validierung wurde empfangen",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Rateversuch Zähler wird um 1 erhöht.",
+      "testPic": "counter -- should show incremented.png"
+    }
+  ]
+}

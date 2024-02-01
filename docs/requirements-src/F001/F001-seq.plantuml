@@ -1,0 +1,19 @@
+@startuml F001_seq
+title "Worteingabe"
+
+actor "Spieler" as user
+boundary "Frontend" as frontend
+boundary "Backend" as backend
+
+activate user
+user -> frontend: Spiel öffnen
+activate frontend
+user <- frontend: Spiel anzeigen
+loop 5 Mal
+    user -> frontend: Buchstabe eingeben
+    user <- frontend: Buchstabe anzeigen
+end
+user -> frontend: "Guess"-Knopf anklicken
+frontend -> backend: Rateversuch senden
+backend -> backend: Rateversuch validieren
+@enduml

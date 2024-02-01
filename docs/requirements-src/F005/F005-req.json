@@ -1,0 +1,35 @@
+{
+  "id": "F005",
+  "title": "Ende des Spiels",
+  "reference": "https://github.com/wordle-time/wordle-time/issues/5",
+  "description": "Als Spieler möchte ich wissen, ob ich gewonnen oder verloren habe, damit ich meinen Erfolg oder Misserfolg erkennen kann.",
+  "impact": "Schließt einen Spielzyklus ab und gibt dem Spieler Feedback über sein Ergebnis.",
+  "criteria": [
+    "Ich erhalte eine klare Nachricht über das Ergebnis nach meinen sechs Versuchen.",
+    "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
+    "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann."
+  ],
+  "testCases": [
+    {
+      "name": "Testfall 1",
+      "requirement": "Ich erhalte eine klare Nachricht über das Ergebnis nach meinen sechs Versuchen.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach sechs Versuchen wird eine Nachricht angezeigt, dass das Wort nicht erraten wurde.",
+      "testPic": "endgame -- should show not_guessed.png"
+    },
+    {
+      "name": "Testfall 2",
+      "requirement": "Nach einem Misserfolg habe ich die Möglichkeit, das Spiel erneut zu starten.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Falls das Wort nicht erraten wurde, wird mir die Möglichkeit gegeben, das Spiel erneut zu starten.",
+      "testPic": "endgame -- should show restart_game.png"
+    },
+    {
+      "name": "Testfall 3",
+      "requirement": "Nach einem Erfolg sehe ich, wann das nächste Wort erraten werden kann.",
+      "action": "Rateversuch Zähler wird beobachtet.",
+      "expectation": "Nach einem Erfolg wird mir angezeigt, wann das nächste Wort erraten werden kann.",
+      "testPic": "endgame -- should show remaining_time.png"
+    }
+  ]
+}

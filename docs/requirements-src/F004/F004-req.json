@@ -1,0 +1,12 @@
+{
+  "id": "F004",
+  "title": "Tägliches Wort",
+  "reference": "https://github.com/wordle-time/wordle-time/issues/4",
+  "description": "Als Spieler möchte ich jeden Tag ein neues Wort zum Raten haben, damit das Spiel weiterhin herausfordernd und interessant bleibt.",
+  "impact": "Stellt sicher, dass das Spiel täglich eine neue Herausforderung bietet.",
+  "criteria": [
+    "Ein neues Wort wird täglich ausgewählt.",
+    "Das Wort ist für das Spiel geeignet und hat die vorgegebene Länge."
+  ],
+  "testCases": []
+}

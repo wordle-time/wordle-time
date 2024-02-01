@@ -1,15 +1,13 @@
 pluginManagement {
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
 }
 
-/*
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
- */
 
 rootProject.name = "wordle-time-backend"
 
@@ -26,11 +24,12 @@ fun VersionCatalogBuilder.addCommon(alias: String, commonGroup: String, version:
 dependencyResolutionManagement {
   versionCatalogs {
     val coroutineVersion = "1.7.3"
+    val ktorVersion = "2.3.7"
 
     create("libs") {
       //Server - ktor
       addCommon(
-        "ktor", "io.ktor", "2.3.4", listOf(
+        "ktor", "io.ktor", ktorVersion, listOf(
           "ktor-server-core",
           "ktor-server-netty",
           "ktor-server-call-logging",
@@ -45,28 +44,48 @@ dependencyResolutionManagement {
         )
       )
 
+      //Time operations - kotlinx-datetime
+      val kotlinxDateTime = version("kotlinxDateTime", "0.5.0")
+      library(kotlinxDateTime, "org.jetbrains.kotlinx", "kotlinx-datetime").versionRef(kotlinxDateTime)
+
       //Swagger Codegen
-      val swagger = version("swagger", "1.0.42")
+      val swagger = version("swagger", "1.0.45")
       library(swagger, "io.swagger.codegen.v3", "swagger-codegen-generators").versionRef(swagger)
 
       //DI - Kodein
       addCommon(
-        "kodein", "org.kodein.di", "7.20.2", listOf(
+        "kodein", "org.kodein.di", "7.21.1", listOf(
           "kodein-di", "kodein-di-framework-ktor-server-jvm"
         )
       )
 
       //Config - hoplite
-      addCommon("hoplite", "com.sksamuel.hoplite", "2.7.5", listOf(
-        "hoplite-core", "hoplite-yaml", "hoplite-json"
-      ))
+      addCommon(
+        "hoplite", "com.sksamuel.hoplite", "2.7.5", listOf(
+          "hoplite-core", "hoplite-yaml", "hoplite-json"
+        )
+      )
 
-      //Logging - slf4j-simple
-      val slf4jSimple = version("slf4jSimple", "2.0.7")
-      library(slf4jSimple, "org.slf4j", "slf4j-simple").versionRef(slf4jSimple)
+      //Logging - log4j2
+      addCommon(
+        "log4j2", "org.apache.logging.log4j", "2.22.1", listOf(
+          "log4j", "log4j-api", "log4j-core", "log4j-slf4j2-impl"
+        )
+      )
+      val jackson = version("jackson", "2.16.1")
+      library(
+        "jacksonDataformatYaml",
+        "com.fasterxml.jackson.dataformat",
+        "jackson-dataformat-yaml"
+      ).versionRef(jackson)
+      library(
+        "jacksonCore",
+        "com.fasterxml.jackson.core",
+        "jackson-databind"
+      ).versionRef(jackson)
 
       //Logging - kotlin-logging
-      val kotlinLogging = version("kotlinLogging", "5.1.0")
+      val kotlinLogging = version("kotlinLogging", "6.0.1")
       library(kotlinLogging, "io.github.oshai", "kotlin-logging").versionRef(kotlinLogging)
 
       //Parallel Processing - coroutines
@@ -76,11 +95,25 @@ dependencyResolutionManagement {
 
     create("testLibs") {
       // Testing - kotlin-test-junit5
-      val kotlinTestJunit5 = version("kotlin-test-junit5", "1.9.0")
-      library("kotlin-test-junit5", "org.jetbrains.kotlin", "kotlin-test-junit5").versionRef(kotlinTestJunit5)
+      addCommon(
+        "junit", "org.junit.jupiter", "5.10.1", listOf(
+          "junit-jupiter-api", "junit-jupiter-engine", "junit-jupiter-params"
+        )
+      )
+
+      // Testing - JUnit Platform launcher
+      val junitPlatformLauncher = version("junitPlatformLauncher", "1.10.1")
+      library(junitPlatformLauncher, "org.junit.platform", "junit-platform-launcher").versionRef(junitPlatformLauncher)
+
+      // Testing - ktor-host
+      addCommon(
+        "ktor", "io.ktor", ktorVersion, listOf(
+          "ktor-server-test-host", "ktor-client-content-negotiation", "ktor-client-resources"
+        )
+      )
 
       //Mocking - mockk
-      val mockk = version("mockk", "1.13.5")
+      val mockk = version("mockk", "1.13.9")
       library("mockk", "io.mockk", "mockk").versionRef(mockk)
 
       //Parallel Processing - coroutines

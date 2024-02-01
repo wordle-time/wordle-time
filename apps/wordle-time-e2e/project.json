@@ -4,6 +4,9 @@
   "sourceRoot": "apps/wordle-time-e2e/src",
   "projectType": "application",
   "targets": {
+    "e2e:fullstack": {
+      "command": "npx nx run wordle-time-backend:serve & npx nx run wordle-time-e2e:e2e"
+    },
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
@@ -13,16 +16,25 @@
       },
       "configurations": {
         "production": {
-          "devServerTarget": "wordle-time-frontend:serve:production"
+          "devServerTarget": "wordle-time-frontend:serve"
+        },
+        "watch:development": {
+          "cypressConfig": "apps/wordle-time-e2e/cypress.config.ts",
+          "devServerTarget": "wordle-time-frontend:serve",
+          "watch": true,
+          "testingType": "e2e"
+        },
+        "watch:production": {
+          "cypressConfig": "apps/wordle-time-e2e/cypress.config.ts",
+          "devServerTarget": "wordle-time-frontend:preview",
+          "watch": true,
+          "testingType": "e2e"
         }
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/wordle-time-e2e/**/*.{js,ts}"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     }
   },
   "tags": [],

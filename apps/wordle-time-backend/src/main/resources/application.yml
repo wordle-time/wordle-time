@@ -1,5 +1,7 @@
 server:
-  host: "localhost"
+  host: 'localhost'
   port: 8090
+  frontendPort: 4173
+  demo: false
 wordProviderConfig:
-  staticWord: ""
+  staticWord: ''

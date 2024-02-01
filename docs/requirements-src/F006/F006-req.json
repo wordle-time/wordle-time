@@ -1,0 +1,12 @@
+{
+  "id": "F006",
+  "title": "Benutzeroberfläche",
+  "reference": "https://github.com/wordle-time/wordle-time/issues/6",
+  "description": "Als Spieler möchte ich eine klare und intuitive Benutzeroberfläche haben, damit ich das Spiel ohne Verwirrung oder Ablenkung spielen kann.",
+  "impact": "Verbessert das Spielerlebnis und die Benutzerfreundlichkeit.",
+  "criteria": [
+    "Alle notwendigen Informationen sind sichtbar und leicht verständlich.",
+    "Die Benutzeroberfläche reagiert schnell und ohne Verzögerung."
+  ],
+  "testCases": []
+}

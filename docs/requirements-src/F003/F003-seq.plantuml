@@ -1,0 +1,13 @@
+@startuml F003_seq
+title "Zählmechanismus"
+
+boundary "Frontend" as frontend
+actor "Spieler" as user
+
+activate frontend
+activate user
+
+frontend -> frontend: Rateversuch Zähler inkrementieren
+frontend -> user: Rateversuch Zähler anzeigen
+user -> user: Rateversuch Zähler lesen und verstehen
+@enduml
