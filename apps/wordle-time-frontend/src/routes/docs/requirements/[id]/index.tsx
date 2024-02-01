@@ -1,3 +1,4 @@
+/* eslint-disable qwik/jsx-img */
 import { Resource, component$ } from '@builder.io/qwik';
 import { type DocumentHead, Link, routeLoader$ } from '@builder.io/qwik-city';
 import { IRequirement } from '@wordle-time/models';
@@ -37,49 +38,61 @@ export default component$(() => {
                 </li>
               ))}
             </ul>
-            <p class="text-xl py-6">Sequenzdiagramm:</p>
-            <img
-              src={
-                'http://localhost:8090/api/documentation/requirements/' +
-                requirement.id +
-                '/' +
-                requirement.seqPic
-              }
-              class="mx-auto object-fill"
-            />
-            <p class="text-xl py-6">Aktivitätsdiagramm:</p>
-            <img
-              src={
-                'http://localhost:8090/api/documentation/requirements/' +
-                requirement.id +
-                '/' +
-                requirement.actPic
-              }
-              class="mx-auto object-fill"
-            />
-            <p class="text-xl py-6">Testfälle:</p>
-            <ul class="list-disc pl-5 divide-y divide-dashed">
-              {requirement.testCases.map((t) => (
-                <li class="p-2 list-inside py-4 text-lg" key={t.name}>
-                  {t.name}
-                  <ol class="list list-decimal text-sm pl-12">
-                    <li class="py-2">{t.requirement}</li>
-                    <li class="py-2">{t.action}</li>
-                    <li class="py-2">{t.expectation}</li>
-                  </ol>
+            {requirement.seqPic && (
+              <>
+                <p class="text-xl py-6">Sequenzdiagramm:</p>
+                <img
+                  src={
+                    'http://localhost:8090/api/documentation/requirements/' +
+                    requirement.id +
+                    '/' +
+                    requirement.seqPic
+                  }
+                  class="mx-auto object-fill"
+                />
+              </>
+            )}
+            {requirement.actPic && (
+              <>
+                <p class="text-xl py-6">Aktivitätsdiagramm:</p>
+                <img
+                  src={
+                    'http://localhost:8090/api/documentation/requirements/' +
+                    requirement.id +
+                    '/' +
+                    requirement.actPic
+                  }
+                  class="mx-auto object-fill"
+                />
+              </>
+            )}
+            {requirement.testCases.length > 0 && (
+              <>
+                <p class="text-xl py-6">Testfälle:</p>
+                <ul class="list-disc pl-5 divide-y divide-dashed">
+                  {requirement.testCases.map((t) => (
+                    <li class="p-2 list-inside py-4 text-lg" key={t.name}>
+                      {t.name}
+                      <ol class="list list-decimal text-sm pl-12">
+                        <li class="py-2">{t.requirement}</li>
+                        <li class="py-2">{t.action}</li>
+                        <li class="py-2">{t.expectation}</li>
+                      </ol>
 
-                  <img
-                    src={
-                      'http://localhost:8090/api/documentation/requirements/' +
-                      requirement.id +
-                      '/' +
-                      t.testPic
-                    }
-                    class="mx-auto object-fill border-4 border-ctp-pink"
-                  />
-                </li>
-              ))}
-            </ul>
+                      <img
+                        src={
+                          'http://localhost:8090/api/documentation/requirements/' +
+                          requirement.id +
+                          '/' +
+                          t.testPic
+                        }
+                        class="mx-auto object-fill border-4 border-ctp-pink"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             <div class="mt-6">
 
               <a
@@ -89,11 +102,12 @@ export default component$(() => {
                 Auf GitHub ansehen
               </a>
             </div>
-          </div>
-        )}
+          </div >
+        )
+        }
       />
 
-      <div class="mt-12">
+      < div class="mt-12" >
 
         <Link
           href="docs/requirements"
@@ -101,8 +115,8 @@ export default component$(() => {
         >
           Alle Anforderungen
         </Link>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 });
 

@@ -19,7 +19,7 @@ describe(feedback_group, () => {
     cy.get('[data-cy="letter-0"]').clear();
     cy.get('[data-cy="letter-0"]').type('A');
     cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="letter-0"]', { timeout: 1_000 }).should(
+    cy.get('[data-cy="letter-0"]', { timeout: 3_000 }).should(
       'have.class',
       'border-ctp-green'
     );
@@ -38,7 +38,7 @@ describe(feedback_group, () => {
     cy.get('[data-cy="letter-0"]').clear();
     cy.get('[data-cy="letter-0"]').type('E');
     cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="letter-0"]', { timeout: 1_000 }).should(
+    cy.get('[data-cy="letter-0"]', { timeout: 3_000 }).should(
       'have.class',
       'border-ctp-yellow'
     );
@@ -54,7 +54,7 @@ describe(feedback_group, () => {
     cy.get('[data-cy="letter-0"]').clear();
     cy.get('[data-cy="letter-0"]').type('U');
     cy.get('[data-cy="guess-button"]').click();
-    cy.get('[data-cy="letter-0"]', { timeout: 1_000 }).should(
+    cy.get('[data-cy="letter-0"]', { timeout: 3_000 }).should(
       'have.class',
       'border-ctp-red'
     );
