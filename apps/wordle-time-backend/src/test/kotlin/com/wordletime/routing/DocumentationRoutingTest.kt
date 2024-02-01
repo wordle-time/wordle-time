@@ -2,11 +2,12 @@ package com.wordletime.routing
 
 import com.wordletime.documentationProvider.DesignChoicesProvider
 import com.wordletime.documentationProvider.GlossaryProvider
-import com.wordletime.dto.Requirement
-import com.wordletime.dto.RequirementsContainer
 import com.wordletime.documentationProvider.RequirementsProvider
 import com.wordletime.dto.DesignChoicesContainer
 import com.wordletime.dto.GlossaryContainer
+import com.wordletime.dto.Requirement
+import com.wordletime.dto.RequirementsContainer
+import com.wordletime.dto.TestCase
 import com.wordletime.server.WordleTimeServerTest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -65,13 +66,12 @@ internal class DocumentationRoutingTest {
       }
 
       return requirementsProvider.requirementsContainer.requirements.stream().flatMap {
-        buildList {
-          add(it.actPic)
-          add(it.seqPic)
-          it.testCases.forEach {
-            add(it.testPic)
-          }
-        }.map { picName ->
+        listOfNotNull(
+          it.actPic,
+          it.seqPic
+        ).plus(
+          it.testCases.map(TestCase::testPic)
+        ).map { picName ->
           Arguments.of(requirementsDIModule, it.id, picName, Path.of(it.resourcePath, picName).pathString)
         }.stream()
       }

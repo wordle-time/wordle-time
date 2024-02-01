@@ -113,7 +113,7 @@ dependencyResolutionManagement {
       )
 
       //Mocking - mockk
-      val mockk = version("mockk", "1.13.8")
+      val mockk = version("mockk", "1.13.9")
       library("mockk", "io.mockk", "mockk").versionRef(mockk)
 
       //Parallel Processing - coroutines

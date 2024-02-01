@@ -50,6 +50,7 @@ dependencies {
 }
 
 tasks.test {
+  jvmArgs("-XX:+EnableDynamicAgentLoading")
   useJUnitPlatform()
   testLogging {
     events = setOf(
